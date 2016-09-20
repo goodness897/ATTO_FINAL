@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "26899404053",
-    "project_id": "attoproject-143206"
+    "firebase_url": "https://attoproject-143206.firebaseio.com",
+    "project_id": "attoproject-143206",
+    "storage_bucket": "attoproject-143206.appspot.com"
   },
   "client": [
     {
@@ -11,7 +13,12 @@
           "package_name": "com.atto.developers.atto"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "26899404053-doflepase7ahrqb25cf3kdcjc26vj1np.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDjjpydEew7ekqOF5CO1WorqAxnqACU03o"
@@ -26,7 +33,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
