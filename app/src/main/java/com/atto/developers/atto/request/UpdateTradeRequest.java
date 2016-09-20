@@ -37,7 +37,7 @@ public class UpdateTradeRequest  extends AbstractRequest<TradeListItemData> {
     private final static String DDATE = "trade_dtime";
     private final static String CONTENTS = "trade_product_contents";
     private final static String KEYWORDS = "trade_key_words";
-    private final static String IMAGES = "trade_product_imges_info";
+    private final static String IMAGES = "trade_product_imges";
 
     public UpdateTradeRequest(Context context,String tid, String trade_product_category_1, String trade_product_category_2, String trade_price,
                                   String trade_dtime, String trade_product_contents, String[] trade_key_words, File[] trade_product_imges) {

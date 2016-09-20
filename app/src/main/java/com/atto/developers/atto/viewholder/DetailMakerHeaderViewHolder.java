@@ -25,7 +25,6 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  */
 public class DetailMakerHeaderViewHolder extends RecyclerView.ViewHolder {
 
-
     private static final int REQUEST_FOR_PORTFOLIO = 1000;
 
     @BindView(R.id.img_detail_maker_profile)

@@ -51,7 +51,7 @@ public class UpdateTradeActivity extends AppCompatActivity {
     TextView textPreView;
 
     @BindView(R.id.edit_trade_title)
-    AppCompatEditText inputTitleView;
+    TextView inputTitleView;
 
     @BindView(R.id.edit_trade_content)
     AppCompatEditText inputContentView;

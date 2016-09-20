@@ -36,6 +36,7 @@ public class RealTimeTradeFragment extends Fragment {
     @BindView(R.id.rv_list)
     RecyclerView listView;
     RecyclerRealTimeTradeAdapter mAdapter;
+    ProgressDialogFragment dialogFragment;
 
     public RealTimeTradeFragment() {
         // Required empty public constructor
@@ -54,11 +55,13 @@ public class RealTimeTradeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_real_time_trade, container, false);
         ButterKnife.bind(this, view);
         mAdapter = new RecyclerRealTimeTradeAdapter();
+        dialogFragment = new ProgressDialogFragment();
         listView.setAdapter(mAdapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(manager);
         listView.addItemDecoration(
                 new DividerItemDecoration(getContext(), R.drawable.divider));
+
         mAdapter.setOnAdapterItemClickListener(new RecyclerRealTimeTradeAdapter.OnAdapterItemClickListener() {
             @Override
             public void onAdapterItemClick(View view, final TradeData tradeData, int position) {
@@ -83,10 +86,10 @@ public class RealTimeTradeFragment extends Fragment {
     }
 
     private void initData() {
-        final ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
+
         dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
-        TradeListRequest request = new TradeListRequest(getContext(), "1", "100");
+        TradeListRequest request = new TradeListRequest(getContext(), "1", "20");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<TradeData>> request, ListData<TradeData> result) {
