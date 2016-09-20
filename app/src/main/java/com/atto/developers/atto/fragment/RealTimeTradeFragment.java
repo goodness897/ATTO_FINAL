@@ -63,7 +63,7 @@ public class RealTimeTradeFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, final TradeData tradeData, int position) {
                 Intent intent = new Intent(getContext(), DetailTradeActivity.class);
-                intent.putExtra("trade_id", tradeData.getTrade_id());
+                intent.putExtra("tradeData", tradeData);
                 startActivity(intent);
             }
         });
@@ -93,6 +93,8 @@ public class RealTimeTradeFragment extends Fragment {
                 TradeData[] data = result.getData();
                 mAdapter.addAll(Arrays.asList(data));
                 Log.d("RealTimeTradeFragment", "성공 : " + data[0].getTrade_product_img());
+                Log.d("RealTimeTradeFragment", "성공 : " + data[0].getMember_info().getMember_profile_img());
+                Log.d("RealTimeTradeFragment", "성공 : " + data[0].getTrade_product_contents());
                 dialogFragment.dismiss();
             }
 

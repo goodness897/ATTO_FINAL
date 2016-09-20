@@ -30,7 +30,8 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name=".AddTradeActivity"/>
+		<activity android:name=".AddTradeActivity"
+			android:windowSoftInputMode="adjustPan"/>
 		<activity android:name=".AddImageActivity"/>
 		<activity android:name=".AddNegoActivity"/>
 		<activity android:name=".DetailNegoActivity"/>

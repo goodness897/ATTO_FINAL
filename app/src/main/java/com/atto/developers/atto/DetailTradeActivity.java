@@ -7,18 +7,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.atto.developers.atto.adapter.RecyclerDetailTradeAdapter;
 import com.atto.developers.atto.fragment.ProgressDialogFragment;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.manager.PropertyManager;
+import com.atto.developers.atto.networkdata.ResultMessage;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
 import com.atto.developers.atto.networkdata.tradedata.ListData;
 import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.atto.developers.atto.networkdata.tradedata.TradeListItemData;
+import com.atto.developers.atto.request.DeleteTradeRequest;
 import com.atto.developers.atto.request.DetailTradeRequest;
 import com.atto.developers.atto.request.NegoCardListRequest;
 import com.atto.developers.atto.view.DividerItemDecoration;
@@ -44,6 +49,7 @@ public class DetailTradeActivity extends AppCompatActivity {
     Button registerButton;
 
     int tradeId;
+    TradeData tradeData = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +59,20 @@ public class DetailTradeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int trade_id = intent.getIntExtra("trade_id", -1);
-        TradeData tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+        tradeData = (TradeData) intent.getSerializableExtra("tradeData");
 
         int auth = PropertyManager.getInstance().getKeyAuth();
         checkAuth(auth);
 
-        if(trade_id != -1) {
+        if (trade_id != -1) {
             init(trade_id);
             setTradeId(trade_id);
-        } else if(tradeData != null) {
+        } else if (tradeData != null) {
             init(tradeData);
             setTradeId(tradeData.getTrade_id());
         }
+        Log.d(TAG, "닉네임 1 : " + tradeData.getMember_info().getMember_alias());
+        Log.d(TAG, "닉네임 2: " + PropertyManager.getInstance().getNickName());
     }
 
     @Override
@@ -73,13 +81,61 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        if (tradeData != null) {
+            if (tradeData.getMember_info().getMember_alias().equals(PropertyManager.getInstance().getNickName())) {
+                getMenuInflater().inflate(R.menu.activity_ud_menu, menu);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_update) {
+            Intent intent = new Intent(DetailTradeActivity.this, UpdateTradeActivity.class);
+            if (tradeData != null) {
+                intent.putExtra("tradeData", tradeData);
+                startActivity(intent);
+            }
+
+        } else if (id == R.id.action_delete) {
+            DeleteTradeRequest request = new DeleteTradeRequest(this, String.valueOf(tradeData.getTrade_id()));
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                @Override
+                public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                    Toast.makeText(DetailTradeActivity.this, "성공 : " + result.getMessage(), Toast.LENGTH_LONG).show();
+                    finish();
+                }
+
+                @Override
+                public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                    Toast.makeText(DetailTradeActivity.this, "실패 : " + errorMessage, Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     public void setTradeId(int tradeId) {
         this.tradeId = tradeId;
     }
 
     private void checkAuth(int auth) {
 
-        if(auth == 0) { // 소비자 일때
+        if (auth == 0) { // 소비자 일때
             registerButton.setVisibility(View.GONE);
         } else {
             registerButton.setVisibility(View.VISIBLE);
@@ -133,7 +189,8 @@ public class DetailTradeActivity extends AppCompatActivity {
     }
 
     private void initData(int trade_id) {
-        checkTradeData(trade_id);
+        mAdapter.setTradeData(tradeData);
+//        checkTradeData(trade_id);
         checkNegoData(trade_id);
     }
 

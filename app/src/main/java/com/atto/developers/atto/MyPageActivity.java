@@ -79,6 +79,7 @@ public class MyPageActivity extends AppCompatActivity {
 
 //        tabs.setViewPager(pager);
 
+
         initData();
         initTradeData();
         initToolBar();
@@ -159,8 +160,8 @@ public class MyPageActivity extends AppCompatActivity {
             public void onSuccess(NetworkRequest<MyProfile> request, MyProfile result) {
 
                 MyProfileData myProfileData = result.getData();
-                String nickname = result.getData().getMember_alias();
-                String image_url = result.getData().getMember_profile_img();
+                String nickname = myProfileData.getMember_alias();
+                String image_url = myProfileData.getMember_profile_img();
                 if(image_url != null)
                 checkSetImage(image_url);
                 if(!TextUtils.isEmpty(nickname))
@@ -173,11 +174,9 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onFail(NetworkRequest<MyProfile> request, int errorCode, String errorMessage, Throwable e) {
                 Log.e("error", request + " , " + errorCode + " , " + errorMessage);
-
                 dialogFragment.dismiss();
                 Toast.makeText(MyPageActivity.this, "fail" + errorCode, Toast.LENGTH_SHORT).show();
             }
-
 
         });
     }

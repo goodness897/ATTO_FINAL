@@ -89,9 +89,6 @@ public class RealTimeTradeViewHolder extends RecyclerView.ViewHolder {
             Integer[] keywordList = tradeData.getTrade_key_word_info();
             checkKeywordList(keywordList);
         }
-
-        //mIvPhoto.setImageDrawable(tradeData.getTrad_ );
-        //mIvProfile.setImageDrawable(tradeData.);
         String[] status = itemView.getContext().getResources().getStringArray(R.array.status);
 
         int dDay = 0;

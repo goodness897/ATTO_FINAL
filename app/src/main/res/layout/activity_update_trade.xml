@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_underline_background"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ToolBarStyle">
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_add_trade_register_trade"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/main_toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/text_add_trade_register_trade"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/include5"
+            android:background="@color/color_edit_layout"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/include5"
+                layout="@layout/view_add_trade_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/main_toolbar"
+                android:layout_gravity="center_horizontal" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_trade_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="20dp"
+                android:drawableLeft="@drawable/ic_write_title"
+                android:drawablePadding="12dp"
+                android:hint="Title"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:theme="@style/TextLabel" />
+
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_trade_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="5dp"
+                android:drawableLeft="@drawable/ic_write_content"
+                android:drawablePadding="12dp"
+                android:hint="세부사항입력 (수량, 크기, 색상, 재질 등을 입력해주세요)"
+                android:lines="4"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white"
+                android:theme="@style/TextLabel" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_main_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_edit_layout"
+                    android:textColor="@color/white" />
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_sub_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_weight="1"
+                    android:background="@color/color_edit_layout"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/text_pickup_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/btn_wish_delevery"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/activity_horizontal_margin"
+                    android:paddingTop="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white"
+                    android:theme="@style/TextLabel" />
+
+                <Button
+                    android:id="@+id/btn_wish_delevery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/edit_shape"
+                    android:text="배송희망 날"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_keyword_one"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_keyword"
+                    android:drawablePadding="12dp"
+                    android:hint="키워드를 입력해주세요. (최대 3개)"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:theme="@style/TextLabel" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_keyword_two"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_keyword"
+                    android:drawablePadding="12dp"
+                    android:hint="키워드를 입력해주세요. (최대 3개)"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:theme="@style/TextLabel" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_keyword_three"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_keyword"
+                    android:drawablePadding="12dp"
+                    android:hint="키워드를 입력해주세요. (최대 3개)"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:theme="@style/TextLabel" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/text_setting_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_price"
+                android:drawablePadding="12dp"
+                android:hint="희망 가격"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:theme="@style/TextLabel" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/text_add_trade_register_trade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@color/color_text_price"
+        android:text="@string/text_trade_update"
+        android:textColor="@color/white" />
+</RelativeLayout>
