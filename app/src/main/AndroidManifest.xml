@@ -48,7 +48,7 @@
 		<activity android:name=".MakerInfoActivity"/>
 		<activity android:name=".MakerNegoActivity"/>
 		<activity android:name=".AcceptWaitActivity"/>
-		<activity android:name=".ChatActivity"/>
+		<activity android:name=".ChatActivity" android:exported="true"/>
 		<activity android:name=".MyPageSettingActivity"/>
 		<activity android:name=".ChangePasswordActivity"/>
 		<activity android:name=".AboutAttoActivity"/>
@@ -71,10 +71,6 @@
 			android:theme="@android:style/Theme.Translucent.NoTitleBar"
 			android:label="@string/app_name" />
 
-		<service
-			android:name=".gcm.RegistrationIntentService"
-			android:exported="false">
-		</service>
 		<service
 			android:name=".gcm.MyFirebaseMessagingService">
 			<intent-filter>

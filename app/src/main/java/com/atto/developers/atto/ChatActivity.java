@@ -43,7 +43,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
-
+        init();
 //        user = (User) getIntent().getSerializableExtra(EXTRA_USER);
 
         mAdapter = new ChatAdapter();
@@ -84,7 +84,15 @@ public class ChatActivity extends AppCompatActivity {
 //
 //        updateMessage();
     }
-
+private void init(){
+    user = new MyProfileData();
+    user.setMember_id(1234);
+    user.setMember_address_1("sdf");
+    user.setMember_alias("sdf");
+    user.setMember_auth(0);
+    user.setMember_phone("011");
+    user.setMember_zipcode_1("sede");
+}
     private void updateMessage() {
         Cursor c = DBManager.getInstance().getChatMessage(user);
         mAdapter.changeCursor(c);

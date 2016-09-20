@@ -100,7 +100,6 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void doRealStart() {
-// 여기 무슨리퀘스트지 ?
 
         MyProfileRequest request = new MyProfileRequest(this);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<MyProfile>() {
