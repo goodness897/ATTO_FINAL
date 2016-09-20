@@ -112,4 +112,9 @@ public class MyTradeFragment extends Fragment {
 
     }
 
+    public TradeData getTradeData() {
+        return tradeData;
+
+    }
+
 }

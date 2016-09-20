@@ -92,6 +92,7 @@ public class DetailTradeHeaderViewHolder extends RecyclerView.ViewHolder {
                 checkDdaytest(tradeData);
                 mTvStatus.setText(status[tradeData.getTrade_status() - 1]);
                 mTvTitle.setText(tradeData.getTrade_title());
+                mTvContent.setText(tradeData.getTrade_product_contents());
                 int price = tradeData.getTrade_price();
                 String sPrice = String.format("%,d", price);
                 mTvPrice.setText(sPrice + "원");
@@ -127,21 +128,6 @@ public class DetailTradeHeaderViewHolder extends RecyclerView.ViewHolder {
             }
         }
     }
-
-/*
-    private void checkKeywordList(Integer[] keywordList) {
-
-		*/
-/*
-        for (TextView keywordView : mTvKeywordList)
-			keywordView.setVisibility(View.GONE);
-		*//*
-
-
-        for (int i = 0; i < keywordList.length; i++)
-            mTvKeywordList.get(i).setText(String.valueOf(keywordList[i]));
-    }
-*/
 
     private void checkKeywordList(Integer[] keywordList) {
         if (keywordList != null) {

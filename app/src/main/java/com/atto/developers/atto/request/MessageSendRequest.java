@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.atto.developers.atto.networkdata.ResultMessage;
-import com.atto.developers.atto.networkdata.negodata.NegoData;
 import com.atto.developers.atto.networkdata.userdata.MyProfileData;
 import com.google.gson.reflect.TypeToken;
 
@@ -71,7 +70,7 @@ public class MessageSendRequest extends AbstractRequest<ResultMessage> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<NegoData>() {
+        return new TypeToken<ResultMessage>() {
         }.getType();
     }
 

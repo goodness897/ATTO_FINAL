@@ -1,6 +1,7 @@
 package com.atto.developers.atto;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +28,7 @@ import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.atto.developers.atto.networkdata.tradedata.TradeListItemData;
-import com.atto.developers.atto.request.AddTradeRequest;
+import com.atto.developers.atto.request.UpdateTradeRequest;
 import com.bumptech.glide.Glide;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -68,6 +69,7 @@ public class UpdateTradeActivity extends AppCompatActivity {
     private int subCategory = -1;
 
     private String file_path;
+    private TradeData tradeData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,15 @@ public class UpdateTradeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update_trade);
         ButterKnife.bind(this);
         initToolBar();
+
+        Intent intent = getIntent();
+        tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+        if (tradeData != null) {
+
+            textPreView.setVisibility(View.GONE);
+            setTradeData(tradeData);
+
+        }
 
         MaterialSpinner main_spinner = (MaterialSpinner) findViewById(R.id.spinner_main_category);
         main_spinner.setBackgroundColor(getResources().getColor(R.color.color_edit_layout));
@@ -103,9 +114,22 @@ public class UpdateTradeActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.text_add_trade_register_trade)
+    private void setTradeData(TradeData tradeData) {
+        if (tradeData != null) {
+
+            Glide.with(this).load(tradeData.getTrade_product_img()).centerCrop().into(imagePreView);
+            inputTitleView.setText(tradeData.getTrade_title());
+            inputContentView.setText(tradeData.getTrade_product_contents());
+            pickUpDateView.setText(tradeData.getTrade_dtime());
+            keywordOneView.setText(tradeData.getTrade_key_word_info()[0] + "");
+            priceView.setText(tradeData.getTrade_price() + "");
+
+        }
+    }
+
+    @OnClick(R.id.text_update_trade)
     public void onTradeRegister() {
-        addData();
+        UpdateData();
 
     }
 
@@ -119,7 +143,7 @@ public class UpdateTradeActivity extends AppCompatActivity {
 
     private void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        toolbar.setTitle(R.string.activity_addtrade);
+        toolbar.setTitle(R.string.activity_update_trade);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_navigate_before_white);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -135,10 +159,9 @@ public class UpdateTradeActivity extends AppCompatActivity {
         dateView.setText(selectedDate);
     }
 
-    public void addData() {
+    public void UpdateData() {
 
         final ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
-        progressDialogFragment.show(getSupportFragmentManager(), "progress");
         String trade_title = inputTitleView.getText().toString();
         int trade_product_category_1 = mainCategory;
         int trade_product_category_2 = subCategory;
@@ -158,19 +181,18 @@ public class UpdateTradeActivity extends AppCompatActivity {
                 || TextUtils.isEmpty(trade_dtime) || TextUtils.isEmpty(trade_product_contents)) {
             Toast.makeText(this, "잘못된 입력입니다.", Toast.LENGTH_LONG).show();
         } else {
-
-            AddTradeRequest request = new AddTradeRequest(this, trade_title, String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
+            progressDialogFragment.show(getSupportFragmentManager(), "progress");
+            UpdateTradeRequest request = new UpdateTradeRequest(this, String.valueOf(tradeData.getTrade_id()), String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
                     trade_price, trade_dtime, trade_product_contents, trade_key_words, trade_product_images_info);
-            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
 
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
                 @Override
                 public void onSuccess(NetworkRequest<TradeListItemData> request, TradeListItemData result) {
                     TradeData tradeData = result.getData();
                     if (tradeData != null) {
-                        Intent intent = new Intent(UpdateTradeActivity.this, DetailTradeActivity.class);
+                        Intent intent = new Intent();
                         intent.putExtra("tradeData", tradeData);
-                        Log.d("AddTradeActivity", "성공 : " + tradeData.getTrade_id() + ", 이미지 : " + tradeData.getTrade_product_imges_info());
-                        startActivity(intent);
+                        setResult(Activity.RESULT_OK, intent);
                         finish();
                         progressDialogFragment.dismiss();
                     }
@@ -180,10 +202,9 @@ public class UpdateTradeActivity extends AppCompatActivity {
                 public void onFail(NetworkRequest<TradeListItemData> request, int errorCode, String errorMessage, Throwable e) {
                     Log.d("AddTradeActivity", "실패 : " + errorCode);
                     progressDialogFragment.dismiss();
-
-
                 }
             });
+
         }
 
     }

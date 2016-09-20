@@ -152,9 +152,12 @@ public class SplashActivity extends AppCompatActivity {
         if (isFacebookLogin()) {
             processFacebookLogin();
         } else if (isAutoLogin()) {
+            Log.d("SplashActivity", "자동로그인 : isAutoLogin 실행");
             processAutoLogin();
         } else {
+            Log.d("SplashActivity", "자동로그인 : moveLoginActivity 실행");
             moveLoginActivity();
+
         }
     }
 

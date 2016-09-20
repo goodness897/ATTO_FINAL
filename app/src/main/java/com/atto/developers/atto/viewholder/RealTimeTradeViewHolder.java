@@ -130,7 +130,6 @@ public class RealTimeTradeViewHolder extends RecyclerView.ViewHolder {
 
             Glide.with(itemView.getContext()).load(tradeData.getMember_info().getMember_profile_img())
                     .bitmapTransform(new CropCircleTransformation(itemView.getContext())).into(trade_profile);
-
         } else {
             trade_profile.setImageResource(R.drawable.sample_profile);
 

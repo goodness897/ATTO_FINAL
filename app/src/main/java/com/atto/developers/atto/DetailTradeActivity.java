@@ -37,6 +37,7 @@ import butterknife.Unbinder;
 
 public class DetailTradeActivity extends AppCompatActivity {
 
+    private static final int REQUEST_UPDATE = 1000;
     private Unbinder mUnbinder;
     private static final String TAG = DetailTradeActivity.class.getSimpleName();
 
@@ -105,7 +106,7 @@ public class DetailTradeActivity extends AppCompatActivity {
             Intent intent = new Intent(DetailTradeActivity.this, UpdateTradeActivity.class);
             if (tradeData != null) {
                 intent.putExtra("tradeData", tradeData);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_UPDATE);
             }
 
         } else if (id == R.id.action_delete) {
@@ -260,5 +261,19 @@ public class DetailTradeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch (requestCode) {
+
+            case REQUEST_UPDATE:
+                if (resultCode == RESULT_OK) {
+                    TradeData tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+                    mAdapter.setTradeData(tradeData);
+                }
+                break;
+        }
     }
 }

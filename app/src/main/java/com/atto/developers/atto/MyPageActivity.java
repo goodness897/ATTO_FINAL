@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -79,7 +80,33 @@ public class MyPageActivity extends AppCompatActivity {
 
 //        tabs.setViewPager(pager);
 
+        pager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                TradeData tradeData = (TradeData)adapter.getItem(position).getArguments().getSerializable("tradeData");
+                if (tradeData != null) {
+                    Intent intent = new Intent(MyPageActivity.this, DetailTradeActivity.class);
+                    intent.putExtra("tradeData", tradeData);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         initData();
         initTradeData();
         initToolBar();
@@ -190,7 +217,7 @@ public class MyPageActivity extends AppCompatActivity {
     private void initTradeData() {
 
         adapter.clear();
-        MyTradeListRequest request = new MyTradeListRequest(this, "0", "50");
+        MyTradeListRequest request = new MyTradeListRequest(this, "1", "10");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
 
             @Override
@@ -214,7 +241,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     }
 
-    public class MyTradePagerAdapter extends FragmentStatePagerAdapter {
+    public static class MyTradePagerAdapter extends FragmentStatePagerAdapter {
 
         List<TradeData> items = new ArrayList<>();
 
@@ -229,6 +256,11 @@ public class MyPageActivity extends AppCompatActivity {
 
         public MyTradePagerAdapter(FragmentManager fm) {
             super(fm);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return super.getItemPosition(object);
         }
 
         @Override

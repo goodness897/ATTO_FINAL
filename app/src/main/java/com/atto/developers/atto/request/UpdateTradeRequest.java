@@ -3,7 +3,7 @@ package com.atto.developers.atto.request;
 import android.content.Context;
 import android.util.Log;
 
-import com.atto.developers.atto.networkdata.ResultMessage;
+import com.atto.developers.atto.networkdata.tradedata.TradeListItemData;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import okhttp3.RequestBody;
 /**
  * Created by Tacademy on 2016-09-02.
  */
-public class UpdateTradeRequest  extends AbstractRequest<ResultMessage> {
+public class UpdateTradeRequest  extends AbstractRequest<TradeListItemData> {
 
     Request mRequest;
 
@@ -89,7 +89,7 @@ public class UpdateTradeRequest  extends AbstractRequest<ResultMessage> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<ResultMessage>() {
+        return new TypeToken<TradeListItemData>() {
         }.getType();
     }
 

@@ -86,7 +86,7 @@ public class RealTimeTradeFragment extends Fragment {
         final ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
         dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
-        TradeListRequest request = new TradeListRequest(getContext(), "", "");
+        TradeListRequest request = new TradeListRequest(getContext(), "1", "100");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<TradeData>> request, ListData<TradeData> result) {

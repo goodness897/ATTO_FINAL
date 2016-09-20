@@ -139,19 +139,58 @@
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/edit_keyword_one"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/ic_keyword"
-            android:hint="키워드를 입력해주세요. (최대 3개)"
-            android:inputType="text"
-            android:drawablePadding="12dp"
-            android:textColor="@color/white"
-            android:theme="@style/TextLabel" />
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_keyword_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_keyword"
+                android:drawablePadding="12dp"
+                android:hint="키워드 1"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:theme="@style/TextLabel" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_keyword_two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_keyword"
+                android:drawablePadding="12dp"
+                android:hint="키워드 2"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:theme="@style/TextLabel" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_keyword_three"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_keyword"
+                android:drawablePadding="12dp"
+                android:hint="키워드 3"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:theme="@style/TextLabel" />
+        </LinearLayout>
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/text_setting_price"
