@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -71,7 +70,7 @@ public class MyPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int auth = intent.getIntExtra("AUTH", -1);
-        if(auth == 1) {
+        if (auth == 1) {
 //            footerLayout.setVisibility(View.VISIBLE);
         }
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
@@ -79,39 +78,12 @@ public class MyPageActivity extends AppCompatActivity {
         pager.setPageMargin(pageMargin);
 
 //        tabs.setViewPager(pager);
-
-        pager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                TradeData tradeData = (TradeData)adapter.getItem(position).getArguments().getSerializable("tradeData");
-                if (tradeData != null) {
-                    Intent intent = new Intent(MyPageActivity.this, DetailTradeActivity.class);
-                    intent.putExtra("tradeData", tradeData);
-                    startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
         initData();
         initTradeData();
         initToolBar();
 
     }
+
 
     @OnClick(R.id.btn_mypage_setting_myprofile)
     void onMyPageSettingClick() {
@@ -189,10 +161,10 @@ public class MyPageActivity extends AppCompatActivity {
                 MyProfileData myProfileData = result.getData();
                 String nickname = myProfileData.getMember_alias();
                 String image_url = myProfileData.getMember_profile_img();
-                if(image_url != null)
-                checkSetImage(image_url);
-                if(!TextUtils.isEmpty(nickname))
-                nickNameView.setText(nickname);
+                if (image_url != null)
+                    checkSetImage(image_url);
+                if (!TextUtils.isEmpty(nickname))
+                    nickNameView.setText(nickname);
                 dialogFragment.dismiss();
                 Log.d("MyPageActivity", "success : " + nickname);
 
@@ -241,7 +213,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     }
 
-    public static class MyTradePagerAdapter extends FragmentStatePagerAdapter {
+    public class MyTradePagerAdapter extends FragmentStatePagerAdapter {
 
         List<TradeData> items = new ArrayList<>();
 
@@ -249,6 +221,7 @@ public class MyPageActivity extends AppCompatActivity {
             items.addAll(list);
             notifyDataSetChanged();
         }
+
         public void clear() {
             items.clear();
             notifyDataSetChanged();

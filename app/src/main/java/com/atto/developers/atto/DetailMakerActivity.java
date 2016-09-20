@@ -135,7 +135,7 @@ public class DetailMakerActivity extends AppCompatActivity {
     private void listPortFolioData(int tid) {
 
         int pageNo = 1;
-        int rowCount = 50;
+        int rowCount = 12;
         MakerPortfolioListRequest request = new MakerPortfolioListRequest(this, String.valueOf(tid), String.valueOf(pageNo), String.valueOf(rowCount));
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<PortfolioData>>() {
             @Override

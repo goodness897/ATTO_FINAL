@@ -44,13 +44,12 @@ public class DetailTradeActivity extends AppCompatActivity {
     @BindView(R.id.re_list)
     RecyclerView mListView;
     RecyclerDetailTradeAdapter mAdapter;
-    ProgressDialogFragment mDialogFragment;
-
     @BindView(R.id.btn_move_nego_register)
     Button registerButton;
 
     int tradeId;
     TradeData tradeData = null;
+    ProgressDialogFragment mDialogFragment = new ProgressDialogFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +60,9 @@ public class DetailTradeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int trade_id = intent.getIntExtra("trade_id", -1);
         tradeData = (TradeData) intent.getSerializableExtra("tradeData");
-
         int auth = PropertyManager.getInstance().getKeyAuth();
         checkAuth(auth);
-
+/*
         if (trade_id != -1) {
             init(trade_id);
             setTradeId(trade_id);
@@ -72,6 +70,7 @@ public class DetailTradeActivity extends AppCompatActivity {
             init(tradeData);
             setTradeId(tradeData.getTrade_id());
         }
+        */
         Log.d(TAG, "닉네임 1 : " + tradeData.getMember_info().getMember_alias());
         Log.d(TAG, "닉네임 2: " + PropertyManager.getInstance().getNickName());
     }
@@ -79,6 +78,8 @@ public class DetailTradeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume 실행");
+        init(tradeData);
 
     }
 
@@ -145,7 +146,6 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void init(int trade_id) {
         initToolBar();
-        mDialogFragment = new ProgressDialogFragment();
         mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
         mAdapter = new RecyclerDetailTradeAdapter();
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
@@ -166,7 +166,7 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void init(TradeData tradeData) {
         initToolBar();
-        mDialogFragment = new ProgressDialogFragment();
+
         mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
         mAdapter = new RecyclerDetailTradeAdapter();
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
@@ -225,7 +225,6 @@ public class DetailTradeActivity extends AppCompatActivity {
                 Log.e(TAG, " Trade onSuccess 성공 : " + result.getData().getTrade_product_imges_info());
                 TradeData tradeData = result.getData();
                 mAdapter.setTradeData(tradeData);
-                mDialogFragment.dismiss();
 
             }
 
@@ -267,13 +266,23 @@ public class DetailTradeActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
-
             case REQUEST_UPDATE:
                 if (resultCode == RESULT_OK) {
-                    TradeData tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+                    tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+                    Log.d(TAG, "content : " + tradeData.getTrade_product_contents());
+                    Log.d(TAG, "image[1] : " + tradeData.getTrade_product_imges_info()[0]);
                     mAdapter.setTradeData(tradeData);
+                    mDialogFragment.dismiss();
+
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause 실행");
+
     }
 }
