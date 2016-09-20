@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_layout"
+    tools:context="com.atto.developers.atto.AddPortActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        app:theme="@style/ToolBarStyle"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_underline_background">
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_toolbar"
+        android:background="@color/color_edit_layout"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:background="@drawable/view_underline"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/img_add_port_photo"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/text_trade_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_photo_camera"
+                android:drawablePadding="12dp"
+                android:text="Add Photo"
+                android:textColor="@color/color_hint"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <ImageButton
+
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:src="@drawable/ic_cancel_not_circle"
+                android:background="@null"
+                android:id="@+id/btn_add_port_delete_photo"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_trade_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/ic_write_title"
+            android:drawablePadding="12dp"
+            android:hint="Title"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:theme="@style/TextLabel" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_add_port_keyword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/ic_write_content"
+            android:drawablePadding="12dp"
+            android:inputType="number"
+            android:hint="키워드를 입력하세요"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:theme="@style/TextLabel" />
+    </LinearLayout>
+
+    <Button
+        android:textColor="@color/white"
+        android:background="@color/color_text_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add_port_register"
+        android:id="@+id/btn_add_port_register"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

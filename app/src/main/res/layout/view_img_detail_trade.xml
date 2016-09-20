@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_img_detail_nego"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:gravity="fill_horizontal"
+    android:paddingTop="5dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal">
+
+        <ImageView
+            android:id="@+id/img_maker_profile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/text_maker_profile_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="16sp"
+            android:layout_marginTop="2dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp">
+
+            <RatingBar
+                android:id="@+id/ratingbar_maker_grade"
+                android:layout_width="wrap_content"
+                android:layout_height="12dp"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressDrawable="@drawable/custom_bar"
+                android:rating="5"
+                android:stepSize="0.5" />
+
+            <TextView
+                android:id="@+id/ratingbar_maker_grade_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout6"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal">
+
+        <TextView
+            android:id="@+id/text_trade_remain_time"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/staus_shape"
+            android:gravity="center"
+            android:text="24:24:24"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/offer_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout7"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginRight="5dp">
+
+
+        <TextView
+            android:id="@+id/limit_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="2016.09.12까지"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text_trade_dday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/staus_shape"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+
+    </LinearLayout>
+</RelativeLayout>

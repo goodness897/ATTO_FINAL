@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.atto.developers.atto.fragment.SendMailDialogFragment"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:gravity="center">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메일 전송이 완료되었습니다"/>
+
+    <TextView
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="메일을 확인하세요"/>
+
+    <Button
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="확인"
+        android:textColor="@color/white"
+        android:id="@+id/btn_check_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/color_btn"/>
+
+</LinearLayout>

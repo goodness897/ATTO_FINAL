@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="status">
+        <item>등록</item>
+        <item>협상</item>
+        <item>수락대기</item>
+        <item>제작</item>
+        <item>제작완료</item>
+        <item>배송완료</item>
+    </string-array>
+
+    <string-array name="titles">
+        <item>ATTO</item>
+        <item>TRADE</item>
+        <item>MAKER</item>
+    </string-array>
+
+    <string-array name="search_result">
+        <item>PORTFOLIO</item>
+        <item>TRADE</item>
+        <item>MAKER</item>
+    </string-array>
+
+
+</resources>

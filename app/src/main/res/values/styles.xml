@@ -1,0 +1,93 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="windowActionBar">false</item>
+        <!-- colorPrimary is used for coloring the Toolbar -->
+        <item name="colorPrimary">@color/color_atto_sub</item>
+        <!-- colorPrimaryDark is used for coloring the status bar -->
+        <item name="colorPrimaryDark">@color/color_atto_main</item>
+        <!-- colorAccent is used as the default value for colorControlActivated which is used to tint widgets -->
+        <item name="colorAccent">@color/color_atto_main</item>
+
+    </style>
+
+    <style name="SplashAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="windowActionBar">false</item>
+        <!-- colorPrimary is used for coloring the Toolbar -->
+        <item name="colorPrimary">@color/color_atto_sub</item>
+        <!-- colorPrimaryDark is used for coloring the status bar -->
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <!-- colorAccent is used as the default value for colorControlActivated which is used to tint widgets -->
+        <item name="colorAccent">@color/color_atto_main</item>
+    </style>
+
+    <style name="LoginAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="windowActionBar">false</item>
+        <!-- colorPrimary is used for coloring the Toolbar -->
+        <item name="colorPrimary">@color/color_atto_sub</item>
+        <!-- colorPrimaryDark is used for coloring the status bar -->
+        <item name="colorPrimaryDark">#f5c9a2</item>
+        <!-- colorAccent is used as the default value for colorControlActivated which is used to tint widgets -->
+        <item name="colorAccent">@color/color_atto_main</item>
+    </style>
+
+    <style name="myrating" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_bar</item>
+        <item name="android:minHeight">16dp</item>
+        <item name="android:maxHeight">16dp</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/color_hint</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColorHighlight">@color/color_atto_main_opa</item>
+        <item name="android:textColorLink">@color/white</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+
+    </style>
+
+    <style name="ProfileTextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/color_transparent_black</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColorHighlight">@color/color_atto_main_opa</item>
+        <item name="android:textColorLink">@color/white</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/color_transparent_black</item>
+        <item name="colorControlNormal">@color/color_transparent_black</item>
+        <item name="colorControlActivated">@color/color_transparent_black</item>
+
+    </style>
+
+
+    <!-- ToolBar -->
+    <style name="ToolBarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+
+    <style name="FacebookLoginButton">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:drawableLeft">@drawable/ic_facebook</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:gravity">center</item>
+        <!--<item name="android:background">@drawable/facebook_signin_btn</item>-->
+        <item name="android:layout_gravity">center</item>
+
+    </style>
+</resources>

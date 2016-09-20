@@ -1,0 +1,163 @@
+<resources>
+    <string name="app_name">ATTO</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!-- 메인 로그인 -->
+    <string name="btn_local_login"><b>로그인</b></string>
+    <string name="btn_kakao_login"><b>카카오톡 로그인하기</b></string>
+    <string name="text_logo_title">atto</string>
+    <string name="text_login_search"><b><u>로그인 정보를 잊으셨나요?</u></b></string>
+    <string name="text_login_signup">회원가입</string>
+    <string name="text_login_guest">둘러보기</string>
+    <string name="edit_login_id_hint">아이디</string>
+    <string name="edit_login_password_hint">비밀번호</string>
+
+    <!-- 회원가입 -->
+    <string name="activity_signup">회원가입</string>
+    <string name="btn_complete_signup">동의하고 회원 가입하기</string>
+    <string name="text_check_agreement">이용약관과 개인정보 취급방침 보기</string>
+    <string name="edit_email_hint">이메일</string>
+    <string name="edit_password_hint">비밀번호 12자리를 입력하세요</string>
+    <string name="edit_repassword_hint">비밀번호 확인</string>
+    <string name="edit_name_hint">닉네임</string>
+    <string name="edit_phone_hint">연락처</string>
+    <string name="edit_address_hint">주소</string>
+
+    <!-- 비밀번호 찾기 -->
+    <string name="activity_find_password">비밀번호 찾기</string>
+    <string name="btn_find_email">이메일로 전송</string>
+
+
+    <!-- 메인 ATTO -->
+    <string name="main_tab_one">atto</string>
+    <string name="main_tab_realtrade">실시간 거래</string>
+    <string name="main_tab_maker">아토 제작자</string>
+    <string name="btn_realtimetrade_write_text">거래글 작성하러 가기</string>
+
+    <!-- 검색 -->
+    <string name="activity_unified_search">통합 검색</string>
+    <string name="text_search_text">검색결과</string>
+    <string name="text_search_maker">제작자</string>
+    <string name="text_search_trade">거래</string>
+    <string name="text_search_itemphoto">작품</string>
+    <string name="text_search_more">더보기 ></string>
+    <string name="edit_input_search_hint">검색어를 입력하세요</string>
+
+    <!--마이페이지-->
+    <string name="activity_my_page">마이페이지</string>
+    <string name="activity_mypage_more_trade">My 거래</string>
+    <string name="text_my_trade">MY 거래</string>
+    <string name="text_mypage_more_trade"><![CDATA[더보기 >]]></string>
+    <string name="text_sell_management">판매 관리</string>
+    <string name="btn_footer_move_maker_info">제작자 등록 정보</string>
+    <string name="btn_footer_move_maker_nego">협상중인 거래</string>
+    <string name="btn_footer_move_accept_wait">수락대기중인 거래</string>
+    <string name="btn_mypage_setting_myprofile">내 프로필 설정</string>
+
+    <!-- 프로필 설정 -->
+    <string name="activity_my_page_set_profile">내 프로필 설정</string>
+    <string name="edit_sex_hint">성별</string>
+    <string name="text_main_address">대표주소</string>
+
+    <!-- 주소 변경 -->
+    <string name="text_notice">*주소는 최대 2개까지 입력가능합니다.</string>
+    <string name="btn_complete_update">수정 완료</string>
+    <string name="btn_change_address">주소변경</string>
+    <string name="btn_post_code">우편 번호</string>
+    <string name="edit_hitn_detail_address">상세 주소 입력</string>
+    <string name="edit_hint_search_address">예) 판교역로 235, 한남동 714</string>
+
+    <!-- 제작자 등록정보 -->
+    <string name="activity_maker_info">제작자 등록 정보</string>
+    <string name="text_maker_notice">수정 및 추가는 아토관리자에게 문의해야 가능합니다.</string>
+    <string name="text_maker_notice_phone">연락처 : 070-0000-0000</string>
+    <string name="text_maker_notice_email">이메일 : admin@atto.com</string>
+
+    <!--협상중인 거래-->
+    <string name="activity_maker_nego">협상중인 거래</string>
+
+    <!--수락대기 중인 거래 -->
+    <string name="activity_accept_wait">수락대기 중인 거래</string>
+
+
+    <!-- 마이페이지설정 -->
+    <string name="activity_mypage_setting">설정</string>
+    <string name="text_key_setting_profile">프로필수정</string>
+    <string name="text_key_change_password">비밀번호변경</string>
+    <string name="text_key_change_address">주소변경</string>
+    <string name="text_key_alert_setting">알림 ON/OFF</string>
+    <string name="text_key_register_maker">판매자등록</string>
+    <string name="text_key_logout">로그아웃</string>
+    <string name="text_key_leave_atto">탈퇴하기</string>
+
+
+    <!-- 탈퇴 -->
+    <string name="activity_leave_account">계정탈퇴</string>
+    <string name="btn_leave_account">탈퇴하기</string>
+
+
+    <!-- 비밀번호 변경-->
+    <string name="activity_change_password">비밀번호변경</string>
+    <string name="edit_password">현재 비밀번호</string>
+    <string name="edit_new_password">새 비밀번호</string>
+    <string name="edit_re_new_password">새 비밀번호 재입력</string>
+    <string name="btn_password_update">비밀번호변경</string>
+
+
+    <!-- 이용약관 -->
+    <string name="activity_areement">이용약관과 개인정보취급방침</string>
+    <string name="text_personal_information">개인정보취급방침</string>
+    <string name="text_agreement">이용약관</string>
+    <string name="btn_agreement">전체동의하기</string>
+
+
+    <!-- 포트폴리오 추가 -->
+    <string name="activity_add_port.xml">포트폴리오 추가</string>
+    <string name="text_img_add_port_photo">이미지추가</string>
+    <string name="edit_hint_add_port_title">제목을 입력하세요.</string>
+    <string name="edit_hint_add_port_category"># 키워드를 입력해주세요. (최대 3개)</string>
+    <string name="btn_add_port_register">등록하기</string>
+
+
+    <string name="text_register_nego">협상카드 작성하기</string>
+    <string name="text_nego_register">협상카드 등록하기</string>
+    <string name="text_add_trade_register_trade">거래 작성하기</string>
+    <string name="btn_setting_price">가격 설정하기</string>
+    <string name="btn_accept_request">승인 및 수락 요청하기</string>
+    <string name="text_maker_order_dialog">협상 카드 등록이 마감됩니다.제작 주문서 작성페이지로 이동합니다.</string>
+    <string name="btn_detail_port_move_trade">거래 작성하러 가기</string>
+    <string name="btn_final_accept_request">제작자에게 최종수락 요청</string>
+    <string name="btn_update_order">수정하기</string>
+    <string name="activity_addtrade">거래글 작성하기</string>
+    <string name="activity_detail_trade">거래글상세보기</string>
+    <string name="activity_add_nego">협상카드작성하기</string>
+    <string name="activity_detail_maker">제작자 상세보기</string>
+    <string name="activity_my_page_setting">설정</string>
+    <string name="activity_notice">알림</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_settings">설정</string>
+    <string name="text_detail_port_title">작품 제목</string>
+    <string name="text_check_logout">로그아웃 하시겠습니까?</string>
+    <string name="btn_check_complete">OK</string>
+    <string name="btn_cancel">CANCEL</string>
+    <string name="activity_add_image">이미지 추가하기</string>
+    <string name="text_detail_maker_intro">반려동물을 위한 건강한 간식을 제작합니다.</string>
+    <string name="activity_regsiter_maker">판매자등록</string>
+    <string name="edit_detail_address">상세주소 입력</string>
+    <string name="btn_img_address">우편번호 검색</string>
+    <string name="edit_search_hint_text">검색어를 입력해주세요.</string>
+    <string name="present_password_hint">현재 비밀번호</string>
+    <string name="new_password_hint">새로운 비밀번호</string>
+    <string name="check_new_password_hint">비밀번호 확인</string>
+    <string name="activity_add_port">포트폴리오 추가하기</string>
+    <string name="key_maker_info">제작자 등록 정보</string>
+    <string name="activity_account_leave">탈퇴하기</string>
+    <string name="activity_about_atto">About atto</string>
+    <!-- 페이스북 앱 id-->
+    <string name="facebook_app_id">595957133909630</string>
+    <string name="loginFacebookButton">Login with Facebook</string>
+    <string name="logoutFacebookButton">Logout with Facebook</string>
+    <string name="activity_detail_nego">협상카드 상세보기</string>
+</resources>

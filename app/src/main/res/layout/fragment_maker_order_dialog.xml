@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.atto.developers.atto.fragment.MakerOrderDialogFragment"
+    android:gravity="center"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="협상 카드 등록이 마감됩니다.제작 주문서 작성페이지로 이동합니다."
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="진행"
+            android:textColor="@color/white_opa"
+            android:background="@color/color_atto_main"
+            android:id="@+id/btn_positive"
+            android:layout_weight="1"
+            android:layout_marginRight="4dp" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:textColor="@color/white_opa"
+            android:background="@color/color_atto_main"
+            android:id="@+id/btn_negative"
+            android:layout_weight="1"
+            android:layout_marginLeft="4dp" />
+    </LinearLayout>
+
+</LinearLayout>

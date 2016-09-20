@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBlack">#000</color>
+    <color name="colorBackg">#FFD5D5D5</color>
+    <color name="fontColor">#262626</color>
+
+    <color name="color_layout">#ffe0e0e0</color>
+    <color name="color_edit_layout">#a1a1a1</color>
+
+    <color name="color_edit_line">#FFAAB0F5</color>
+
+    <color name="white">#ffffff</color>
+    <color name="white_opa">#B3ffffff</color>
+
+    <color name="color_btn">#f8606d</color>
+
+    <!--<color name="color_atto_main">#ff3b7b</color>-->
+    <color name="color_atto_main">#f8606d</color>
+    <color name="color_atto_main_opa">#33ff3b7b</color>
+
+    <color name="color_atto_sub">#f8b895</color>
+    <color name="color_atto_sub_opa">#33f8b895</color>
+
+    <color name="color_trade_status_text_bg">#9A59B5</color>
+    <color name="color_trade_status_layout_bg">#E0E0E0</color>
+
+    <color name="color_detail_port_text_bg">#99000000</color>
+    <color name="color_add_form_bg">#E5E5E5</color>
+
+    <color name="color_rating_bg">#5F5F5F</color>
+
+    <color name="color_hint">#e6e6e6</color>
+
+    <color name="color_title">#de000000</color>
+    <color name="color_caption">#8A000000</color>
+
+    <color name="color_transparent_black">#50000000</color>
+
+    <color name="color_text_price">#8000A388</color>
+    <color name="color_keyword">#809F0A97</color>
+</resources>

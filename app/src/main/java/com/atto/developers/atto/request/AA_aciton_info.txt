@@ -1,0 +1,54 @@
+{
+    /trades/:tid
+
+    HTTP PUT
+
+    tid: 거래글 ID (number)
+    action:{
+        modify 일때 수정,
+            t_accept 일때 거래글 수락,
+            n_accept 일때 협상 수락 정보 수정,
+            frequency 일때 수거일 선택
+
+        t_accept 일때
+            nid : 협상카드 ID (number)
+
+        n_accept  일때
+            accept  : 협상 수락 정보(number) 0 - 미수락 / 1 - 수락
+
+        frequency 일때 수거일 선택
+            frequency_dtime : 수거일
+
+            }
+}
+
+{
+    거래글 검색
+        /trades/:tid?action=&key_word_id=&pageNo=&rowCount=
+        HTTP GET
+
+    tid = 거래글 ID(number)
+    action=
+        tradeid 는 거래글 상세정보
+        productorder 는 제작주문서 작성시 정보제공 기능(거래, 협상 수락시만 가능)
+
+
+        예시)
+            /trades/1?action=trade_id
+            /trades/1?action=productorder
+
+}
+
+{
+ 협상카드 등록, 등록
+ AddNegoRequest
+ HTTP POST
+tid : 현재 거래글의 ID(number)
+negotiation_price : 협상카드에 등록할 가격(number)
+negotiation_dtime : 협상카드에 등록할 거래 마감일
+negotiation_product_contents : 협상카드에 등록할 상세정보
+negotiation_product_imges : 협상카드에 등록할 이미지들
+
+예시) /trades/1/negotiations
+
+}

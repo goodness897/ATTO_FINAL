@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:layout_width="200dp"
+        android:layout_height="300dp"
+        android:background="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/my_pagelayout">
+
+        <ImageView
+            android:background="@color/color_layout"
+            android:id="@+id/my_page_product_img"
+            android:layout_width="200dp"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:id="@+id/my_page_text_trade_staus"
+            android:background="@drawable/staus_shape"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="Large Text"
+            android:textColor="@color/white"
+            android:id="@+id/my_page_text_trade_title"
+            android:layout_alignBottom="@+id/my_page_product_img"
+            android:layout_alignLeft="@+id/my_page_product_img"
+            android:layout_alignStart="@+id/my_page_product_img"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D-13"
+            android:textColor="@color/white"
+            android:background="@drawable/staus_shape"
+            android:id="@+id/my_page_text_trade_dday"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/my_page_text_trade_price"
+            android:layout_alignEnd="@+id/my_page_text_trade_price"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/my_page_text_trade_price"
+            android:textSize="18sp"
+            android:layout_above="@+id/my_page_text_trade_dday"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

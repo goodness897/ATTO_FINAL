@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@color/white">
+
+    <!--<TextView
+        android:id="@+id/text_detail_maker_signed"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/staus_shape"
+        android:gravity="center"
+        android:text="Large Text"
+        android:textColor="@color/white"
+        android:textSize="14sp" />-->
+
+    <ImageView
+        android:id="@+id/img_detail_maker_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/text_detail_maker_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_detail_maker_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+
+    <!--<RatingBar
+        android:id="@+id/ratingbar_detail_maker_grade"
+        style="@style/myrating"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ratingbar_height"
+        android:layout_below="@+id/text_detail_maker_nickname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:rating="3.5" />-->
+
+    <RatingBar
+        android:id="@+id/ratingbar_detail_maker_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_gravity="left"
+        android:layout_below="@+id/text_detail_maker_nickname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:progressDrawable="@drawable/custom_detail_ratingbar"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:rating="5"
+        android:layout_marginLeft="12dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:isIndicator="true"
+        />
+
+    <TextView
+        android:id="@+id/text_detail_maker_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ratingbar_detail_maker_grade"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_detail_maker_intro"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout10">
+
+        <TextView
+            android:id="@+id/text_detail_maker_keyword_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@drawable/category_shapes"
+            android:text="#반려동물"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text_detail_maker_keyword_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/category_shapes"
+            android:text="#간식"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/btn_add_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="포트폴리오 추가"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/staus_shape"
+        android:layout_below="@+id/linearLayout10"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

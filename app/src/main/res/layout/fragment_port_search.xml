@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.atto.developers.atto.fragment.PortSearchFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/search_itemphoto_text"
+        android:id="@+id/text_itemphoto_search_result"
+        android:gravity="left"
+        android:layout_marginLeft="15dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/re_itemphoto_search"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="5dp" />
+
+</LinearLayout>

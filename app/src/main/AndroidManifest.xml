@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.atto.developers.atto">
+
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.CAMERA" />
+
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+	<permission
+		android:name="com.atto.developers.atto.permission.C2D_MESSAGE"
+		android:protectionLevel="signature" />
+	<uses-permission android:name="com.atto.developers.atto.permission.C2D_MESSAGE" />
+	<application
+		android:name=".MyApplication"
+		android:allowBackup="true"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:supportsRtl="true"
+		android:theme="@style/AppTheme">
+		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+		<activity
+			android:name=".SplashActivity"
+			android:theme="@style/LoginAppTheme">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+		<activity android:name=".AddTradeActivity"/>
+		<activity android:name=".AddImageActivity"/>
+		<activity android:name=".AddNegoActivity"/>
+		<activity android:name=".DetailNegoActivity"/>
+		<activity android:name=".MyDetailNegoActivity"/>
+		<activity android:name=".DetailMakerActivity"/>
+		<activity android:name=".DetailPortActivity"/>
+		<activity android:name=".DetailTradeActivity"/>
+		<activity android:name=".AddPortActivity"/>
+		<activity android:name=".MyPageSetProfileActivity"/>
+		<activity android:name=".ChangeAddressActivity"/>
+		<activity android:name=".MyTradeActivity"/>
+		<activity android:name=".AddMakeOrderActivity"/>
+		<activity android:name=".MakeOrderActivity"/>
+		<activity android:name=".MyPageMoreTradeActivity"/>
+		<activity android:name=".MakerInfoActivity"/>
+		<activity android:name=".MakerNegoActivity"/>
+		<activity android:name=".AcceptWaitActivity"/>
+		<activity android:name=".ChatActivity"/>
+		<activity android:name=".MyPageSettingActivity"/>
+		<activity android:name=".ChangePasswordActivity"/>
+		<activity android:name=".AboutAttoActivity"/>
+		<activity android:name=".AccountLeaveActivity"/>
+		<activity android:name=".RegisterMakerActivity"/>
+		<activity android:name=".UnifiedSearchActivity"/>
+		<activity android:name=".NoticeMainActivity"/>
+		<activity android:name=".MainActivity"/>
+		<activity android:name=".FindPasswordActivity"/>
+		<activity android:name=".SignUpActivity"/>
+		<activity android:name=".AgreementActivity"/>
+		<activity
+			android:name=".LoginActivity"
+			android:theme="@style/LoginAppTheme"/>
+		<activity android:name=".MyPageActivity"/>
+		<activity android:name=".SearchAddressActivity"/>
+		<activity android:name="com.facebook.FacebookActivity"
+			android:configChanges=
+				"keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+			android:theme="@android:style/Theme.Translucent.NoTitleBar"
+			android:label="@string/app_name" />
+
+		<receiver
+			android:name="com.google.android.gms.gcm.GcmReceiver"
+			android:exported="true"
+			android:permission="com.google.android.c2dm.permission.SEND" >
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+				<category android:name="com.atto.developers.atto" />
+			</intent-filter>
+		</receiver>
+		<service
+			android:name=".gcm.MyGcmListenerService"
+			android:exported="false" >
+			<intent-filter>
+				<action android:name="com.google.android.c2dm.intent.RECEIVE" />
+			</intent-filter>
+		</service>
+		<service
+			android:name=".gcm.MyInstanceIDListenerService"
+			android:exported="false">
+			<intent-filter>
+				<action android:name="com.google.android.gms.iid.InstanceID"/>
+			</intent-filter>
+		</service>
+		<service
+			android:name=".gcm.RegistrationIntentService"
+			android:exported="false">
+		</service>
+	</application>
+</manifest>

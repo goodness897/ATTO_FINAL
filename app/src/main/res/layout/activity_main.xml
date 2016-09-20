@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.atto.developers.atto.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_underline_background"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/toolbar_title"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:src="@drawable/atto_logo_white" />
+    </android.support.v7.widget.Toolbar>
+
+    <!--<android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/main_toolbar"
+        android:background="@color/color_atto_main"
+        app:tabIndicatorHeight="3dp"
+        app:tabIndicatorColor="@color/white"
+        app:tabMinWidth="100dp"
+        app:tabMode="fixed" />-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_below="@+id/nts_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+        <!--android:layout_below="@+id/tabs"-->
+
+    <LinearLayout
+        android:id="@+id/nts_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_toolbar">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_atto_main"
+            android:paddingEnd="30dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingStart="30dp">
+
+            <com.gigamole.navigationtabstrip.NavigationTabStrip
+                android:id="@+id/nts"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                app:nts_active_color="#fff"
+                app:nts_color="@color/white"
+                app:nts_factor="2.8"
+                app:nts_corners_radius="1.5dp"
+                app:nts_inactive_color="#81ffffff"
+                app:nts_titles="@array/titles"
+                app:nts_typeface="fonts/drugs.otf"
+                app:nts_weight="3dp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
