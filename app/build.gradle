@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'android-apt'
-apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 24
@@ -52,7 +51,9 @@ dependencies {
     compile 'com.jaredrummler:material-spinner:1.1.0'
     compile 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.google.android.gms:play-services-gcm:9.0.0'
     compile 'com.android.support:support-core-utils:24.2.0'
+    compile 'com.google.firebase:firebase-messaging:9.4.0'
+    compile "com.google.android.gms:play-services-gcm:9.4.0"
     compile 'com.pixplicity.multiviewpager:library:1.0'
 }
+apply plugin: 'com.google.gms.google-services'

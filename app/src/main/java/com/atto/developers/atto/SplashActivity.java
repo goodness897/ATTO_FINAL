@@ -125,6 +125,7 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+
     private boolean checkPlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
