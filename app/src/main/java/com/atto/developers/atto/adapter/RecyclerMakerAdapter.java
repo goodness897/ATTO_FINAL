@@ -65,7 +65,7 @@ public class RecyclerMakerAdapter extends RecyclerView.Adapter<RecyclerMakerView
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return items.size()-1;
     }
 
     @Override

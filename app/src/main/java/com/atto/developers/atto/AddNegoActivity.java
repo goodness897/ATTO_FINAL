@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.atto.developers.atto.fragment.NegoDateFragment;
+import com.atto.developers.atto.fragment.ProgressDialogFragment;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
@@ -47,6 +48,8 @@ public class AddNegoActivity extends AppCompatActivity {
 
     private String file_path;
 
+    ProgressDialogFragment dialogFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,63 +58,11 @@ public class AddNegoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initToolBar();
 
+        dialogFragment = new ProgressDialogFragment();
         Intent intent = getIntent();
         tradeId = intent.getIntExtra("tradeId", -1);
         Log.d("AddNegoActivity", "tradeId : " + tradeId);
 
-
-    }
-
-    @OnClick(R.id.btn_wish_delevery)
-    public void onPickUpDate() {
-        FragmentManager fm = getSupportFragmentManager();
-        NegoDateFragment dialogFragment = new NegoDateFragment();
-        dialogFragment.show(fm, "fragment_pickup_date");
-    }
-
-    @OnClick(R.id.btn_nego_register)
-    public void onCompleteNegoRegister() {
-        String negotiation_price = priceView.getText().toString();
-        String negotiation_dtime = dateView.getText().toString();
-        String negotiation_product_contents = contentView.getText().toString();
-        File imageFile = null;
-        if (file_path != null) {
-            imageFile = new File(file_path);
-        }
-        File[] negotiation_product_images = {imageFile};
-
-
-        AddNegoCardRequest request = new AddNegoCardRequest(this, String.valueOf(tradeId), negotiation_price, negotiation_dtime, negotiation_product_contents,
-                negotiation_product_images);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoData>() {
-            @Override
-            public void onSuccess(NetworkRequest<NegoData> request, NegoData result) {
-                Log.d("AddNegoActivity", "성공 : " + result.getCode());
-                Intent intent = new Intent(AddNegoActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onFail(NetworkRequest<NegoData> request, int errorCode, String errorMessage, Throwable e) {
-                Log.d("AddNegoActivity", "실패 : " + errorMessage);
-
-            }
-        });
-
-
-    }
-
-    public void onDateSelectValue(String selectedDate) {
-        TextView dateView = (TextView) findViewById(R.id.text_pickup_date);
-        dateView.setText(selectedDate);
-    }
-
-
-    @OnClick(R.id.img_trade_preview)
-    public void onSetPhotoImage() {
-        Intent intent = new Intent(AddNegoActivity.this, AddImageActivity.class);
-        startActivityForResult(intent, RC_GET_IMAGE);
     }
 
     private void initToolBar() {
@@ -125,6 +76,59 @@ public class AddNegoActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @OnClick(R.id.btn_wish_delevery)
+    public void onPickUpDate() {
+        FragmentManager fm = getSupportFragmentManager();
+        NegoDateFragment dialogFragment = new NegoDateFragment();
+        dialogFragment.show(fm, "fragment_pickup_date");
+    }
+
+    @OnClick(R.id.btn_nego_register)
+    public void onCompleteNegoRegister() {
+
+        dialogFragment.show(getSupportFragmentManager(), "progress");
+        String negotiation_price = priceView.getText().toString();
+        String negotiation_dtime = dateView.getText().toString();
+        String negotiation_product_contents = contentView.getText().toString();
+        File imageFile = null;
+        if (file_path != null) {
+            imageFile = new File(file_path);
+        }
+        File[] negotiation_product_images = {imageFile};
+
+        AddNegoCardRequest request = new AddNegoCardRequest(this, String.valueOf(tradeId), negotiation_price, negotiation_dtime, negotiation_product_contents,
+                negotiation_product_images);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoData>() {
+            @Override
+            public void onSuccess(NetworkRequest<NegoData> request, NegoData result) {
+                Log.d("AddNegoActivity", "성공 : " + result.getCode());
+                Intent intent = new Intent(AddNegoActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                dialogFragment.dismiss();
+            }
+
+            @Override
+            public void onFail(NetworkRequest<NegoData> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("AddNegoActivity", "실패 : " + errorMessage);
+                dialogFragment.dismiss();
+
+            }
+        });
+
+    }
+
+    public void onDateSelectValue(String selectedDate) {
+        TextView dateView = (TextView) findViewById(R.id.text_pickup_date);
+        dateView.setText(selectedDate);
+    }
+
+    @OnClick(R.id.img_trade_preview)
+    public void onSetPhotoImage() {
+        Intent intent = new Intent(AddNegoActivity.this, AddImageActivity.class);
+        startActivityForResult(intent, RC_GET_IMAGE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

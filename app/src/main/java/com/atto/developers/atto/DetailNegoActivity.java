@@ -9,15 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.atto.developers.atto.fragment.MakerOrderDialogFragment;
 import com.atto.developers.atto.fragment.ReportDialogFragment;
-import com.atto.developers.atto.manager.NetworkManager;
-import com.atto.developers.atto.manager.NetworkRequest;
-import com.atto.developers.atto.networkdata.negodata.NegeListItemData;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
-import com.atto.developers.atto.request.DetailNegoRequest;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -101,7 +96,6 @@ public class DetailNegoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         negoData = (NegoData)intent.getSerializableExtra("negoData");
-
         negoId = intent.getIntExtra("negoId", -1);
         tradeId = intent.getIntExtra("tradeId", -1);
         Log.d("DetailNegoActivity", "negoId : " + negoId);
@@ -111,11 +105,13 @@ public class DetailNegoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        initData(tradeId, negoId);
     }
 
     private void initData(int tradeId, int negoId) {
-        DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(tradeId), String.valueOf(negoId));
+
+        setNegoData(negoData);
+
+        /*DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(tradeId), String.valueOf(negoId));
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegeListItemData>() {
             @Override
             public void onSuccess(NetworkRequest<NegeListItemData> request, NegeListItemData result) {
@@ -128,7 +124,7 @@ public class DetailNegoActivity extends AppCompatActivity {
             public void onFail(NetworkRequest<NegeListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(getApplicationContext(), "실패 : " + errorCode, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 
@@ -148,7 +144,6 @@ public class DetailNegoActivity extends AppCompatActivity {
     private void checkImageData(NegoData data) {
         if (data.getMaker_info().getMaker_profile_img() != null) {
             Glide.with(this).load(data.getMaker_info().getMaker_profile_img()).bitmapTransform(new CropCircleTransformation(this)).into(maker_profile);
-
         } else {
             img_add_port_photo.setImageResource(R.drawable.default_image);
         }

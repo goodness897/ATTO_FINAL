@@ -1,5 +1,6 @@
 package com.atto.developers.atto;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -55,6 +56,11 @@ public class MyDetailNegoActivity extends AppCompatActivity {
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
             @Override
             public void onAdapterItemClick(View view, NegoData negoData, int position) {
+
+                Intent intent = new Intent(MyDetailNegoActivity.this, DetailNegoActivity.class);
+                intent.putExtra("negoData", negoData);
+                startActivity(intent);
+
 
                 Toast.makeText(MyDetailNegoActivity.this, "position : " + position, Toast.LENGTH_LONG).show();
             }
