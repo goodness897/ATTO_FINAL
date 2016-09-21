@@ -45,7 +45,7 @@ public class DBManager extends SQLiteOpenHelper {
                 ChatContract.ChatUser._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ChatContract.ChatUser.COLUMN_SERVER_ID + " INTEGER," +
                 ChatContract.ChatUser.COLUMN_NAME + " TEXT," +
-                ChatContract.ChatUser.COLUMN_EMAIL + " TEXT NOT NULL," +
+                ChatContract.ChatUser.COLUMN_EMAIL + " TEXT," +
                 ChatContract.ChatUser.COLUMN_LAST_MESSAGE_ID + " INTEGER);";
         db.execSQL(sql);
 
@@ -128,7 +128,7 @@ public class DBManager extends SQLiteOpenHelper {
             values.clear();
             values.put(ChatContract.ChatUser.COLUMN_SERVER_ID, user.getMember_id());
             values.put(ChatContract.ChatUser.COLUMN_NAME, user.getMember_alias());
-            values.put(ChatContract.ChatUser.COLUMN_EMAIL, user.getMember_phone());
+            values.put(ChatContract.ChatUser.COLUMN_EMAIL, "consumer");
             return db.insert(ChatContract.ChatUser.TABLE, null, values);
         }
         throw new IllegalArgumentException("aleady user added");
@@ -190,6 +190,7 @@ public class DBManager extends SQLiteOpenHelper {
     public Cursor getChatMessage(MyProfileData user) {
         long userid = -1;
         Long uid = resolveUserId.get(user.getMember_id());
+        Log.d("userid",String.valueOf(user.getMember_id()));
         if (uid == null) {
             long id = getUserId(user.getMember_id());
             if (id != -1) {

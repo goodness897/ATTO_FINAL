@@ -31,7 +31,7 @@ public class MessageSendRequest extends AbstractRequest<ResultMessage> {
     private final static String COLLAPSEKEY = "collapseKey";
     private final static String COLLAPSEKEY_VALUE = "Chat";
     private final static String IMAGES = "chat_img";
-
+private final static String TID = "user_id";
     Request mRequest;
 
     MediaType jpeg = MediaType.parse("image/jpeg");
@@ -47,7 +47,8 @@ public class MessageSendRequest extends AbstractRequest<ResultMessage> {
                 .setType(MultipartBody.FORM)
                 .addFormDataPart(ALIAS, user.getMember_alias())
                 .addFormDataPart(MESSAGE, message)
-                .addFormDataPart(COLLAPSEKEY, COLLAPSEKEY_VALUE);
+                .addFormDataPart(TID,"134");
+
 
         if (chat_img != null) {
             body.addFormDataPart(IMAGES, chat_img.getName(),
@@ -64,7 +65,7 @@ public class MessageSendRequest extends AbstractRequest<ResultMessage> {
                 .tag(context)
                 .build();
 
-        Log.i("url", body.toString());
+        Log.i("url", url.toString());
 
     }
 

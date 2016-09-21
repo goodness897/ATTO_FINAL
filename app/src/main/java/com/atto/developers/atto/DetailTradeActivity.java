@@ -243,7 +243,7 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void checkNegoData(int trade_id) {
 
-        NegoCardListRequest request = new NegoCardListRequest(this, String.valueOf(trade_id), "", "");
+        NegoCardListRequest request = new NegoCardListRequest(this, String.valueOf(trade_id), "", "50");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<NegoData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<NegoData>> request, ListData<NegoData> result) {

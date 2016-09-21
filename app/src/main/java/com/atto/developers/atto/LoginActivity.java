@@ -389,6 +389,9 @@ public class LoginActivity extends AppCompatActivity {
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
                 @Override
                 public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                    if(result.getCode()==0){
+                        Toast.makeText(LoginActivity.this, "아이디 혹은 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
                     PropertyManager.getInstance().setEmail(e_mail);
                     PropertyManager.getInstance().setPassword(password);
                     Toast.makeText(LoginActivity.this, "성공 : " + result.getMessage(), Toast.LENGTH_LONG).show();
@@ -397,7 +400,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
-                    Toast.makeText(LoginActivity.this, "아이디와 비밀번호를 확인하세요", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "서버가 불안정하니 잠시후 로그인 해주세요.. 이런일이 종종 있습니다.", Toast.LENGTH_LONG).show();
 
                 }
             });

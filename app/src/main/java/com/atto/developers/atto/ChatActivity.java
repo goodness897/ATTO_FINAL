@@ -43,19 +43,28 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
-
 //        user = (User) getIntent().getSerializableExtra(EXTRA_USER);
-
+        init();
         mAdapter = new ChatAdapter();
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         mLBM = LocalBroadcastManager.getInstance(this);
     }
 
+    private void init() {
+     user = new MyProfileData();
+        user.setMember_id(134);
+        user.setMember_auth(0);
+        user.setMember_alias("consumer");
+        user.setMember_address_1("sdf");
+    DBManager.getInstance().addUser(user);
+
+    }
+
     @OnClick(R.id.btn_send)
     public void onSend(View view) {
         final String message = inputView.getText().toString();
-        String tid = null;
+        String tid = "1341";
         File img = null;
         MessageSendRequest request = new MessageSendRequest(this, tid, user, message, img);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
@@ -67,7 +76,7 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
-                Toast.makeText(ChatActivity.this, "fail", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "fail" +errorCode, Toast.LENGTH_SHORT).show();
 
             }
         });
