@@ -99,6 +99,9 @@ public class DetailNegoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initToolBar();
         Intent intent = getIntent();
+
+        negoData = (NegoData)intent.getSerializableExtra("negoData");
+
         negoId = intent.getIntExtra("negoId", -1);
         tradeId = intent.getIntExtra("tradeId", -1);
         Log.d("DetailNegoActivity", "negoId : " + negoId);

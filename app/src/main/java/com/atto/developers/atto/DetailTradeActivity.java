@@ -48,18 +48,22 @@ public class DetailTradeActivity extends AppCompatActivity {
     Button registerButton;
 
     int tradeId;
-    TradeData tradeData = null;
-    ProgressDialogFragment mDialogFragment = new ProgressDialogFragment();
+    TradeData tradeData;
+    ProgressDialogFragment mDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_trade);
         mUnbinder = ButterKnife.bind(this);
+        mAdapter = new RecyclerDetailTradeAdapter();
+        mDialogFragment = new ProgressDialogFragment();
 
         Intent intent = getIntent();
         int trade_id = intent.getIntExtra("trade_id", -1);
         tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+        init(tradeData);
+
         int auth = PropertyManager.getInstance().getKeyAuth();
         checkAuth(auth);
 /*
@@ -72,14 +76,15 @@ public class DetailTradeActivity extends AppCompatActivity {
         }
         */
         Log.d(TAG, "닉네임 1 : " + tradeData.getMember_info().getMember_alias());
-        Log.d(TAG, "닉네임 2: " + PropertyManager.getInstance().getNickName());
+        Log.d(TAG, "닉네임 2 : " + PropertyManager.getInstance().getNickName());
+        Log.d(TAG, "아이디 : " + tradeData.getTrade_id());
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume 실행");
-        init(tradeData);
 
     }
 
@@ -147,7 +152,6 @@ public class DetailTradeActivity extends AppCompatActivity {
     private void init(int trade_id) {
         initToolBar();
         mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
-        mAdapter = new RecyclerDetailTradeAdapter();
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
             @Override
             public void onAdapterItemClick(View view, NegoData negoData, int position) {
@@ -168,11 +172,11 @@ public class DetailTradeActivity extends AppCompatActivity {
         initToolBar();
 
         mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
-        mAdapter = new RecyclerDetailTradeAdapter();
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
             @Override
             public void onAdapterItemClick(View view, NegoData negoData, int position) {
                 Intent intent = new Intent(DetailTradeActivity.this, DetailNegoActivity.class);
+                intent.putExtra("negoData", negoData);
                 startActivity(intent);
             }
         });
@@ -238,24 +242,19 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void checkNegoData(int trade_id) {
 
-        NegoCardListRequest request = new NegoCardListRequest(getApplicationContext(), trade_id + "", "", "");
+        NegoCardListRequest request = new NegoCardListRequest(this, String.valueOf(trade_id), "", "50");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<NegoData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<NegoData>> request, ListData<NegoData> result) {
-                Log.e(TAG, "Nego onSuccess 성공 : " + result);
-                if (result.getCode() == 0) {
-                    NegoData[] data = null;
-                    mDialogFragment.dismiss();
-                } else {
-                    NegoData[] data = result.getData();
-                    mAdapter.addAll(Arrays.asList(data));
-                    mDialogFragment.dismiss();
-                }
+                Log.e(TAG, "Nego onSuccess 성공 : " + result.getCode());
+                NegoData[] data = result.getData();
+                mAdapter.addAll(Arrays.asList(data));
+                mDialogFragment.dismiss();
             }
 
             @Override
             public void onFail(NetworkRequest<ListData<NegoData>> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e(TAG, "Nego onFail 실패: " + errorCode + ", " + request.getRequest().toString());
+                Log.e(TAG, "Nego onFail 실패: " + errorMessage);
                 mDialogFragment.dismiss();
             }
         });
@@ -277,7 +276,6 @@ public class DetailTradeActivity extends AppCompatActivity {
                     Log.d(TAG, "content : " + tradeData.getTrade_product_contents());
                     Log.d(TAG, "image[1] : " + tradeData.getTrade_product_imges_info()[0]);
                     mAdapter.setTradeData(tradeData);
-                    mDialogFragment.dismiss();
 
                 }
                 break;

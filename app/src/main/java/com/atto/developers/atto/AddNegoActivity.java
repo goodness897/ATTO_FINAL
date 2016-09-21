@@ -92,7 +92,6 @@ public class AddNegoActivity extends AppCompatActivity {
             public void onFail(NetworkRequest<NegoData> request, int errorCode, String errorMessage, Throwable e) {
                 Log.d("AddNegoActivity", "실패 : " + errorMessage);
 
-
             }
         });
 

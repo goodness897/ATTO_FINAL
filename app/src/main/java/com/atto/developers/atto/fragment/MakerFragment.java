@@ -37,7 +37,7 @@ public class MakerFragment extends Fragment {
     RecyclerMakerAdapter mAdapter;
 
 
-    public final static String MAKER_ID = "maker_id";
+    public final static String MAKER = "maker";
 
     public MakerFragment() {
         // Required empty public constructor
@@ -74,7 +74,7 @@ public class MakerFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, MakerData makerItemData, int position) {
                 Intent intent = new Intent(getContext(), DetailMakerActivity.class);
-                intent.putExtra(MAKER_ID, makerItemData.getMaker_id());
+                intent.putExtra(MAKER, makerItemData);
                 startActivity(intent);
             }
         });
@@ -96,7 +96,7 @@ public class MakerFragment extends Fragment {
         final ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
         dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
-        MakerListRequest request = new MakerListRequest(getContext(), "1", "10");
+        MakerListRequest request = new MakerListRequest(getContext(), "", "50");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<MakerData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<MakerData>> request, ListData<MakerData> result) {

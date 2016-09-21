@@ -26,6 +26,7 @@ public class RecyclerDetailTradeAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public void setTradeData(TradeData tradeData) {
         this.tradeData = tradeData;
+        notifyDataSetChanged();
     }
 
     public void addAll(List<NegoData> list) {
@@ -62,42 +63,30 @@ public class RecyclerDetailTradeAdapter extends RecyclerView.Adapter<RecyclerVie
         throw new IllegalArgumentException("invalid view type");
     }
 
-/*    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        // HEADER
-        if (holder instanceof DetailTradeHeaderViewHolder) {
-            DetailTradeHeaderViewHolder hvh = (DetailTradeHeaderViewHolder) holder;
-            hvh.setTradeData(tradeData);
-        }
-        // GROUP
-        else {
-            DetailTradeViewHolder gvh = (DetailTradeViewHolder) holder;
-            gvh.setNegoDataList(mNegoDataList);
-        }
-    }*/
-
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (mNegoDataList.size() > 0) {
-            if (position == 0) {
-                DetailTradeHeaderViewHolder hvh = (DetailTradeHeaderViewHolder) holder;
+
+        if (position == 0) {
+            DetailTradeHeaderViewHolder hvh = (DetailTradeHeaderViewHolder) holder;
+            if (tradeData != null) {
                 hvh.setTradeData(tradeData);
+            }
+            return;
+        }
+        position--;
+        for (int i = 0; i < mNegoDataList.size(); i++) {
+            if (position == 0) {
+                if (holder.getItemViewType() != VIEW_TYPE_GROUP) {
+                    throw new IllegalArgumentException("invalid view holder");
+                }
+                DetailTradeViewHolder gvh = (DetailTradeViewHolder) holder;
+                gvh.setNegoData(mNegoDataList.get(i));
                 return;
             }
             position--;
-            for (int i = 0; i < mNegoDataList.size(); i++) {
-                if (position == 0) {
-                    if (holder.getItemViewType() != VIEW_TYPE_GROUP) {
-                        throw new IllegalArgumentException("invalid view holder");
-                    }
-                    DetailTradeViewHolder gvh = (DetailTradeViewHolder) holder;
-                    gvh.setNegoData(mNegoDataList.get(i));
-                    return;
-                }
-                position--;
-            }
-            throw new IllegalArgumentException("invalid position");
         }
+        throw new IllegalArgumentException("invalid position");
+
     }
 
 

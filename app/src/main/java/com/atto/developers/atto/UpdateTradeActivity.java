@@ -159,9 +159,11 @@ public class UpdateTradeActivity extends AppCompatActivity {
         dateView.setText(selectedDate);
     }
 
+    ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
+
     public void UpdateData() {
 
-        final ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
+
         String trade_title = inputTitleView.getText().toString();
         int trade_product_category_1 = mainCategory;
         int trade_product_category_2 = subCategory;

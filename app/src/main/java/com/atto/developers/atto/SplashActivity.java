@@ -61,15 +61,15 @@ public class SplashActivity extends AppCompatActivity {
         loginSharedPreference();
         loginManager = LoginManager.getInstance();
         callbackManager = CallbackManager.Factory.create();
-
+        setUpIfNeeded();
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
+                Log.i("onReceve","doRealStart");
                 doRealStart();
             }
         };
-        setUpIfNeeded();
+
     }
 
     @Override
@@ -90,9 +90,11 @@ public class SplashActivity extends AppCompatActivity {
             String regId = PropertyManager.getInstance().getRegistrationId();
             if (!regId.equals("")) {
                 doRealStart();
+                Log.i("service","checkPlayServices");
             } else {
-//                Intent intent = new Intent(this, RegistrationIntentService.class);
+//                Intent intent = new Intent(this, MyFirebaseInstanceIDService.class);
 //                startService(intent);
+//                Log.i("service","start service!");
             }
         }
     }
