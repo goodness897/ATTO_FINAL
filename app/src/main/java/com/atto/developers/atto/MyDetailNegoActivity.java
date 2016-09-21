@@ -60,8 +60,6 @@ public class MyDetailNegoActivity extends AppCompatActivity {
                 Intent intent = new Intent(MyDetailNegoActivity.this, DetailNegoActivity.class);
                 intent.putExtra("negoData", negoData);
                 startActivity(intent);
-
-
                 Toast.makeText(MyDetailNegoActivity.this, "position : " + position, Toast.LENGTH_LONG).show();
             }
         });

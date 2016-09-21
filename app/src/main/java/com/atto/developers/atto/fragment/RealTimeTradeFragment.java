@@ -86,7 +86,7 @@ public class RealTimeTradeFragment extends Fragment {
     private void initData() {
 
         mAdapter.clear();
-        TradeListRequest request = new TradeListRequest(getContext(), "", "100");
+        TradeListRequest request = new TradeListRequest(getContext(), "", "20");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<TradeData>> request, ListData<TradeData> result) {
