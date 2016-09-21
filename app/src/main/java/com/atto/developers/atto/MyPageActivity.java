@@ -75,6 +75,8 @@ public class MyPageActivity extends AppCompatActivity {
         int auth = intent.getIntExtra("AUTH", -1);
         if (auth == 1) {
             footerLayout.setVisibility(View.VISIBLE);
+        } else {
+            footerLayout.setVisibility(View.GONE);
         }
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
                 .getDisplayMetrics());
@@ -107,7 +109,7 @@ public class MyPageActivity extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.btn_footer_move_maker_nego:
-                intent = new Intent(MyPageActivity.this, MakerNegoActivity.class);
+                intent = new Intent(MyPageActivity.this, MyDetailNegoActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_footer_move_accept_wait:

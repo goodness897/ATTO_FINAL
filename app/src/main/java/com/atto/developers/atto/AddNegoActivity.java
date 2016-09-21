@@ -57,6 +57,7 @@ public class AddNegoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tradeId = intent.getIntExtra("tradeId", -1);
+        Log.d("AddNegoActivity", "tradeId : " + tradeId);
 
 
     }
@@ -79,13 +80,16 @@ public class AddNegoActivity extends AppCompatActivity {
         }
         File[] negotiation_product_images = {imageFile};
 
-        Intent intent = new Intent(AddNegoActivity.this, MainActivity.class);
+
         AddNegoCardRequest request = new AddNegoCardRequest(this, String.valueOf(tradeId), negotiation_price, negotiation_dtime, negotiation_product_contents,
                 negotiation_product_images);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoData>() {
             @Override
             public void onSuccess(NetworkRequest<NegoData> request, NegoData result) {
                 Log.d("AddNegoActivity", "성공 : " + result.getCode());
+                Intent intent = new Intent(AddNegoActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
 
             @Override
@@ -95,8 +99,6 @@ public class AddNegoActivity extends AppCompatActivity {
             }
         });
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
 
     }
 
