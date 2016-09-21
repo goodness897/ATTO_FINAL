@@ -111,7 +111,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onFail(NetworkRequest<MyProfile> request, int errorCode, String errorMessage, Throwable e) {
                 if (errorCode == -1) {
-                    if (errorMessage.equals("not login")) {
+                    if (errorMessage.equals("not login")||errorMessage==null) {
                         loginSharedPreference();
                         return;
                     }

@@ -20,6 +20,7 @@ import com.atto.developers.atto.networkdata.ResultMessage;
 import com.atto.developers.atto.request.ReduplicationAliasRequest;
 import com.atto.developers.atto.request.ReduplicationEmailRequest;
 import com.atto.developers.atto.request.SignUpRequest;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -131,7 +132,7 @@ public class SignUpActivity extends AppCompatActivity {
         String postCode = postCodeView.getText().toString();
         String address = addressView.getText().toString();
         String phone = phoneNumberView.getText().toString();
-        String registration_token = "1";
+        String registration_token = FirebaseInstanceId.getInstance().getToken();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "필수사항을 입력해주세요", Toast.LENGTH_LONG).show();
