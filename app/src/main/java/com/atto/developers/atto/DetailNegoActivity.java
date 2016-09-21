@@ -87,7 +87,7 @@ public class DetailNegoActivity extends AppCompatActivity {
     }
 
     private void checkUser() {
-        if(negoData.getMaker_info().getMaker_name().equals(PropertyManager.getInstance().getNickName())){
+        if (negoData.getMaker_info().getMaker_name().equals(PropertyManager.getInstance().getNickName())) {
             linearLayout.setVisibility(View.VISIBLE);
         } else {
             linearLayout.setVisibility(View.GONE);
@@ -174,14 +174,14 @@ public class DetailNegoActivity extends AppCompatActivity {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_update) {
-            Intent intent = new Intent(DetailNegoActivity.this, UpdateTradeActivity.class);
+            Intent intent = new Intent(DetailNegoActivity.this, UpdateNegoActivity.class);
             if (negoData != null) {
                 intent.putExtra("negoData", negoData);
                 startActivityForResult(intent, REQUEST_NEGO_UPDATE);
             }
 
         } else if (id == R.id.action_delete) {
-            DeleteNegoCardRequest request = new DeleteNegoCardRequest(this, "", String.valueOf(negoData.getNegotiation_id()));
+            DeleteNegoCardRequest request = new DeleteNegoCardRequest(this, "1", String.valueOf(negoData.getNegotiation_id()));
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
                 @Override
                 public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {

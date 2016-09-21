@@ -165,16 +165,19 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onSuccess(NetworkRequest<MyProfile> request, MyProfile result) {
 
-                MyProfileData myProfileData = result.getData();
-                String nickname = myProfileData.getMember_alias();
-                String image_url = myProfileData.getMember_profile_img();
-                if (image_url != null)
-                    checkSetImage(image_url);
-                if (!TextUtils.isEmpty(nickname))
-                    nickNameView.setText(nickname);
-                dialogFragment.dismiss();
-                Log.d("MyPageActivity", "success : " + nickname);
-
+                if (result.getData() != null) {
+                    MyProfileData myProfileData = result.getData();
+                    if (myProfileData != null) {
+                        String nickname = myProfileData.getMember_alias();
+                        String image_url = myProfileData.getMember_profile_img();
+                        if (image_url != null)
+                            checkSetImage(image_url);
+                        if (!TextUtils.isEmpty(nickname))
+                            nickNameView.setText(nickname);
+                        dialogFragment.dismiss();
+                        Log.d("MyPageActivity", "success : " + nickname);
+                    }
+                }
             }
 
             @Override
@@ -202,13 +205,18 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onSuccess(NetworkRequest<ListData<TradeData>> request, ListData<TradeData> result) {
 
-                TradeData[] tradeData = result.getData();
-                if (tradeData != null) {
-                    if (tradeData.length > 0)
-                        adapter.addAll(Arrays.asList(tradeData));
-                    Log.d(this.toString(), "성공 : " + tradeData[0].getTrade_id());
+                if(result.getData() != null) {
+                    TradeData[] tradeData = result.getData();
+                    if (tradeData != null) {
+                        if (tradeData.length > 0)
+                            adapter.addAll(Arrays.asList(tradeData));
+                        Log.d(this.toString(), "성공 : " + tradeData[0].getTrade_id());
+                    }
+                } else {
+                    Log.d(this.toString(), "성공이지만 값이 없어");
 
                 }
+
             }
 
             @Override

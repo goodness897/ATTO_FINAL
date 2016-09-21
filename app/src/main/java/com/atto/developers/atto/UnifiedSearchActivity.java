@@ -51,7 +51,6 @@ public class UnifiedSearchActivity extends AppCompatActivity {
     private final static String TAG = "UnifiedSearchActivity";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +59,7 @@ public class UnifiedSearchActivity extends AppCompatActivity {
         initToolBar();
 
     }
+
     private void setUI() {
         pager.setAdapter(mAdapter);
         mNavigationTabStrip.setTabIndex(0, true);
@@ -68,7 +68,7 @@ public class UnifiedSearchActivity extends AppCompatActivity {
         portList.clear();
         makerList.clear();
         tradeList.clear();
-}
+    }
 
     @OnClick(R.id.btn_search)
     public void onSearch() {
@@ -92,6 +92,7 @@ public class UnifiedSearchActivity extends AppCompatActivity {
                 Log.d(TAG, "maker 성공 : " + makerData[0].getMaker_name());
                 makerList = Arrays.asList(makerData);
             }
+
             @Override
             public void onFail(NetworkRequest<ListData<MakerData>> request, int errorCode, String errorMessage, Throwable e) {
                 Log.d(TAG, "실패 : " + errorMessage);
@@ -99,6 +100,7 @@ public class UnifiedSearchActivity extends AppCompatActivity {
             }
         });
     }
+
     private void searchPortFolio() {
         String input = inputSearchView.getText().toString();
         SearchPortfolioListRequest request = new SearchPortfolioListRequest(this, input, "", "");
@@ -165,11 +167,14 @@ public class UnifiedSearchActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return SearchResultPortFragment.newInstance(portList);
+                    if (portList.size() > 0)
+                        return SearchResultPortFragment.newInstance(portList);
                 case 1:
-                    return SearchResultTradeFragment.newInstance(tradeList);
+                    if (tradeList.size() > 0)
+                        return SearchResultTradeFragment.newInstance(tradeList);
                 case 2:
-                    return SearchResultMakerFragment.newInstance(makerList);
+                    if (makerList.size() > 0)
+                        return SearchResultMakerFragment.newInstance(makerList);
                 default:
                     return SearchResultPortFragment.newInstance(portList);
             }
