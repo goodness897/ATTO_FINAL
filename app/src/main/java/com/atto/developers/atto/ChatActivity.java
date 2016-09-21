@@ -9,6 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,10 +17,10 @@ import android.widget.Toast;
 import com.atto.developers.atto.manager.DBManager;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
-import com.atto.developers.atto.networkdata.ResultMessage;
 import com.atto.developers.atto.networkdata.chatdata.ChatContract;
+import com.atto.developers.atto.networkdata.chatdata.ChatListItemData;
 import com.atto.developers.atto.networkdata.userdata.User;
-import com.atto.developers.atto.request.MessageSendRequest;
+import com.atto.developers.atto.request.AddChatRequest;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +40,7 @@ public class ChatActivity extends AppCompatActivity {
     User user;
 
     LocalBroadcastManager mLBM;
-
+    int tradeid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,28 +48,38 @@ public class ChatActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         user = (User) getIntent().getSerializableExtra(EXTRA_USER);
-
+tradeid= getIntent().getIntExtra("tid",-1);
         mAdapter = new ChatAdapter();
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         mLBM = LocalBroadcastManager.getInstance(this);
+
+
     }
 
     @OnClick(R.id.btn_send)
     public void onSend(View view) {
         final String message = inputView.getText().toString();
-        MessageSendRequest request = new MessageSendRequest(this, "1", user, message, null);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+
+        AddChatRequest request = new AddChatRequest(this, String.valueOf(tradeid), user, message, null);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ChatListItemData>() {
             @Override
-            public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
-                DBManager.getInstance().addMessage(user, ChatContract.ChatMessage.TYPE_SEND, message);
+            public void onSuccess(NetworkRequest<ChatListItemData> request, ChatListItemData result) {
+                if (result.getCode() == 1){
+                    DBManager.getInstance().addMessage(user, ChatContract.ChatMessage.TYPE_SEND, message);
                 updateMessage();
+                    Log.d("chat",result.getMessage());
+
+            }else{
+                    Toast.makeText(ChatActivity.this, "전송실패", Toast.LENGTH_SHORT).show();
+                    Log.d("chat",result.getMessage());
+                }
             }
 
             @Override
-            public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<ChatListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(ChatActivity.this, "fail", Toast.LENGTH_SHORT).show();
-
+                Log.d("chat",errorCode+"");
             }
         });
 
