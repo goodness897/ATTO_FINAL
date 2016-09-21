@@ -176,6 +176,7 @@ public class DetailTradeActivity extends AppCompatActivity {
             @Override
             public void onAdapterItemClick(View view, NegoData negoData, int position) {
                 Intent intent = new Intent(DetailTradeActivity.this, DetailNegoActivity.class);
+                intent.putExtra("tradeId", tradeId);
                 intent.putExtra("negoData", negoData);
                 startActivity(intent);
             }
