@@ -15,7 +15,7 @@ import com.atto.developers.atto.fragment.NegoDateFragment;
 import com.atto.developers.atto.fragment.ProgressDialogFragment;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
-import com.atto.developers.atto.networkdata.negodata.NegoData;
+import com.atto.developers.atto.networkdata.negodata.NegeListItemData;
 import com.atto.developers.atto.request.AddNegoCardRequest;
 import com.bumptech.glide.Glide;
 
@@ -100,10 +100,11 @@ public class AddNegoActivity extends AppCompatActivity {
 
         AddNegoCardRequest request = new AddNegoCardRequest(this, String.valueOf(tradeId), negotiation_price, negotiation_dtime, negotiation_product_contents,
                 negotiation_product_images);
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoData>() {
+
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegeListItemData>() {
             @Override
-            public void onSuccess(NetworkRequest<NegoData> request, NegoData result) {
-                Log.d("AddNegoActivity", "성공 : " + result.getCode());
+            public void onSuccess(NetworkRequest<NegeListItemData> request, NegeListItemData result) {
+                Log.d("AddNegoActivity", "성공 : " + result.getData().getCode());
                 Intent intent = new Intent(AddNegoActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -111,7 +112,7 @@ public class AddNegoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFail(NetworkRequest<NegoData> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<NegeListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Log.d("AddNegoActivity", "실패 : " + errorMessage);
                 dialogFragment.dismiss();
 
