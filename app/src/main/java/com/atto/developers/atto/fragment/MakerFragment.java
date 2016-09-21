@@ -55,8 +55,6 @@ public class MakerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_maker, container, false);
-        dialogFragment = new ProgressDialogFragment();
-
 
         listView = (RecyclerView) view.findViewById(R.id.rv_list);
         mAdapter = new RecyclerMakerAdapter();
@@ -97,7 +95,6 @@ public class MakerFragment extends Fragment {
     private void initData() {
 
 
-        dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
         MakerListRequest request = new MakerListRequest(getContext(), "1", "10");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<MakerData>>() {
@@ -110,7 +107,6 @@ public class MakerFragment extends Fragment {
                     Log.d("MakerFragment", String.valueOf(data[0].getMaker_id()));
                     mAdapter.addAll(Arrays.asList(data));
                 }
-                dialogFragment.dismiss();
 
             }
 
@@ -118,7 +114,6 @@ public class MakerFragment extends Fragment {
             public void onFail(NetworkRequest<ListData<MakerData>> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(getContext(), "실패 : " + errorCode, Toast.LENGTH_SHORT).show();
 
-                dialogFragment.dismiss();
             }
         });
     }

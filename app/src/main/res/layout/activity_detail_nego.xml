@@ -8,15 +8,6 @@
     <!-- TODO: Update blank fragment layout -->
 
 
-    <android.support.v7.widget.Toolbar
-        app:theme="@style/ToolBarStyle"
-        android:id="@+id/main_toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/toolbar_underline_background">
-    </android.support.v7.widget.Toolbar>
-
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +22,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/linearLayout4"
+        android:id="@+id/accept_layout"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -92,4 +83,26 @@
         android:layout_alignEnd="@+id/text_trade_maker_contents"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp" />
+
+    <android.support.v7.widget.Toolbar
+        app:theme="@style/ToolBarStyle"
+        android:id="@+id/main_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_underline_background"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </android.support.v7.widget.Toolbar>
+
+    <ImageView
+        android:src="@drawable/chat"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/btn_chat"
+        android:layout_below="@+id/main_toolbar"
+        android:layout_alignRight="@+id/img_btn_Report"
+        android:layout_alignEnd="@+id/img_btn_Report"
+        android:layout_marginTop="11dp" />
 </RelativeLayout>

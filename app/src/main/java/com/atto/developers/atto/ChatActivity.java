@@ -1,13 +1,16 @@
 package com.atto.developers.atto;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.atto.developers.atto.manager.DBManager;
@@ -15,10 +18,8 @@ import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.networkdata.ResultMessage;
 import com.atto.developers.atto.networkdata.chatdata.ChatContract;
-import com.atto.developers.atto.networkdata.userdata.MyProfileData;
+import com.atto.developers.atto.networkdata.userdata.User;
 import com.atto.developers.atto.request.MessageSendRequest;
-
-import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,10 +33,11 @@ public class ChatActivity extends AppCompatActivity {
     ChatAdapter mAdapter;
 
     @BindView(R.id.edit_input)
-    AppCompatEditText inputView;
+    EditText inputView;
 
     public static final String EXTRA_USER = "user";
-    MyProfileData user;
+    User user;
+
     LocalBroadcastManager mLBM;
 
     @Override
@@ -43,30 +45,19 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
-//        user = (User) getIntent().getSerializableExtra(EXTRA_USER);
-        init();
+
+        user = (User) getIntent().getSerializableExtra(EXTRA_USER);
+
         mAdapter = new ChatAdapter();
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         mLBM = LocalBroadcastManager.getInstance(this);
     }
 
-    private void init() {
-     user = new MyProfileData();
-        user.setMember_id(134);
-        user.setMember_auth(0);
-        user.setMember_alias("consumer");
-        user.setMember_address_1("sdf");
-    DBManager.getInstance().addUser(user);
-
-    }
-
     @OnClick(R.id.btn_send)
     public void onSend(View view) {
         final String message = inputView.getText().toString();
-        String tid = "1341";
-        File img = null;
-        MessageSendRequest request = new MessageSendRequest(this, tid, user, message, img);
+        MessageSendRequest request = new MessageSendRequest(this, "1", user, message, null);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
             @Override
             public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
@@ -76,10 +67,11 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
-                Toast.makeText(ChatActivity.this, "fail" +errorCode, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, "fail", Toast.LENGTH_SHORT).show();
 
             }
         });
+
 //        int type = ChatContract.ChatMessage.TYPE_SEND;
 //        switch (typeView.getCheckedRadioButtonId()) {
 //            case R.id.radio_send :
@@ -103,11 +95,30 @@ public class ChatActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         updateMessage();
+//        mLBM.registerReceiver(mReceiver, new IntentFilter(MyGcmListenerService.ACTION_CHAT));
     }
+
+    BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+//            User u = (User) intent.getSerializableExtra(MyGcmListenerService.EXTRA_CHAT_USER);
+//            if (u.getId() == user.getId()) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        updateMessage();
+//                    }
+//                });
+//                intent.putExtra(MyGcmListenerService.EXTRA_RESULT, true);
+//            }
+        }
+    };
+
 
     @Override
     protected void onStop() {
         super.onStop();
         mAdapter.changeCursor(null);
+        mLBM.unregisterReceiver(mReceiver);
     }
 }

@@ -29,7 +29,6 @@ public class AddNegoCardRequest extends AbstractRequest<NegoData> {
     private final static String CONTENT = "negotiation_product_contents";
     private final static String IMAGES = "negotiation_product_imges";
 
-
     Request mRequest;
 
     MediaType jpeg = MediaType.parse("image/jpeg");

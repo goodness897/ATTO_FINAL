@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.atto.developers.atto.networkdata.ResultMessage;
-import com.atto.developers.atto.networkdata.userdata.MyProfileData;
+import com.atto.developers.atto.networkdata.userdata.User;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -36,7 +36,7 @@ private final static String TID = "user_id";
 
     MediaType jpeg = MediaType.parse("image/jpeg");
 
-    public MessageSendRequest(Context context, String tid, MyProfileData user, String message, File chat_img) {
+    public MessageSendRequest(Context context, String tid, User user, String message, File chat_img) {
         HttpUrl url = getBaseUrlHttpsBuilder()
                 .addPathSegment(TRADE)
                 .addPathSegment(tid)
@@ -45,7 +45,7 @@ private final static String TID = "user_id";
 
         MultipartBody.Builder body = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart(ALIAS, user.getMember_alias())
+                .addFormDataPart(ALIAS, user.getUserName())
                 .addFormDataPart(MESSAGE, message)
                 .addFormDataPart(TID,"134");
 

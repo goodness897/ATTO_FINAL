@@ -133,7 +133,7 @@ public class DetailTradeHeaderViewHolder extends RecyclerView.ViewHolder {
         if (keywordList != null) {
             for (int i = 0; i < keywordList.length; i++) {
                 Log.i("realtime", "keywordList : " + keywordList[i]);
-                if (keywordList[i] != 0) {
+                if (keywordList[i] != null) {
                     mTvKeywordList.get(i).setText(keywordList[i] + "");
                 } else {
                     mTvKeywordList.get(i).setVisibility(View.GONE);

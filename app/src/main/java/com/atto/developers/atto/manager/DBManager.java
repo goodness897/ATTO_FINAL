@@ -9,7 +9,7 @@ import android.util.Log;
 import com.atto.developers.atto.MyApplication;
 import com.atto.developers.atto.networkdata.chatdata.ChatContract;
 import com.atto.developers.atto.networkdata.dbdata.CategoryKeywordData;
-import com.atto.developers.atto.networkdata.userdata.MyProfileData;
+import com.atto.developers.atto.networkdata.userdata.User;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -122,12 +122,12 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     ContentValues values = new ContentValues();
-    public long addUser(MyProfileData user) {
-        if (getUserId(user.getMember_id()) == -1) {
+    public long addUser(User user) {
+        if (getUserId(user.getId()) == -1) {
             SQLiteDatabase db = getWritableDatabase();
             values.clear();
-            values.put(ChatContract.ChatUser.COLUMN_SERVER_ID, user.getMember_id());
-            values.put(ChatContract.ChatUser.COLUMN_NAME, user.getMember_alias());
+            values.put(ChatContract.ChatUser.COLUMN_SERVER_ID, user.getId());
+            values.put(ChatContract.ChatUser.COLUMN_NAME, user.getUserName());
             values.put(ChatContract.ChatUser.COLUMN_EMAIL, "consumer");
             return db.insert(ChatContract.ChatUser.TABLE, null, values);
         }
@@ -135,17 +135,17 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     Map<Long, Long> resolveUserId = new HashMap<>();
-    public long addMessage(MyProfileData user, int type, String message) {
+    public long addMessage(User user, int type, String message) {
         return addMessage(user, type, message, new Date());
     }
-    public long addMessage(MyProfileData user, int type, String message, Date date) {
-        Long uid = resolveUserId.get(user.getMember_id());
+    public long addMessage(User user, int type, String message, Date date) {
+        Long uid = resolveUserId.get(user.getId());
         if (uid == null) {
-            long id = getUserId(user.getMember_id());
+            long id = getUserId(user.getId());
             if (id == -1) {
                 id = addUser(user);
             }
-            resolveUserId.put(user.getMember_id(), id);
+            resolveUserId.put(user.getId(), id);
             uid = id;
         }
 
@@ -187,14 +187,14 @@ public class DBManager extends SQLiteOpenHelper {
         return db.query(table, columns, null, null, null, null, sort);
     }
 
-    public Cursor getChatMessage(MyProfileData user) {
+    public Cursor getChatMessage(User user) {
         long userid = -1;
-        Long uid = resolveUserId.get(user.getMember_id());
-        Log.d("userid",String.valueOf(user.getMember_id()));
+        Long uid = resolveUserId.get(user.getId());
+        Log.d("userid",String.valueOf(user.getId()));
         if (uid == null) {
-            long id = getUserId(user.getMember_id());
+            long id = getUserId(user.getId());
             if (id != -1) {
-                resolveUserId.put(user.getMember_id(), id);
+                resolveUserId.put(user.getId(), id);
                 userid = id;
             }
         } else {

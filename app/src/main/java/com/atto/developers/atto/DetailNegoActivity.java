@@ -1,18 +1,23 @@
 package com.atto.developers.atto;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.atto.developers.atto.fragment.MakerOrderDialogFragment;
 import com.atto.developers.atto.fragment.ReportDialogFragment;
+import com.atto.developers.atto.manager.PropertyManager;
+import com.atto.developers.atto.networkdata.chatdata.ChatContract;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
+import com.atto.developers.atto.networkdata.userdata.User;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -49,9 +54,11 @@ public class DetailNegoActivity extends AppCompatActivity {
     @BindView(R.id.text_trade_maker_contents)
     TextView trade_maker_contents;
 
+    @BindView(R.id.accept_layout)
+    LinearLayout linearLayout;
+
 
     NegoData negoData;
-
 
 
     int negoId = -1;
@@ -65,11 +72,21 @@ public class DetailNegoActivity extends AppCompatActivity {
         initToolBar();
         Intent intent = getIntent();
 
-        negoData = (NegoData)intent.getSerializableExtra("negoData");
+        negoData = (NegoData) intent.getSerializableExtra("negoData");
         negoId = intent.getIntExtra("negoId", -1);
         tradeId = intent.getIntExtra("tradeId", -1);
         Log.d("DetailNegoActivity", "negoId : " + negoId);
         initData(tradeId, negoId);
+        checkUser();
+    }
+
+    private void checkUser() {
+        if(negoData.getMaker_info().getMaker_name().equals(PropertyManager.getInstance().getNickName())){
+            linearLayout.setVisibility(View.VISIBLE);
+        } else {
+            linearLayout.setVisibility(View.GONE);
+
+        }
     }
 
     @Override
@@ -140,7 +157,6 @@ public class DetailNegoActivity extends AppCompatActivity {
         limit_date.setText(negoData.getNegotiation_dtime()); //yyyy-mm-dd까지
 
         trade_maker_contents.setText(negoData.getNegotiation_product_contents());
-
     }
 
     private void checkImageData(NegoData data) {
@@ -172,5 +188,19 @@ public class DetailNegoActivity extends AppCompatActivity {
 //       \
 //    }
 
+
+    @OnClick(R.id.btn_chat)
+    public void onChatButton() {
+
+        Cursor cursor = (Cursor) negoData;
+        User user = new User();
+        user.setId(cursor.getLong(cursor.getColumnIndex(ChatContract.ChatUser.COLUMN_SERVER_ID)));
+        user.setEmail(cursor.getString(cursor.getColumnIndex(ChatContract.ChatUser.COLUMN_EMAIL)));
+        user.setUserName(cursor.getString(cursor.getColumnIndex(ChatContract.ChatUser.COLUMN_NAME)));
+        Intent intent = new Intent(DetailNegoActivity.this, ChatActivity.class);
+        intent.putExtra(ChatActivity.EXTRA_USER, user);
+        startActivity(intent);
+
+    }
 
 }

@@ -36,7 +36,6 @@ public class RealTimeTradeFragment extends Fragment {
     @BindView(R.id.rv_list)
     RecyclerView listView;
     RecyclerRealTimeTradeAdapter mAdapter;
-    ProgressDialogFragment dialogFragment;
 
     public RealTimeTradeFragment() {
         // Required empty public constructor
@@ -55,7 +54,6 @@ public class RealTimeTradeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_real_time_trade, container, false);
         ButterKnife.bind(this, view);
         mAdapter = new RecyclerRealTimeTradeAdapter();
-        dialogFragment = new ProgressDialogFragment();
         listView.setAdapter(mAdapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(manager);
@@ -87,7 +85,6 @@ public class RealTimeTradeFragment extends Fragment {
 
     private void initData() {
 
-        dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
         TradeListRequest request = new TradeListRequest(getContext(), "", "100");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
@@ -98,13 +95,11 @@ public class RealTimeTradeFragment extends Fragment {
                 Log.d("RealTimeTradeFragment", "성공 : " + data[0].getTrade_product_img());
                 Log.d("RealTimeTradeFragment", "성공 : " + data[0].getMember_info().getMember_profile_img());
                 Log.d("RealTimeTradeFragment", "성공 : " + data[0].getTrade_product_contents());
-                dialogFragment.dismiss();
             }
 
             @Override
             public void onFail(NetworkRequest<ListData<TradeData>> request, int errorCode, String errorMessage, Throwable e) {
                 Log.d("RealTimeTradeFragment", "실패 : " + errorCode);
-                dialogFragment.dismiss();
             }
         });
     }
