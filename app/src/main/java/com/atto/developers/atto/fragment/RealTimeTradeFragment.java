@@ -64,7 +64,7 @@ public class RealTimeTradeFragment extends Fragment {
 
         mAdapter.setOnAdapterItemClickListener(new RecyclerRealTimeTradeAdapter.OnAdapterItemClickListener() {
             @Override
-            public void onAdapterItemClick(View view, final TradeData tradeData, int position) {
+            public void onAdapterItemClick(View view, TradeData tradeData, int position) {
                 Intent intent = new Intent(getContext(), DetailTradeActivity.class);
                 intent.putExtra("tradeData", tradeData);
                 startActivity(intent);
@@ -89,7 +89,7 @@ public class RealTimeTradeFragment extends Fragment {
 
         dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
-        TradeListRequest request = new TradeListRequest(getContext(), "1", "20");
+        TradeListRequest request = new TradeListRequest(getContext(), "", "");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<TradeData>> request, ListData<TradeData> result) {

@@ -179,5 +179,6 @@
     <string name="text_register_nego">협상카드 작성하기</string>
     <string name="text_nego_register">협상카드 등록하기</string>
     <string name="activity_update_trade">거래글 수정하기</string>
+    <string name="activity_update_maker">제작자 수정하기</string>
 
 </resources>

@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/img_detail_port"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="match_parent"
         android:layout_above="@+id/btn_detail_port_move_trade"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

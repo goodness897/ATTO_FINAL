@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,10 +54,12 @@ public class MyPageActivity extends AppCompatActivity {
     @BindView(R.id.img_mypage_profile)
     ImageView profileImageView;
 
-/*    @BindView(R.id.view_mypage_maker_footerview)
-    LinearLayout footerLayout;*/
+    @BindView(R.id.view_mypage_maker_footerview)
+    LinearLayout footerLayout;
 
     private MyTradePagerAdapter adapter;
+
+    ProgressDialogFragment dialogFragment;
 
 
     @Override
@@ -66,12 +69,12 @@ public class MyPageActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         adapter = new MyTradePagerAdapter(getSupportFragmentManager());
+        dialogFragment = new ProgressDialogFragment();
         pager.setAdapter(adapter);
-
         Intent intent = getIntent();
         int auth = intent.getIntExtra("AUTH", -1);
         if (auth == 1) {
-//            footerLayout.setVisibility(View.VISIBLE);
+            footerLayout.setVisibility(View.VISIBLE);
         }
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
                 .getDisplayMetrics());
@@ -79,11 +82,16 @@ public class MyPageActivity extends AppCompatActivity {
 
 //        tabs.setViewPager(pager);
         initData();
-        initTradeData();
         initToolBar();
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initTradeData();
+
+    }
 
     @OnClick(R.id.btn_mypage_setting_myprofile)
     void onMyPageSettingClick() {
@@ -93,7 +101,6 @@ public class MyPageActivity extends AppCompatActivity {
 
     Intent intent;
 
-/*
     // 제작자일 때만 생기는 페이지
     @OnClick({R.id.btn_footer_move_maker_nego, R.id.btn_footer_move_accept_wait})
     void onMovePage(View view) {
@@ -109,7 +116,6 @@ public class MyPageActivity extends AppCompatActivity {
                 break;
         }
     }
-*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -143,14 +149,13 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-
             }
         });
 
     }
 
     private void initData() {
-        final ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
+
         dialogFragment.show(getSupportFragmentManager(), "progress");
 
         MyProfileRequest request = new MyProfileRequest(this);
@@ -189,7 +194,7 @@ public class MyPageActivity extends AppCompatActivity {
     private void initTradeData() {
 
         adapter.clear();
-        MyTradeListRequest request = new MyTradeListRequest(this, "1", "10");
+        MyTradeListRequest request = new MyTradeListRequest(this, "1", "30");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
 
             @Override

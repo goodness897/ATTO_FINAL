@@ -37,7 +37,7 @@ public class MakerFragment extends Fragment {
     RecyclerMakerAdapter mAdapter;
 
 
-    public final static String MAKER_ID = "maker_id";
+    public final static String MAKER = "maker";
 
     public MakerFragment() {
         // Required empty public constructor
@@ -74,7 +74,7 @@ public class MakerFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, MakerData makerItemData, int position) {
                 Intent intent = new Intent(getContext(), DetailMakerActivity.class);
-                intent.putExtra(MAKER_ID, makerItemData.getMaker_id());
+                intent.putExtra(MAKER, makerItemData);
                 startActivity(intent);
             }
         });
