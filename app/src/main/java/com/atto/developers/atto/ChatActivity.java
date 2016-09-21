@@ -49,7 +49,10 @@ public class ChatActivity extends AppCompatActivity {
 
         user = (User) getIntent().getSerializableExtra(EXTRA_USER);
 tradeid= getIntent().getIntExtra("tid",-1);
+
         mAdapter = new ChatAdapter();
+        Cursor c = DBManager.getInstance().getChatUser();
+        mAdapter.changeCursor(c);
         listView.setAdapter(mAdapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         mLBM = LocalBroadcastManager.getInstance(this);
