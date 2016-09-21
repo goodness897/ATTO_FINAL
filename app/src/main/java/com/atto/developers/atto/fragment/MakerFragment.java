@@ -38,6 +38,7 @@ public class MakerFragment extends Fragment {
 
 
     public final static String MAKER = "maker";
+    ProgressDialogFragment dialogFragment;
 
     public MakerFragment() {
         // Required empty public constructor
@@ -54,6 +55,8 @@ public class MakerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_maker, container, false);
+        dialogFragment = new ProgressDialogFragment();
+
 
         listView = (RecyclerView) view.findViewById(R.id.rv_list);
         mAdapter = new RecyclerMakerAdapter();
@@ -93,7 +96,7 @@ public class MakerFragment extends Fragment {
 
     private void initData() {
 
-        final ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
+
         dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
         MakerListRequest request = new MakerListRequest(getContext(), "1", "9");

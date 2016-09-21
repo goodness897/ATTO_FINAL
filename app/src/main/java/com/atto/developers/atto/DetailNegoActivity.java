@@ -52,6 +52,31 @@ public class DetailNegoActivity extends AppCompatActivity {
 
     NegoData negoData;
 
+
+
+    int negoId = -1;
+    int tradeId = -1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_detail_nego);
+        ButterKnife.bind(this);
+        initToolBar();
+        Intent intent = getIntent();
+
+        negoData = (NegoData)intent.getSerializableExtra("negoData");
+        negoId = intent.getIntExtra("negoId", -1);
+        tradeId = intent.getIntExtra("tradeId", -1);
+        Log.d("DetailNegoActivity", "negoId : " + negoId);
+        initData(tradeId, negoId);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     private void initToolBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         toolbar.setTitle(R.string.activity_detail_nego);
@@ -82,29 +107,6 @@ public class DetailNegoActivity extends AppCompatActivity {
         Intent intent = new Intent(DetailNegoActivity.this, DetailTradeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
-
-    int negoId = -1;
-    int tradeId = -1;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_nego);
-        ButterKnife.bind(this);
-        initToolBar();
-        Intent intent = getIntent();
-
-        negoData = (NegoData)intent.getSerializableExtra("negoData");
-        negoId = intent.getIntExtra("negoId", -1);
-        tradeId = intent.getIntExtra("tradeId", -1);
-        Log.d("DetailNegoActivity", "negoId : " + negoId);
-        initData(tradeId, negoId);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     private void initData(int tradeId, int negoId) {
