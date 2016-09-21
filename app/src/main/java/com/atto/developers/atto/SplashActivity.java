@@ -12,7 +12,6 @@ import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.atto.developers.atto.manager.FontManager;
 import com.atto.developers.atto.manager.NetworkManager;
@@ -58,6 +57,7 @@ public class SplashActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash_scale);
         textView.startAnimation(animation);*/
         mHandler = new Handler(Looper.getMainLooper());
+        loginSharedPreference();
         loginManager = LoginManager.getInstance();
         callbackManager = CallbackManager.Factory.create();
 
@@ -85,10 +85,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setUpIfNeeded() {
-
-        doRealStart();
-
-        /*if (checkPlayServices()) {
+        if (checkPlayServices()) {
             String regId = PropertyManager.getInstance().getRegistrationId();
             if (!regId.equals("")) {
                 doRealStart();
@@ -96,22 +93,20 @@ public class SplashActivity extends AppCompatActivity {
 //                Intent intent = new Intent(this, RegistrationIntentService.class);
 //                startService(intent);
             }
-        }*/
+        }
     }
 
     private void doRealStart() {
+// 여기 무슨리퀘스트지 ?
 
         MyProfileRequest request = new MyProfileRequest(this);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<MyProfile>() {
             @Override
             public void onSuccess(NetworkRequest<MyProfile> request, MyProfile result) {
-                Log.d("SplashActivity", "성공 : " + result.getMessage());
                 moveMainActivity();
             }
             @Override
             public void onFail(NetworkRequest<MyProfile> request, int errorCode, String errorMessage, Throwable e) {
-                Log.d("SplashActivity", "실패 : " + errorMessage);
-
                 if (errorCode == -1) {
                     if (errorMessage.equals("not login")) {
                         loginSharedPreference();
@@ -123,7 +118,6 @@ public class SplashActivity extends AppCompatActivity {
         });
 
     }
-
 
     private boolean checkPlayServices() {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();

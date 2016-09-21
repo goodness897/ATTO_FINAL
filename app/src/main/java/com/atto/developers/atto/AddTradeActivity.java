@@ -135,22 +135,25 @@ public class AddTradeActivity extends AppCompatActivity {
         dateView.setText(selectedDate);
     }
 
+    ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
+
     public void addData() {
 
-        final ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
-        progressDialogFragment.show(getSupportFragmentManager(), "progress");
+
         String trade_title = inputTitleView.getText().toString();
         int trade_product_category_1 = mainCategory;
         int trade_product_category_2 = subCategory;
         String trade_price = priceView.getText().toString();
         String trade_dtime = pickUpDateView.getText().toString();
         String trade_product_contents = inputContentView.getText().toString();
+
         File imageFile = null;
         if (file_path != null) {
             imageFile = new File(file_path);
         }
         File[] trade_product_images_info = {imageFile};
         String[] trade_key_words = {keywordOneView.getText().toString()};
+
 
         Log.d("AddTradeActivity", "data : " + trade_title + " " + trade_product_category_1 + " " + trade_product_category_2
                 + " " + trade_price + " " + trade_dtime + " " + trade_product_contents);
@@ -159,32 +162,41 @@ public class AddTradeActivity extends AppCompatActivity {
             Toast.makeText(this, "잘못된 입력입니다.", Toast.LENGTH_LONG).show();
         } else {
 
-            AddTradeRequest request = new AddTradeRequest(this, trade_title, String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
+            progressDialogFragment.show(getSupportFragmentManager(), "progress");
+            getAddTradeRequest(trade_title, String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
                     trade_price, trade_dtime, trade_product_contents, trade_key_words, trade_product_images_info);
-            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
-
-                @Override
-                public void onSuccess(NetworkRequest<TradeListItemData> request, TradeListItemData result) {
-                    TradeData tradeData = result.getData();
-                    if (tradeData != null) {
-                        Intent intent = new Intent(AddTradeActivity.this, DetailTradeActivity.class);
-                        intent.putExtra("tradeData", tradeData);
-                        Log.d("AddTradeActivity", "성공 : " + tradeData.getTrade_id() + ", 이미지 : " + tradeData.getTrade_product_imges_info());
-                        startActivity(intent);
-                        finish();
-                        progressDialogFragment.dismiss();
-                    }
-                }
-
-                @Override
-                public void onFail(NetworkRequest<TradeListItemData> request, int errorCode, String errorMessage, Throwable e) {
-                    Log.d("AddTradeActivity", "실패 : " + errorCode);
-                    progressDialogFragment.dismiss();
-
-
-                }
-            });
         }
+
+    }
+    private void getAddTradeRequest(String trade_title, String trade_product_category_1, String trade_product_category_2, String trade_price,
+                                    String trade_dtime, String trade_product_contents, String[] trade_key_words, File[] trade_product_images_info) {
+
+        AddTradeRequest request = new AddTradeRequest(this, trade_title, String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
+                trade_price, trade_dtime, trade_product_contents, trade_key_words, trade_product_images_info);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
+
+            @Override
+            public void onSuccess(NetworkRequest<TradeListItemData> request, TradeListItemData result) {
+                TradeData tradeData = result.getData();
+                if (tradeData != null) {
+                    Intent intent = new Intent(AddTradeActivity.this, DetailTradeActivity.class);
+                    intent.putExtra("tradeData", tradeData);
+                    Log.d("AddTradeActivity", "성공 : " + tradeData.getTrade_id() + ", 이미지 : " + tradeData.getTrade_product_imges_info());
+                    startActivity(intent);
+                    finish();
+                    progressDialogFragment.dismiss();
+                }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<TradeListItemData> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("AddTradeActivity", "실패 : " + errorCode);
+                Toast.makeText(AddTradeActivity.this, "실패 : " + errorMessage, Toast.LENGTH_LONG).show();
+                progressDialogFragment.dismiss();
+
+
+            }
+        });
 
     }
 
