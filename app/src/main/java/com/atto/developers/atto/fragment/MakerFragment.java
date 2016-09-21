@@ -96,7 +96,7 @@ public class MakerFragment extends Fragment {
         final ProgressDialogFragment dialogFragment = new ProgressDialogFragment();
         dialogFragment.show(getFragmentManager(), "progress");
         mAdapter.clear();
-        MakerListRequest request = new MakerListRequest(getContext(), "1", "10");
+        MakerListRequest request = new MakerListRequest(getContext(), "1", "9");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<MakerData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<MakerData>> request, ListData<MakerData> result) {

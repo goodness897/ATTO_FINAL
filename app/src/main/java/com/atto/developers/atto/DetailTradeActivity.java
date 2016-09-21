@@ -60,8 +60,8 @@ public class DetailTradeActivity extends AppCompatActivity {
         mDialogFragment = new ProgressDialogFragment();
 
         Intent intent = getIntent();
-        int trade_id = intent.getIntExtra("trade_id", -1);
         tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+        tradeId = tradeData.getTrade_id();
         init(tradeData);
 
         int auth = PropertyManager.getInstance().getKeyAuth();

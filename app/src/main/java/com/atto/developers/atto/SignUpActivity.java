@@ -151,7 +151,6 @@ public class SignUpActivity extends AppCompatActivity {
 
                 @Override
                 public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
-
                     Log.e("error", request + " , " + errorCode + " , " + errorMessage);
                 }
             });
