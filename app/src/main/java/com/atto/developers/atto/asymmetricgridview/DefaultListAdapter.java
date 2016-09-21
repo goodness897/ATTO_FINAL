@@ -53,7 +53,7 @@ public class DefaultListAdapter extends ArrayAdapter<DemoItem> implements DemoAd
             imageView = (ImageView) v.findViewById(R.id.imageView_odd);
         }
 
-        Glide.with(getContext()).load(item.getTradeData().getTrade_product_img()).centerCrop().into(imageView);
+        Glide.with(getContext()).load(item.getPortfolioData().getPortfolio_img()).centerCrop().into(imageView);
 
         return v;
     }

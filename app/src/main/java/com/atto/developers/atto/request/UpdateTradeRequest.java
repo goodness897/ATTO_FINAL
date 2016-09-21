@@ -3,7 +3,7 @@ package com.atto.developers.atto.request;
 import android.content.Context;
 import android.util.Log;
 
-import com.atto.developers.atto.networkdata.ResultMessage;
+import com.atto.developers.atto.networkdata.tradedata.TradeListItemData;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import okhttp3.RequestBody;
 /**
  * Created by Tacademy on 2016-09-02.
  */
-public class UpdateTradeRequest  extends AbstractRequest<ResultMessage> {
+public class UpdateTradeRequest  extends AbstractRequest<TradeListItemData> {
 
     Request mRequest;
 
@@ -37,7 +37,7 @@ public class UpdateTradeRequest  extends AbstractRequest<ResultMessage> {
     private final static String DDATE = "trade_dtime";
     private final static String CONTENTS = "trade_product_contents";
     private final static String KEYWORDS = "trade_key_words";
-    private final static String IMAGES = "trade_product_imges_info";
+    private final static String IMAGES = "trade_product_imges";
 
     public UpdateTradeRequest(Context context,String tid, String trade_product_category_1, String trade_product_category_2, String trade_price,
                                   String trade_dtime, String trade_product_contents, String[] trade_key_words, File[] trade_product_imges) {
@@ -89,7 +89,7 @@ public class UpdateTradeRequest  extends AbstractRequest<ResultMessage> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<ResultMessage>() {
+        return new TypeToken<TradeListItemData>() {
         }.getType();
     }
 

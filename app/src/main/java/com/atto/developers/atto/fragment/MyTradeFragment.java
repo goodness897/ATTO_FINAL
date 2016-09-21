@@ -1,6 +1,7 @@
 package com.atto.developers.atto.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.atto.developers.atto.DetailTradeActivity;
 import com.atto.developers.atto.R;
 import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.bumptech.glide.Glide;
@@ -85,9 +86,12 @@ public class MyTradeFragment extends Fragment {
         statusView.setText(tradeData.getTrade_status() + "");
 
         view.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "id : " + tradeData.getTrade_id(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getContext(), DetailTradeActivity.class);
+                intent.putExtra("tradeData", tradeData);
+                startActivity(intent);
             }
         });
 
@@ -109,6 +113,11 @@ public class MyTradeFragment extends Fragment {
         } else {
             dDayView.setText("D-" + day);
         }
+
+    }
+
+    public TradeData getTradeData() {
+        return tradeData;
 
     }
 

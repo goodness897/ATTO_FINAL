@@ -89,9 +89,6 @@ public class RealTimeTradeViewHolder extends RecyclerView.ViewHolder {
             Integer[] keywordList = tradeData.getTrade_key_word_info();
             checkKeywordList(keywordList);
         }
-
-        //mIvPhoto.setImageDrawable(tradeData.getTrad_ );
-        //mIvProfile.setImageDrawable(tradeData.);
         String[] status = itemView.getContext().getResources().getStringArray(R.array.status);
 
         int dDay = 0;
@@ -133,7 +130,6 @@ public class RealTimeTradeViewHolder extends RecyclerView.ViewHolder {
 
             Glide.with(itemView.getContext()).load(tradeData.getMember_info().getMember_profile_img())
                     .bitmapTransform(new CropCircleTransformation(itemView.getContext())).into(trade_profile);
-
         } else {
             trade_profile.setImageResource(R.drawable.sample_profile);
 
@@ -156,7 +152,7 @@ public class RealTimeTradeViewHolder extends RecyclerView.ViewHolder {
         if (keywordList != null) {
             for (int i = 0; i < keywordList.length; i++) {
                 Log.i("realtime", "keywordList : " + keywordList[i]);
-                if (keywordList[i] != 0) {
+                if (keywordList[i] != null) {
                     keywordView[i].setText(keywordList[i] + "");
                 } else {
                     keywordView[i].setVisibility(View.GONE);

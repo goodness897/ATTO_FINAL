@@ -118,9 +118,6 @@
     <string name="edit_hint_add_port_category"># 키워드를 입력해주세요. (최대 3개)</string>
     <string name="btn_add_port_register">등록하기</string>
 
-
-    <string name="text_register_nego">협상카드 작성하기</string>
-    <string name="text_nego_register">협상카드 등록하기</string>
     <string name="text_add_trade_register_trade">거래 작성하기</string>
     <string name="btn_setting_price">가격 설정하기</string>
     <string name="btn_accept_request">승인 및 수락 요청하기</string>
@@ -160,4 +157,27 @@
     <string name="loginFacebookButton">Login with Facebook</string>
     <string name="logoutFacebookButton">Logout with Facebook</string>
     <string name="activity_detail_nego">협상카드 상세보기</string>
+    <string name="text_trade_update">거래 수정하기</string>
+
+    <string name="text_maker">제작자</string>
+    <string name="text_consumer">소비자</string>
+    <string name="text_detailed">상세설명</string>
+    <string name="text_input_address">주소입력</string>
+    <string name="text_spinner_address">주소선택하기</string>
+    <string name="text_address"><u>주소</u></string>
+
+    <string name="text_zip_code"><u>우편번호</u></string>
+    <string name="text_payment">결제</string>
+    <string name="text_atto_notice">atto는 안심거래만 가능합니다.</string>
+    <string name="text_spinner_deposit_account">무통장 입금계좌</string>
+    <string name="text_payment_notice">상기 내용을 모두 확인했으며, atto가 제시한 교환, 환불 정책에 동의합니다.</string>
+    <string name="text_waiting_payment">입금대기중</string>
+    <string name="text_complete_payment">입금완료</string>
+    <string name="btn_final_accept">제작자에게 최종수락 요청</string>
+    <string name="btn_revise">수정하기</string>
+    <string name="btn_complete_production">제작완료</string>
+    <string name="text_register_nego">협상카드 작성하기</string>
+    <string name="text_nego_register">협상카드 등록하기</string>
+    <string name="activity_update_trade">거래글 수정하기</string>
+
 </resources>

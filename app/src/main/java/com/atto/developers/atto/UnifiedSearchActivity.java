@@ -20,7 +20,7 @@ import com.atto.developers.atto.networkdata.makerdata.MakerData;
 import com.atto.developers.atto.networkdata.portfoliodata.PortfolioData;
 import com.atto.developers.atto.networkdata.tradedata.ListData;
 import com.atto.developers.atto.networkdata.tradedata.TradeData;
-import com.atto.developers.atto.request.PortfolioListRequest;
+import com.atto.developers.atto.request.SearchPortfolioListRequest;
 import com.atto.developers.atto.request.SearchMakerListRequest;
 import com.atto.developers.atto.request.SearchTradeListRequest;
 import com.gigamole.navigationtabstrip.NavigationTabStrip;
@@ -101,7 +101,7 @@ public class UnifiedSearchActivity extends AppCompatActivity {
     }
     private void searchPortFolio() {
         String input = inputSearchView.getText().toString();
-        PortfolioListRequest request = new PortfolioListRequest(this, input, "", "");
+        SearchPortfolioListRequest request = new SearchPortfolioListRequest(this, input, "", "");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<PortfolioData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<PortfolioData>> request, ListData<PortfolioData> result) {

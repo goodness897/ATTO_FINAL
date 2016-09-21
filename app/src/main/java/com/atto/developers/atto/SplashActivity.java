@@ -12,6 +12,7 @@ import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.atto.developers.atto.manager.FontManager;
 import com.atto.developers.atto.manager.NetworkManager;
@@ -145,9 +146,12 @@ public class SplashActivity extends AppCompatActivity {
         if (isFacebookLogin()) {
             processFacebookLogin();
         } else if (isAutoLogin()) {
+            Log.d("SplashActivity", "자동로그인 : isAutoLogin 실행");
             processAutoLogin();
         } else {
+            Log.d("SplashActivity", "자동로그인 : moveLoginActivity 실행");
             moveLoginActivity();
+
         }
     }
 

@@ -70,7 +70,7 @@ public class MyPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int auth = intent.getIntExtra("AUTH", -1);
-        if(auth == 1) {
+        if (auth == 1) {
 //            footerLayout.setVisibility(View.VISIBLE);
         }
         final int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources()
@@ -78,12 +78,12 @@ public class MyPageActivity extends AppCompatActivity {
         pager.setPageMargin(pageMargin);
 
 //        tabs.setViewPager(pager);
-
         initData();
         initTradeData();
         initToolBar();
 
     }
+
 
     @OnClick(R.id.btn_mypage_setting_myprofile)
     void onMyPageSettingClick() {
@@ -159,12 +159,12 @@ public class MyPageActivity extends AppCompatActivity {
             public void onSuccess(NetworkRequest<MyProfile> request, MyProfile result) {
 
                 MyProfileData myProfileData = result.getData();
-                String nickname = result.getData().getMember_alias();
-                String image_url = result.getData().getMember_profile_img();
-                if(image_url != null)
-                checkSetImage(image_url);
-                if(!TextUtils.isEmpty(nickname))
-                nickNameView.setText(nickname);
+                String nickname = myProfileData.getMember_alias();
+                String image_url = myProfileData.getMember_profile_img();
+                if (image_url != null)
+                    checkSetImage(image_url);
+                if (!TextUtils.isEmpty(nickname))
+                    nickNameView.setText(nickname);
                 dialogFragment.dismiss();
                 Log.d("MyPageActivity", "success : " + nickname);
 
@@ -173,11 +173,9 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onFail(NetworkRequest<MyProfile> request, int errorCode, String errorMessage, Throwable e) {
                 Log.e("error", request + " , " + errorCode + " , " + errorMessage);
-
                 dialogFragment.dismiss();
                 Toast.makeText(MyPageActivity.this, "fail" + errorCode, Toast.LENGTH_SHORT).show();
             }
-
 
         });
     }
@@ -191,7 +189,7 @@ public class MyPageActivity extends AppCompatActivity {
     private void initTradeData() {
 
         adapter.clear();
-        MyTradeListRequest request = new MyTradeListRequest(this, "0", "50");
+        MyTradeListRequest request = new MyTradeListRequest(this, "1", "10");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
 
             @Override
@@ -223,6 +221,7 @@ public class MyPageActivity extends AppCompatActivity {
             items.addAll(list);
             notifyDataSetChanged();
         }
+
         public void clear() {
             items.clear();
             notifyDataSetChanged();
@@ -230,6 +229,11 @@ public class MyPageActivity extends AppCompatActivity {
 
         public MyTradePagerAdapter(FragmentManager fm) {
             super(fm);
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return super.getItemPosition(object);
         }
 
         @Override

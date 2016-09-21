@@ -46,6 +46,14 @@ public class DemoItem implements AsymmetricItem {
         return tradeData;
     }
 
+    public PortfolioData getPortfolioData() {
+        return portfolioData;
+    }
+
+    public void setPortfolioData(PortfolioData portfolioData) {
+        this.portfolioData = portfolioData;
+    }
+
     public void setTradeData(TradeData tradeData) {
         this.tradeData = tradeData;
     }

@@ -14,17 +14,23 @@ import okhttp3.Request;
 /**
  * Created by Tacademy on 2016-09-12.
  */
-public class PortfolioListRequest extends AbstractRequest<ListData<PortfolioData>> {
+public class SearchPortfolioListRequest extends AbstractRequest<ListData<PortfolioData>> {
     Request mRequest;
     private static final String PAGE_NO = "pageNo";
     private static final String ROWCOUNT = "rowCount";
     private static final String PORTFOLIO = "portfolioes";
+    private static final String ACTION = "action";
+    private static final String ACTION_VALUE = "keyword";
+    // url
+    private static final String KEY_WORD_ID = "key_word_id";
 
-    public PortfolioListRequest(Context context, String page_no, String row_count) {
+    public SearchPortfolioListRequest(Context context, String key_word_id, String page_no, String row_counnt) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(PORTFOLIO)
+                .addQueryParameter(ACTION, ACTION_VALUE)
                 .addQueryParameter(PAGE_NO, page_no)
-                .addQueryParameter(ROWCOUNT, row_count)
+                .addQueryParameter(ROWCOUNT, row_counnt)
+                .addQueryParameter(KEY_WORD_ID, key_word_id)
                 .build();
 
         mRequest = new Request.Builder()

@@ -7,18 +7,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.atto.developers.atto.adapter.RecyclerDetailTradeAdapter;
 import com.atto.developers.atto.fragment.ProgressDialogFragment;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.manager.PropertyManager;
+import com.atto.developers.atto.networkdata.ResultMessage;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
 import com.atto.developers.atto.networkdata.tradedata.ListData;
 import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.atto.developers.atto.networkdata.tradedata.TradeListItemData;
+import com.atto.developers.atto.request.DeleteTradeRequest;
 import com.atto.developers.atto.request.DetailTradeRequest;
 import com.atto.developers.atto.request.NegoCardListRequest;
 import com.atto.developers.atto.view.DividerItemDecoration;
@@ -32,18 +37,19 @@ import butterknife.Unbinder;
 
 public class DetailTradeActivity extends AppCompatActivity {
 
+    private static final int REQUEST_UPDATE = 1000;
     private Unbinder mUnbinder;
     private static final String TAG = DetailTradeActivity.class.getSimpleName();
 
     @BindView(R.id.re_list)
     RecyclerView mListView;
     RecyclerDetailTradeAdapter mAdapter;
-    ProgressDialogFragment mDialogFragment;
-
     @BindView(R.id.btn_move_nego_register)
     Button registerButton;
 
     int tradeId;
+    TradeData tradeData = null;
+    ProgressDialogFragment mDialogFragment = new ProgressDialogFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +59,77 @@ public class DetailTradeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         int trade_id = intent.getIntExtra("trade_id", -1);
-        TradeData tradeData = (TradeData) intent.getSerializableExtra("tradeData");
-
+        tradeData = (TradeData) intent.getSerializableExtra("tradeData");
         int auth = PropertyManager.getInstance().getKeyAuth();
         checkAuth(auth);
-
-        if(trade_id != -1) {
+/*
+        if (trade_id != -1) {
             init(trade_id);
             setTradeId(trade_id);
-        } else if(tradeData != null) {
+        } else if (tradeData != null) {
             init(tradeData);
             setTradeId(tradeData.getTrade_id());
         }
+        */
+        Log.d(TAG, "닉네임 1 : " + tradeData.getMember_info().getMember_alias());
+        Log.d(TAG, "닉네임 2: " + PropertyManager.getInstance().getNickName());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume 실행");
+        init(tradeData);
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        if (tradeData != null) {
+            if (tradeData.getMember_info().getMember_alias().equals(PropertyManager.getInstance().getNickName())) {
+                getMenuInflater().inflate(R.menu.activity_ud_menu, menu);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_update) {
+            Intent intent = new Intent(DetailTradeActivity.this, UpdateTradeActivity.class);
+            if (tradeData != null) {
+                intent.putExtra("tradeData", tradeData);
+                startActivityForResult(intent, REQUEST_UPDATE);
+            }
+
+        } else if (id == R.id.action_delete) {
+            DeleteTradeRequest request = new DeleteTradeRequest(this, String.valueOf(tradeData.getTrade_id()));
+            NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
+                @Override
+                public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
+                    Toast.makeText(DetailTradeActivity.this, "성공 : " + result.getMessage(), Toast.LENGTH_LONG).show();
+                    finish();
+                }
+
+                @Override
+                public void onFail(NetworkRequest<ResultMessage> request, int errorCode, String errorMessage, Throwable e) {
+                    Toast.makeText(DetailTradeActivity.this, "실패 : " + errorMessage, Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void setTradeId(int tradeId) {
         this.tradeId = tradeId;
@@ -79,7 +137,7 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void checkAuth(int auth) {
 
-        if(auth == 0) { // 소비자 일때
+        if (auth == 0) { // 소비자 일때
             registerButton.setVisibility(View.GONE);
         } else {
             registerButton.setVisibility(View.VISIBLE);
@@ -88,7 +146,6 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void init(int trade_id) {
         initToolBar();
-        mDialogFragment = new ProgressDialogFragment();
         mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
         mAdapter = new RecyclerDetailTradeAdapter();
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
@@ -109,7 +166,7 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void init(TradeData tradeData) {
         initToolBar();
-        mDialogFragment = new ProgressDialogFragment();
+
         mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
         mAdapter = new RecyclerDetailTradeAdapter();
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
@@ -133,7 +190,8 @@ public class DetailTradeActivity extends AppCompatActivity {
     }
 
     private void initData(int trade_id) {
-        checkTradeData(trade_id);
+        mAdapter.setTradeData(tradeData);
+//        checkTradeData(trade_id);
         checkNegoData(trade_id);
     }
 
@@ -167,7 +225,6 @@ public class DetailTradeActivity extends AppCompatActivity {
                 Log.e(TAG, " Trade onSuccess 성공 : " + result.getData().getTrade_product_imges_info());
                 TradeData tradeData = result.getData();
                 mAdapter.setTradeData(tradeData);
-                mDialogFragment.dismiss();
 
             }
 
@@ -181,19 +238,24 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void checkNegoData(int trade_id) {
 
-        NegoCardListRequest request = new NegoCardListRequest(this, trade_id + "", "", "10");
+        NegoCardListRequest request = new NegoCardListRequest(getApplicationContext(), trade_id + "", "", "");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<NegoData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<NegoData>> request, ListData<NegoData> result) {
                 Log.e(TAG, "Nego onSuccess 성공 : " + result);
-                NegoData[] data = result.getData();
-                mAdapter.addAll(Arrays.asList(data));
-                mDialogFragment.dismiss();
+                if (result.getCode() == 0) {
+                    NegoData[] data = null;
+                    mDialogFragment.dismiss();
+                } else {
+                    NegoData[] data = result.getData();
+                    mAdapter.addAll(Arrays.asList(data));
+                    mDialogFragment.dismiss();
+                }
             }
 
             @Override
             public void onFail(NetworkRequest<ListData<NegoData>> request, int errorCode, String errorMessage, Throwable e) {
-                Log.e(TAG, "Nego onFail 실패: " + errorCode);
+                Log.e(TAG, "Nego onFail 실패: " + errorCode + ", " + request.getRequest().toString());
                 mDialogFragment.dismiss();
             }
         });
@@ -203,5 +265,29 @@ public class DetailTradeActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch (requestCode) {
+            case REQUEST_UPDATE:
+                if (resultCode == RESULT_OK) {
+                    tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+                    Log.d(TAG, "content : " + tradeData.getTrade_product_contents());
+                    Log.d(TAG, "image[1] : " + tradeData.getTrade_product_imges_info()[0]);
+                    mAdapter.setTradeData(tradeData);
+                    mDialogFragment.dismiss();
+
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause 실행");
+
     }
 }
