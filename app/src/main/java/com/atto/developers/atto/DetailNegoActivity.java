@@ -83,7 +83,7 @@ public class DetailNegoActivity extends AppCompatActivity {
         negoData = (NegoData) intent.getSerializableExtra("negoData");
         negoId = intent.getIntExtra("negoId", -1);
         tradeId = intent.getIntExtra("tradeId", -1);
-        Log.d("DetailNegoActivity", "negoId : " + negoId);
+        Log.d("DetailNegoActivity", "negoId : " + negoData.getNegotiation_id());
         initData(tradeId, negoId);
         checkUser();
     }
@@ -188,6 +188,7 @@ public class DetailNegoActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
                     Toast.makeText(DetailNegoActivity.this, "성공 : " + result.getMessage(), Toast.LENGTH_LONG).show();
+                    finish();
                 }
 
                 @Override

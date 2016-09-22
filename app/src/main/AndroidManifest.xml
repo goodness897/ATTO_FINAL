@@ -97,7 +97,8 @@
         </service>
 
         <activity android:name=".UpdateMakerActivity" />
-        <activity android:name=".UpdateNegoActivity"></activity>
+        <activity android:name=".UpdateNegoActivity" />
+        <activity android:name=".UpdatePortActivity"></activity>
     </application>
 
 </manifest>

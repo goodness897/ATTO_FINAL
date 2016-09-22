@@ -17,10 +17,10 @@ public class DeletePortfolioRequest extends AbstractRequest<ResultMessage> {
     Request mRequest;
 private final static String PORTFOLIO = "portfolioes";
 
-    public DeletePortfolioRequest(Context context, String tid) {
+    public DeletePortfolioRequest(Context context, String pid) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(PORTFOLIO)
-                .addPathSegment(tid)
+                .addPathSegment(pid)
                 .build();
         mRequest = new Request.Builder()
                 .tag(context)

@@ -51,7 +51,6 @@ public class MyDetailNegoActivity extends AppCompatActivity {
         listView.addItemDecoration(
                 new DividerItemDecoration(getContext(), R.drawable.divider));
 
-        checkNegoData(1);
 
         mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
             @Override
@@ -63,6 +62,14 @@ public class MyDetailNegoActivity extends AppCompatActivity {
                 Toast.makeText(MyDetailNegoActivity.this, "position : " + position, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAdapter.clear();
+        checkNegoData(1);
+
     }
 
     private void initToolBar() {

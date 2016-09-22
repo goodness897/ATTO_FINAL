@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:visibility="visible">
@@ -10,14 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:padding="4dp"
-        android:orientation="horizontal">
-
+        android:gravity="center"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_footer_move_maker_nego"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:background="@drawable/button_shape_not_solid"
             android:gravity="center"
             android:text="@string/btn_footer_move_maker_nego"
@@ -26,9 +25,8 @@
 
         <Button
             android:id="@+id/btn_footer_move_accept_wait"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:background="@drawable/button_shape_not_solid"
             android:gravity="center"
             android:text="@string/btn_footer_move_accept_wait"

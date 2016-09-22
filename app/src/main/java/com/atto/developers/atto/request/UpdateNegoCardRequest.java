@@ -65,7 +65,7 @@ public class UpdateNegoCardRequest extends AbstractRequest<NegoData> {
                 .tag(context)
                 .build();
 
-        Log.i("url", body.toString());
+        Log.i("url", mRequest.url().toString());
 
     }
 

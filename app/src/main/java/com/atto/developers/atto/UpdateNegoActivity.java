@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.atto.developers.atto.fragment.NegoDateFragment;
 import com.atto.developers.atto.fragment.ProgressDialogFragment;
+import com.atto.developers.atto.fragment.UpdateMyNegoDateFragment;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
@@ -62,6 +62,8 @@ public class UpdateNegoActivity extends AppCompatActivity {
         dialogFragment = new ProgressDialogFragment();
         Intent intent = getIntent();
         negoData = (NegoData) intent.getSerializableExtra("negoData");
+        Log.d("UpdateNegoActivity", "성공 : " + negoData.getNegotiation_id());
+
 
         setBeforeUpdateData(negoData);
     }
@@ -97,7 +99,7 @@ public class UpdateNegoActivity extends AppCompatActivity {
     @OnClick(R.id.btn_wish_delevery)
     public void onPickUpDate() {
         FragmentManager fm = getSupportFragmentManager();
-        NegoDateFragment dialogFragment = new NegoDateFragment();
+        UpdateMyNegoDateFragment dialogFragment = new UpdateMyNegoDateFragment();
         dialogFragment.show(fm, "fragment_pickup_date");
     }
 
@@ -114,7 +116,7 @@ public class UpdateNegoActivity extends AppCompatActivity {
         }
         File[] negotiation_product_images = {imageFile};
 
-        UpdateNegoCardRequest request = new UpdateNegoCardRequest(this, String.valueOf(tradeId), String.valueOf(negoData.getNegotiation_id())
+        UpdateNegoCardRequest request = new UpdateNegoCardRequest(this, "1", String.valueOf(negoData.getNegotiation_id())
                 , negotiation_price, negotiation_dtime, negotiation_product_contents,
                 negotiation_product_images);
 
@@ -132,7 +134,7 @@ public class UpdateNegoActivity extends AppCompatActivity {
 
             @Override
             public void onFail(NetworkRequest<NegoData> request, int errorCode, String errorMessage, Throwable e) {
-                Log.d("AddNegoActivity", "실패 : " + errorMessage);
+                Log.d("UpdateNegoActivity", "실패 : " + errorMessage);
                 dialogFragment.dismiss();
             }
         });

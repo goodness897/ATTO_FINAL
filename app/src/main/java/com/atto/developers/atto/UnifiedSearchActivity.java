@@ -65,9 +65,9 @@ public class UnifiedSearchActivity extends AppCompatActivity {
         mNavigationTabStrip.setTabIndex(0, true);
         mNavigationTabStrip.setViewPager(pager, 0);
         mNavigationTabStrip.setAnimationDuration(300);
-        portList.clear();
-        makerList.clear();
-        tradeList.clear();
+        if(!portList.isEmpty()) portList.clear();
+        if(!makerList.isEmpty()) makerList.clear();
+        if(!tradeList.isEmpty()) tradeList.clear();
     }
 
     @OnClick(R.id.btn_search)
