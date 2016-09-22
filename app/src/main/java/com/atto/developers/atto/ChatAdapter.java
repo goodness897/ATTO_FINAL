@@ -57,7 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         cursor.moveToPosition(position);
-//        int type = cursor.getInt(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_TYPE));
+        int type = cursor.getInt(cursor.getColumnIndex(ChatContract.ChatMessage.COLUMN_TYPE));
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_SEND : {
                 SendViewHolder svh = (SendViewHolder)holder;

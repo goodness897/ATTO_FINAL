@@ -1,7 +1,6 @@
 package com.atto.developers.atto;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +20,6 @@ import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.manager.PropertyManager;
 import com.atto.developers.atto.networkdata.ResultMessage;
-import com.atto.developers.atto.networkdata.chatdata.ChatContract;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
 import com.atto.developers.atto.networkdata.userdata.User;
 import com.atto.developers.atto.request.DeleteNegoCardRequest;
@@ -244,14 +242,15 @@ public class DetailNegoActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_chat)
     public void onChatButton() {
+User user= new User();
+        user.setId(negoData.getMaker_info().getMaker_id());
+        user.setEmail(negoData.getMaker_info().getMaker_name());
+        user.setUserName(negoData.getMaker_info().getMaker_name());
 
-        Cursor cursor = (Cursor) negoData;
-        User user = new User();
-        user.setId(cursor.getLong(cursor.getColumnIndex(ChatContract.ChatUser.COLUMN_SERVER_ID)));
-        user.setEmail(cursor.getString(cursor.getColumnIndex(ChatContract.ChatUser.COLUMN_EMAIL)));
-        user.setUserName(cursor.getString(cursor.getColumnIndex(ChatContract.ChatUser.COLUMN_NAME)));
+
         Intent intent = new Intent(DetailNegoActivity.this, ChatActivity.class);
-        intent.putExtra(ChatActivity.EXTRA_USER, user);
+        intent.putExtra(ChatActivity.EXTRA_USER,user);
+        intent.putExtra("tid",tradeId);
         startActivity(intent);
 
     }
