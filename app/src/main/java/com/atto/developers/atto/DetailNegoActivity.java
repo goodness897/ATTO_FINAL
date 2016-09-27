@@ -21,8 +21,10 @@ import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.manager.PropertyManager;
 import com.atto.developers.atto.networkdata.ResultMessage;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
+import com.atto.developers.atto.networkdata.negodata.NegoListItemData;
 import com.atto.developers.atto.networkdata.userdata.User;
 import com.atto.developers.atto.request.DeleteNegoCardRequest;
+import com.atto.developers.atto.request.DetailNegoRequest;
 import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
@@ -79,8 +81,8 @@ public class DetailNegoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         negoData = (NegoData) intent.getSerializableExtra("negoData");
-        negoId = intent.getIntExtra("negoId", -1);
-        tradeId = intent.getIntExtra("tradeId", -1);
+        negoId = negoData.getNegotiation_id();
+        tradeId = negoData.getTrade_id();
         Log.d("DetailNegoActivity", "negoId : " + negoData.getNegotiation_id());
         initData(tradeId, negoId);
         checkUser();
@@ -134,22 +136,21 @@ public class DetailNegoActivity extends AppCompatActivity {
 
     private void initData(int tradeId, int negoId) {
 
-        setNegoData(negoData);
 
-        /*DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(tradeId), String.valueOf(negoId));
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegeListItemData>() {
+        DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(tradeId), String.valueOf(negoId));
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoListItemData>() {
             @Override
-            public void onSuccess(NetworkRequest<NegeListItemData> request, NegeListItemData result) {
+            public void onSuccess(NetworkRequest<NegoListItemData> request, NegoListItemData result) {
                 NegoData negoData = result.getData();
                 setNegoData(negoData);
                 Log.d(this.toString(), "협상카드상세성공 : " + result.getMessage());
             }
 
             @Override
-            public void onFail(NetworkRequest<NegeListItemData> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<NegoListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(getApplicationContext(), "실패 : " + errorCode, Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
     }
 
@@ -223,34 +224,17 @@ public class DetailNegoActivity extends AppCompatActivity {
         }
     }
 
-
-//    private void calenderDday(NegoData negoData) {
-//        String[] data = negoData
-//
-//        Calendar a = Calendar.getInstance();
-//        long currentTiem = a.getTimeInMillis();
-//        a.set(Calendar.YEAR, Calendar.MONTH-1, Calendar.DAY_OF_MONTH);
-//
-//        Calendar b = Calendar.getInstance(TimeZone.getTimeZone(negoData.getNegotiation_dtime()));
-//        long futureTime = b.getTimeInMillis();
-//        b.set();
-//        long diff = futureTime - currentTiem;
-//        int day = (int) (diff / (1000 * 60 * 60 * 24));
-//       \
-//    }
-
-
     @OnClick(R.id.btn_chat)
     public void onChatButton() {
-User user= new User();
+        User user = new User();
         user.setId(negoData.getMaker_info().getMaker_id());
         user.setEmail(negoData.getMaker_info().getMaker_name());
         user.setUserName(negoData.getMaker_info().getMaker_name());
 
 
         Intent intent = new Intent(DetailNegoActivity.this, ChatActivity.class);
-        intent.putExtra(ChatActivity.EXTRA_USER,user);
-        intent.putExtra("tid",tradeId);
+        intent.putExtra(ChatActivity.EXTRA_USER, user);
+        intent.putExtra("tid", tradeId);
         startActivity(intent);
 
     }

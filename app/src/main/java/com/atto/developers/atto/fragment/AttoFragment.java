@@ -2,6 +2,7 @@ package com.atto.developers.atto.fragment;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.atto.developers.atto.BaseFragment;
 import com.atto.developers.atto.DetailPortActivity;
 import com.atto.developers.atto.R;
 import com.atto.developers.atto.asymmetricgridview.DefaultListAdapter;
@@ -37,7 +39,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AttoFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class AttoFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+
+    static final String TAG = "tag.ScrollViewFragment";
 
     AsymmetricGridView listView;
     DemoAdapter adapter;
@@ -179,4 +183,18 @@ public class AttoFragment extends Fragment implements AdapterView.OnItemClickLis
         this.portfolioDataList = Arrays.asList(portfolioData);
     }
 
+    @Override
+    public CharSequence getTitle(Resources r) {
+        return "PORTFOLIO";
+    }
+
+    @Override
+    public String getSelfTag() {
+        return TAG;
+    }
+
+    @Override
+    public boolean canScrollVertically(int direction) {
+        return false;
+    }
 }

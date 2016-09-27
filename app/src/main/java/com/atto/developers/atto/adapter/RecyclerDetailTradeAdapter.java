@@ -35,6 +35,11 @@ public class RecyclerDetailTradeAdapter extends RecyclerView.Adapter<RecyclerVie
         notifyDataSetChanged();
     }
 
+    public void clear() {
+        mNegoDataList.clear();
+        notifyDataSetChanged();
+    }
+
     private static final int VIEW_TYPE_HEADER = 100;
     private static final int VIEW_TYPE_GROUP = 200;
 

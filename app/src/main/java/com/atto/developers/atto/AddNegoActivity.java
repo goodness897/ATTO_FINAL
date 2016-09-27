@@ -15,7 +15,7 @@ import com.atto.developers.atto.fragment.NegoDateFragment;
 import com.atto.developers.atto.fragment.ProgressDialogFragment;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
-import com.atto.developers.atto.networkdata.negodata.NegeListItemData;
+import com.atto.developers.atto.networkdata.negodata.NegoListItemData;
 import com.atto.developers.atto.request.AddNegoCardRequest;
 import com.bumptech.glide.Glide;
 
@@ -101,9 +101,9 @@ public class AddNegoActivity extends AppCompatActivity {
         AddNegoCardRequest request = new AddNegoCardRequest(this, String.valueOf(tradeId), negotiation_price, negotiation_dtime, negotiation_product_contents,
                 negotiation_product_images);
 
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegeListItemData>() {
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoListItemData>() {
             @Override
-            public void onSuccess(NetworkRequest<NegeListItemData> request, NegeListItemData result) {
+            public void onSuccess(NetworkRequest<NegoListItemData> request, NegoListItemData result) {
                 Log.d("AddNegoActivity", "성공 : " + result.getData().getCode());
                 Intent intent = new Intent(AddNegoActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -112,7 +112,7 @@ public class AddNegoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFail(NetworkRequest<NegeListItemData> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<NegoListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Log.d("AddNegoActivity", "실패 : " + errorMessage);
                 dialogFragment.dismiss();
 

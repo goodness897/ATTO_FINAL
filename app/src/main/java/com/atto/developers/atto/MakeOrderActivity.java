@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
-import com.atto.developers.atto.networkdata.negodata.NegeListItemData;
+import com.atto.developers.atto.networkdata.negodata.NegoListItemData;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
 import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.atto.developers.atto.networkdata.tradedata.TradeListItemData;
@@ -80,16 +80,16 @@ public class MakeOrderActivity extends AppCompatActivity {
 
     private void makeOrderMakerData(int tradeId, int negoId) {
         DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(this.tradeId), String.valueOf(this.negoId));
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegeListItemData>() {
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoListItemData>() {
             @Override
-            public void onSuccess(NetworkRequest<NegeListItemData> request, NegeListItemData result) {
+            public void onSuccess(NetworkRequest<NegoListItemData> request, NegoListItemData result) {
                 Log.e(TAG, "MakeOrder_Maker 성공 : " + result.getData());
                 NegoData negoData = result.getData();
                 setMakeMaker(negoData);
             }
 
             @Override
-            public void onFail(NetworkRequest<NegeListItemData> request, int errorCode, String errorMessage, Throwable e) {
+            public void onFail(NetworkRequest<NegoListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Log.e(TAG, "MakeOrder_Maker 실패 : " + errorMessage);
             }
         });

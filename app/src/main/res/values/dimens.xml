@@ -11,4 +11,6 @@
 
     <dimen name="item_offset">1dp</dimen>
     <dimen name="btn_size">14sp</dimen>
+    <dimen name="tabs_height">64dp</dimen>
+    <dimen name="header_height">300dp</dimen>
 </resources>

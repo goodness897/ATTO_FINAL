@@ -2,6 +2,7 @@ package com.atto.developers.atto.fragment;
 
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,13 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.atto.developers.atto.AddTradeActivity;
+import com.atto.developers.atto.BaseFragment;
 import com.atto.developers.atto.DetailTradeActivity;
 import com.atto.developers.atto.R;
 import com.atto.developers.atto.adapter.RecyclerRealTimeTradeAdapter;
 import com.atto.developers.atto.manager.NetworkManager;
 import com.atto.developers.atto.manager.NetworkRequest;
-import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.atto.developers.atto.networkdata.tradedata.ListData;
+import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.atto.developers.atto.request.TradeListRequest;
 import com.atto.developers.atto.view.DividerItemDecoration;
 
@@ -31,7 +33,9 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RealTimeTradeFragment extends Fragment {
+public class RealTimeTradeFragment extends BaseFragment {
+
+    static final String TAG = "tag.RecyclerViewFragment";
 
     @BindView(R.id.rv_list)
     RecyclerView listView;
@@ -102,5 +106,20 @@ public class RealTimeTradeFragment extends Fragment {
                 Log.d("RealTimeTradeFragment", "실패 : " + errorCode);
             }
         });
+    }
+
+    @Override
+    public CharSequence getTitle(Resources r) {
+        return "판매완료";
+    }
+
+    @Override
+    public String getSelfTag() {
+        return TAG;
+    }
+
+    @Override
+    public boolean canScrollVertically(int direction) {
+        return false;
     }
 }

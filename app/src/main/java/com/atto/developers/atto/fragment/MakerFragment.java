@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.atto.developers.atto.DetailMakerActivity;
+import com.atto.developers.atto.DetailMakerTwoActivity;
 import com.atto.developers.atto.R;
 import com.atto.developers.atto.adapter.RecyclerMakerAdapter;
 import com.atto.developers.atto.manager.NetworkManager;
@@ -74,7 +74,7 @@ public class MakerFragment extends Fragment {
 
             @Override
             public void onAdapterItemClick(View view, MakerData makerItemData, int position) {
-                Intent intent = new Intent(getContext(), DetailMakerActivity.class);
+                Intent intent = new Intent(getContext(), DetailMakerTwoActivity.class);
                 intent.putExtra(MAKER, makerItemData);
                 startActivity(intent);
             }

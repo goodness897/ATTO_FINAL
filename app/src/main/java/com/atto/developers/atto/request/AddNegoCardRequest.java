@@ -3,7 +3,7 @@ package com.atto.developers.atto.request;
 import android.content.Context;
 import android.util.Log;
 
-import com.atto.developers.atto.networkdata.negodata.NegeListItemData;
+import com.atto.developers.atto.networkdata.negodata.NegoListItemData;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
@@ -18,7 +18,7 @@ import okhttp3.RequestBody;
 /**
  * Created by Tacademy on 2016-09-02.
  */
-public class AddNegoCardRequest extends AbstractRequest<NegeListItemData> {
+public class AddNegoCardRequest extends AbstractRequest<NegoListItemData> {
     //    협상카드 등록 url
     private final static String TRADE = "trades";
     private final static String NEGTIATION = "negotiations";
@@ -73,7 +73,7 @@ public class AddNegoCardRequest extends AbstractRequest<NegeListItemData> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<NegeListItemData>() {
+        return new TypeToken<NegoListItemData>() {
         }.getType();
     }
 

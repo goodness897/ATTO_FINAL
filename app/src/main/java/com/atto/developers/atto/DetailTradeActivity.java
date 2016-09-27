@@ -66,15 +66,6 @@ public class DetailTradeActivity extends AppCompatActivity {
 
         int auth = PropertyManager.getInstance().getKeyAuth();
         checkAuth(auth);
-/*
-        if (trade_id != -1) {
-            init(trade_id);
-            setTradeId(trade_id);
-        } else if (tradeData != null) {
-            init(tradeData);
-            setTradeId(tradeData.getTrade_id());
-        }
-        */
         Log.d(TAG, "닉네임 1 : " + tradeData.getMember_info().getMember_alias());
         Log.d(TAG, "닉네임 2 : " + PropertyManager.getInstance().getNickName());
         Log.d(TAG, "아이디 : " + tradeData.getTrade_id());
@@ -85,6 +76,8 @@ public class DetailTradeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume 실행");
+
+        checkNegoData(tradeData.getTrade_id());
 
     }
 
@@ -142,30 +135,11 @@ public class DetailTradeActivity extends AppCompatActivity {
 
     private void checkAuth(int auth) {
 
-        if (auth == 0) { // 소비자 일때
+        if (auth == 0 || tradeData.getMember_info().getMember_alias().equals(PropertyManager.getInstance().getNickName())) { // 소비자 일때
             registerButton.setVisibility(View.GONE);
         } else {
             registerButton.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void init(int trade_id) {
-        initToolBar();
-        mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
-        mAdapter.setOnAdapterItemClickListener(new RecyclerDetailTradeAdapter.OnAdapterItemClickLIstener() {
-            @Override
-            public void onAdapterItemClick(View view, NegoData negoData, int position) {
-                Intent intent = new Intent(DetailTradeActivity.this, DetailNegoActivity.class);
-                intent.putExtra("tradeId", tradeId);
-                intent.putExtra("negoId", negoData.getNegotiation_id());
-                startActivity(intent);
-
-            }
-        });
-        mListView.setAdapter(mAdapter);
-        mListView.setLayoutManager(new LinearLayoutManager(this));
-        mListView.addItemDecoration(new DividerItemDecoration(this, R.drawable.divider));
-        initData(trade_id);
     }
 
     private void init(TradeData tradeData) {
@@ -193,13 +167,6 @@ public class DetailTradeActivity extends AppCompatActivity {
         checkNegoData(tradeData.getTrade_id());
 
     }
-
-    private void initData(int trade_id) {
-        mAdapter.setTradeData(tradeData);
-//        checkTradeData(trade_id);
-        checkNegoData(trade_id);
-    }
-
     @OnClick(R.id.btn_move_nego_register)
     public void onMoveAddNego() {
         Intent intent = new Intent(DetailTradeActivity.this, AddNegoActivity.class);

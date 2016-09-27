@@ -6,12 +6,21 @@ public class NegoData implements java.io.Serializable {
 	private static final long serialVersionUID = -2572726441148153839L;
 	int code;
 	private int negotiation_id;
+	private int trade_id;
 	private NegoDataMaker_info maker_info;
 	private int negotiation_price;
 	private String negotiation_dtime;
 	private String negotiation_ctime;
 	private String negotiation_product_contents;
 	private String[] negotiation_product_imges_info;// null 가능
+
+	public int getTrade_id() {
+		return trade_id;
+	}
+
+	public void setTrade_id(int trade_id) {
+		this.trade_id = trade_id;
+	}
 
 	public String getNegotiation_ctime() {
 		return negotiation_ctime;

@@ -3,7 +3,7 @@ package com.atto.developers.atto.request;
 import android.content.Context;
 import android.util.Log;
 
-import com.atto.developers.atto.networkdata.negodata.NegeListItemData;
+import com.atto.developers.atto.networkdata.negodata.NegoListItemData;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -14,7 +14,7 @@ import okhttp3.Request;
 /**
  * Created by Tacademy on 2016-09-02.
  */
-public class DetailNegoRequest extends AbstractRequest<NegeListItemData> {
+public class DetailNegoRequest extends AbstractRequest<NegoListItemData> {
     Request mRequest;
     private final static String TRADES = "trades";
     private final static String NEGTIATION = "negotiations";
@@ -36,7 +36,7 @@ public class DetailNegoRequest extends AbstractRequest<NegeListItemData> {
 
     @Override
     protected Type getType() {
-        return new TypeToken<NegeListItemData>(){}.getType();
+        return new TypeToken<NegoListItemData>(){}.getType();
     }
 
     @Override

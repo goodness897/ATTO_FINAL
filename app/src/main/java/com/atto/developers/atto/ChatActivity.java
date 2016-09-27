@@ -41,6 +41,7 @@ public class ChatActivity extends AppCompatActivity {
 
     LocalBroadcastManager mLBM;
     int tradeid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,7 @@ public class ChatActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         user = (User) getIntent().getSerializableExtra(EXTRA_USER);
-tradeid= getIntent().getIntExtra("tid",-1);
+        tradeid = getIntent().getIntExtra("tid", -1);
 
         mAdapter = new ChatAdapter();
         Cursor c = DBManager.getInstance().getChatUser();
@@ -68,21 +69,21 @@ tradeid= getIntent().getIntExtra("tid",-1);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ChatListItemData>() {
             @Override
             public void onSuccess(NetworkRequest<ChatListItemData> request, ChatListItemData result) {
-                if (result.getCode() == 1){
+                if (result.getCode() == 1) {
                     DBManager.getInstance().addMessage(user, ChatContract.ChatMessage.TYPE_SEND, message);
-                updateMessage();
-                    Log.d("chat",result.getMessage());
+                    updateMessage();
+                    Log.d("chat", result.getMessage());
 
-            }else{
+                } else {
                     Toast.makeText(ChatActivity.this, "전송실패", Toast.LENGTH_SHORT).show();
-                    Log.d("chat",result.getMessage());
+                    Log.d("chat", result.getMessage());
                 }
             }
 
             @Override
             public void onFail(NetworkRequest<ChatListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(ChatActivity.this, "fail", Toast.LENGTH_SHORT).show();
-                Log.d("chat",errorCode+"");
+                Log.d("chat", errorCode + "");
             }
         });
 
