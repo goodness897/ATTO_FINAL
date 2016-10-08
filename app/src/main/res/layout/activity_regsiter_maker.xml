@@ -1,22 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterMakerActivity">
+    tools:context="com.atto.developers.atto.RegisterMakerActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/main_toolbar"
-        android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/toolbar_underline_background">
+        android:background="@drawable/toolbar_underline_background"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ToolBarStyle">
 
     </android.support.v7.widget.Toolbar>
 
+    <RelativeLayout
+
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_toolbar">
+
+        <ImageView
+            android:id="@+id/img_mypage_set_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/user" />
+
+        <ImageView
+            android:id="@+id/btn_camera"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@+id/img_mypage_set_profile"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="130dp"
+            android:src="@drawable/ic_camera" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout"
+        android:padding="16dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_above="@+id/btn_complete_update">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_profile_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="16dp"
+            android:drawableLeft="@drawable/ic_nickname"
+            android:drawablePadding="12dp"
+            android:hint="@string/edit_name_hint"
+            android:inputType="text"
+            android:textColor="@color/colorBlack"
+            android:theme="@style/ProfileTextLabel" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="12dp"
+            android:hint="@string/edit_phone_hint"
+            android:inputType="phone"
+            android:theme="@style/ProfileTextLabel" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/text_profile_set_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingLeft="8dp"
+                android:text="@string/edit_address_hint"
+                android:focusable="false"
+                android:theme="@style/ProfileTextLabel"
+                android:textColor="@color/color_transparent_black" />
+
+            <Button
+                android:id="@+id/btn_img_address"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/search_address_shape"
+                android:text="@string/btn_img_address"
+                android:textColor="@color/color_transparent_black" />
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/text_profile_set_postcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="8dp"
+            android:hint="우편번호"
+            android:textColor="@color/colorBlack"
+            android:theme="@style/ProfileTextLabel" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_detail_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="12dp"
+            android:hint="@string/edit_detail_address"
+            android:inputType="text"
+            android:textColor="@color/colorBlack"
+            android:theme="@style/ProfileTextLabel" />
 
 
+    </LinearLayout>
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        android:visibility="gone" />
 
+    <Button
+        android:id="@+id/btn_complete_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/color_text_price"
+        android:text="@string/btn_complete_update"
+        android:textColor="@color/white" />
 
 </RelativeLayout>

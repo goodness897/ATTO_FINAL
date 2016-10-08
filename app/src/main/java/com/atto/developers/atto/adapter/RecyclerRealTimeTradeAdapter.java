@@ -31,6 +31,7 @@ public class RecyclerRealTimeTradeAdapter extends RecyclerView.Adapter<RealTimeT
     }
 
     public void addAll(List<TradeData> list) {
+        if(!items.isEmpty()) items.clear();
         items.addAll(list);
         notifyDataSetChanged();
     }

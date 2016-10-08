@@ -11,14 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.atto.developers.atto.DetailMakerActivity;
+import com.atto.developers.atto.DetailMakerTwoActivity;
 import com.atto.developers.atto.R;
 import com.atto.developers.atto.adapter.RecyclerMakerAdapter;
+import com.atto.developers.atto.manager.NetworkManager;
+import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.networkdata.makerdata.MakerData;
+import com.atto.developers.atto.networkdata.tradedata.ListData;
+import com.atto.developers.atto.request.SearchMakerListRequest;
 import com.atto.developers.atto.view.DividerItemDecoration;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,10 +32,11 @@ public class SearchResultMakerFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String MAKER_LIST = "makerList";
+    public final static String MAKER = "maker";
 
     RecyclerView listView;
     RecyclerMakerAdapter mAdapter;
-    List<MakerData> list;
+    String keyword;
 
 
     public SearchResultMakerFragment() {
@@ -40,11 +44,11 @@ public class SearchResultMakerFragment extends Fragment {
     }
 
     // TODO: Rename and change types and number of parameters
-    public static SearchResultMakerFragment newInstance(List<MakerData> makerDataList) {
+    public static SearchResultMakerFragment newInstance(String keyword) {
         SearchResultMakerFragment fragment = new SearchResultMakerFragment();
         Bundle args = new Bundle();
-        args.putSerializable(MAKER_LIST, (Serializable) makerDataList);
-        Log.d("UnifiedSearchActivity", "확인 : " + makerDataList.get(0).getMaker_name());
+        args.putString(MAKER_LIST, keyword);
+        Log.d("UnifiedSearchActivity", "Maker keyword : " + keyword);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,12 +56,9 @@ public class SearchResultMakerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new RecyclerMakerAdapter();
 
         if (getArguments() != null) {
-            list = (List<MakerData>) getArguments().getSerializable(MAKER_LIST);
-            Log.d("UnifiedSearchActivity", "확인 : " + list.get(0).getMaker_name());
-            mAdapter.addAll(list);
+            keyword = getArguments().getString(MAKER_LIST);
         }
     }
 
@@ -67,6 +68,7 @@ public class SearchResultMakerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result_maker, container, false);
         listView = (RecyclerView) view.findViewById(R.id.rv_list);
+        mAdapter = new RecyclerMakerAdapter();
         listView.setAdapter(mAdapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
@@ -77,14 +79,44 @@ public class SearchResultMakerFragment extends Fragment {
 
             @Override
             public void onAdapterItemClick(View view, MakerData makerItemData, int position) {
-                Intent intent = new Intent(getContext(), DetailMakerActivity.class);
-                intent.putExtra("MAKER_ID", makerItemData.getMaker_id());
-                Log.d("UnifiedSearchActivity", "MAKER_ID : " + makerItemData.getMaker_id());
+                Intent intent = new Intent(getContext(), DetailMakerTwoActivity.class);
+                intent.putExtra(MAKER, makerItemData);
                 startActivity(intent);
             }
         });
 
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        searchMaker(keyword);
+
+    }
+
+    private void searchMaker(String keyword) {
+
+        mAdapter.clear();
+        SearchMakerListRequest request = new SearchMakerListRequest(getContext(), keyword);
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<MakerData>>() {
+            @Override
+            public void onSuccess(NetworkRequest<ListData<MakerData>> request, ListData<MakerData> result) {
+                MakerData[] makerData = result.getData();
+                if (makerData != null) {
+                    Log.d("UnifiedSearchActivity", "maker 성공 : " + makerData[0].getMaker_name());
+                    mAdapter.addAll(Arrays.asList(makerData));
+                }
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ListData<MakerData>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("UnifiedSearchActivity", "실패 : " + errorMessage);
+
+            }
+        });
     }
 
 }

@@ -3,7 +3,17 @@
     android:id="@+id/scrollable_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     app:scrollable_maxScroll="@dimen/header_height">
+
+    <android.support.v7.widget.Toolbar
+        app:theme="@style/ToolBarStyle"
+        android:id="@+id/main_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/toolbar_underline_background">
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +21,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/view_item_detail_maker"
+            layout="@layout/view_detail_maker"
             android:layout_width="match_parent"
             android:layout_height="@dimen/header_height"
             android:id="@+id/header"
@@ -21,7 +31,8 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="@dimen/tabs_height"
-            android:background="@color/tabs_background" />
+            android:layout_gravity="center"
+            android:background="@color/color_atto_main" />
 
     </LinearLayout>
 

@@ -122,8 +122,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void checkUser(LoginResult loginResult) {
         final AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        if(accessToken != null) {
-            String token = loginResult.getAccessToken().getToken();
+        if (accessToken != null) {
+            final String token = loginResult.getAccessToken().getToken();
             String regId = PropertyManager.getInstance().getRegistrationId();
             FacebookLoginRequest request = new FacebookLoginRequest(this, token, regId);
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<LoginData>() {
@@ -133,6 +133,8 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, result.getMessage(), Toast.LENGTH_SHORT).show();
                     String facebookId = accessToken.getUserId();
                     PropertyManager.getInstance().setFacebookId(facebookId);
+                    Log.d("LoginActivity", "Token : " + token);
+
                     moveMainActivity();
 
                 }
@@ -389,7 +391,7 @@ public class LoginActivity extends AppCompatActivity {
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ResultMessage>() {
                 @Override
                 public void onSuccess(NetworkRequest<ResultMessage> request, ResultMessage result) {
-                    if(result.getCode()==0){
+                    if (result.getCode() == 0) {
                         Toast.makeText(LoginActivity.this, "아이디 혹은 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     }
                     PropertyManager.getInstance().setEmail(e_mail);

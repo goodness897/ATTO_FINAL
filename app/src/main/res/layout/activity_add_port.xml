@@ -78,22 +78,6 @@
             android:inputType="text"
             android:textColor="@color/white"
             android:theme="@style/TextLabel" />
-
-
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/edit_add_port_keyword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="5dp"
-            android:drawableLeft="@drawable/ic_write_content"
-            android:drawablePadding="12dp"
-            android:inputType="number"
-            android:hint="키워드를 입력하세요"
-            android:textColor="@color/white"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:theme="@style/TextLabel" />
     </LinearLayout>
 
     <Button

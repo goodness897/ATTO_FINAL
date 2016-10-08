@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,14 @@ import android.view.ViewGroup;
 import com.atto.developers.atto.DetailTradeActivity;
 import com.atto.developers.atto.R;
 import com.atto.developers.atto.adapter.RecyclerRealTimeTradeAdapter;
+import com.atto.developers.atto.manager.NetworkManager;
+import com.atto.developers.atto.manager.NetworkRequest;
+import com.atto.developers.atto.networkdata.tradedata.ListData;
 import com.atto.developers.atto.networkdata.tradedata.TradeData;
+import com.atto.developers.atto.request.SearchTradeListRequest;
 import com.atto.developers.atto.view.DividerItemDecoration;
 
-import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,16 +41,19 @@ public class SearchResultTradeFragment extends Fragment {
     RecyclerView listView;
     RecyclerRealTimeTradeAdapter mAdapter;
     private List<TradeData> tradeDataList;
+    private String keyword;
 
 
     public SearchResultTradeFragment() {
         // Required empty public constructor
     }
 
-    public static SearchResultTradeFragment newInstance(List<TradeData> tradeDataList) {
+    public static SearchResultTradeFragment newInstance(String keyword) {
         SearchResultTradeFragment fragment = new SearchResultTradeFragment();
         Bundle args = new Bundle();
-        args.putSerializable(TRADE_LIST, (Serializable) tradeDataList);
+        args.putString(TRADE_LIST, keyword);
+        Log.d("UnifiedSearchActivity", "Trade keyword : " + keyword);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -53,11 +61,9 @@ public class SearchResultTradeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new RecyclerRealTimeTradeAdapter();
 
         if (getArguments() != null) {
-            tradeDataList = (List<TradeData>) getArguments().getSerializable(TRADE_LIST);
-            if(tradeDataList != null) mAdapter.addAll(tradeDataList);
+            keyword = getArguments().getString(TRADE_LIST);
         }
     }
 
@@ -65,8 +71,9 @@ public class SearchResultTradeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_search_result_trade, container, false);
+        View view = inflater.inflate(R.layout.fragment_search_result_trade, container, false);
         ButterKnife.bind(this, view);
+        mAdapter = new RecyclerRealTimeTradeAdapter();
         listView.setAdapter(mAdapter);
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(manager);
@@ -76,11 +83,40 @@ public class SearchResultTradeFragment extends Fragment {
             @Override
             public void onAdapterItemClick(View view, final TradeData tradeData, int position) {
                 Intent intent = new Intent(getContext(), DetailTradeActivity.class);
-                intent.putExtra("trade_id", tradeData.getTrade_id());
+                intent.putExtra("tradeData", tradeData);
                 startActivity(intent);
             }
         });
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        searchTrade();
+    }
+
+    private void searchTrade() {
+
+        mAdapter.clear();
+        SearchTradeListRequest request = new SearchTradeListRequest(getContext(), keyword, "1", "10");
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
+            @Override
+            public void onSuccess(NetworkRequest<ListData<TradeData>> request, ListData<TradeData> result) {
+                TradeData[] tradeDatas = result.getData();
+                if (tradeDatas != null) {
+                    Log.d("UnifiedSearchActivity", "trade 성공 : " + tradeDatas[0].getTrade_title());
+                    mAdapter.addAll(Arrays.asList(tradeDatas));
+                }
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ListData<TradeData>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("UnifiedSearchActivity", "실패 : " + errorMessage);
+
+            }
+        });
     }
 
 }

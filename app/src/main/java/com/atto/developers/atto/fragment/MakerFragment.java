@@ -102,7 +102,6 @@ public class MakerFragment extends Fragment {
             public void onSuccess(NetworkRequest<ListData<MakerData>> request, ListData<MakerData> result) {
                 MakerData[] data = result.getData();
                 if(data != null) {
-                    Toast.makeText(getContext(), "성공 : " + data[0].getMaker_score(), Toast.LENGTH_SHORT).show();
                     Log.d("MakerFragment", String.valueOf(data[0].getMaker_score()));
                     Log.d("MakerFragment", String.valueOf(data[0].getMaker_id()));
                     mAdapter.addAll(Arrays.asList(data));

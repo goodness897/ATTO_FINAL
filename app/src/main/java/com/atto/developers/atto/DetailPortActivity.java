@@ -35,8 +35,6 @@ public class DetailPortActivity extends AppCompatActivity {
     @BindView(R.id.text_detail_port_title)
     TextView titleView;
 
-    @BindView(R.id.text_detail_port_category)
-    TextView categoryView;
     PortfolioData portfolioData;
 
     @BindView(R.id.update_btn)
@@ -133,7 +131,6 @@ public class DetailPortActivity extends AppCompatActivity {
             Glide.with(this).load(image).into(portView);
         }
         titleView.setText(portfolioData.getPortfolio_title());
-        categoryView.setText("# "+portfolioData.getPortfolio_key_word_info()[0]+ "");
     }
 
     private void setDetailTradeData(TradeData tradeData) {
@@ -143,7 +140,6 @@ public class DetailPortActivity extends AppCompatActivity {
             Glide.with(this).load(image[0]).into(portView);
         }
         titleView.setText(tradeData.getTrade_title());
-        categoryView.setText("# "+tradeData.getTrade_key_word_info()[0] + "");
 
     }
 

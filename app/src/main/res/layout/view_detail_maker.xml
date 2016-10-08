@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@color/white">
+
+    <!--<TextView
+        android:id="@+id/text_detail_maker_signed"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/staus_shape"
+        android:gravity="center"
+        android:text="Large Text"
+        android:textColor="@color/white"
+        android:textSize="14sp" />-->
+
+    <!--<RatingBar
+        android:id="@+id/ratingbar_detail_maker_grade"
+        style="@style/myrating"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ratingbar_height"
+        android:layout_below="@+id/text_detail_maker_nickname"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:rating="3.5" />-->
+
+    <ImageView
+        android:id="@+id/img_detail_maker_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="32dp"/>
+
+    <RatingBar
+        android:id="@+id/ratingbar_detail_maker_grade"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_gravity="left"
+        android:progressDrawable="@drawable/custom_detail_ratingbar"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:rating="5"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:isIndicator="true"
+        android:layout_below="@+id/img_detail_maker_profile"
+        android:layout_marginLeft="32dp"/>
+
+    <TextView
+        android:id="@+id/text_detail_maker_nickname"
+        android:text="nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_detail_maker_intro"
+        android:layout_toRightOf="@+id/img_detail_maker_profile"
+        android:layout_toEndOf="@+id/img_detail_maker_profile"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <TextView
+        android:id="@+id/text_detail_maker_intro"
+        android:text="한줄 소개"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ratingbar_detail_maker_grade"
+        android:layout_alignLeft="@+id/text_detail_maker_nickname"
+        android:layout_alignStart="@+id/text_detail_maker_nickname" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/btn_add_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="포트폴리오 추가"
+        android:textColor="@color/white"
+        android:background="@drawable/staus_shape"
+        android:layout_alignTop="@+id/img_detail_maker_profile"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp" />
+
+
+</RelativeLayout>

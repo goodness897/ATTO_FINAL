@@ -58,7 +58,6 @@ public class SplashActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash_scale);
         textView.startAnimation(animation);*/
         mHandler = new Handler(Looper.getMainLooper());
-        loginSharedPreference();
         loginManager = LoginManager.getInstance();
         callbackManager = CallbackManager.Factory.create();
         setUpIfNeeded();
@@ -101,7 +100,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private void doRealStart() {
 // 여기 무슨리퀘스트지 ?
-
         MyProfileRequest request = new MyProfileRequest(this);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<MyProfile>() {
             @Override

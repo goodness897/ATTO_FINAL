@@ -32,11 +32,10 @@ public class AddPortfolioRequest extends AbstractRequest<PortfolioListitemData> 
     MediaType jpeg = MediaType.parse("image/jpeg");
     // 포트폴리오 등록
     private final static String PORTFOLIO = "portfolioes";
-    private final static String FILE_KEY_WORD_IDS = "file_key_word_ids";
     private final static String PORTFOLIO_IMG = "portfolio_img";
     private final static String PORTFOLIO_TITLE = "file_name";
 
-    public AddPortfolioRequest(Context context, String file_name, String[] file_key_word_ids, File portfolio_img) {
+    public AddPortfolioRequest(Context context, String file_name, File portfolio_img) {
 
         //포트폴리오 등록
         HttpUrl url = getBaseUrlBuilder()
@@ -44,14 +43,6 @@ public class AddPortfolioRequest extends AbstractRequest<PortfolioListitemData> 
                 .build();
         MultipartBody.Builder body = new MultipartBody.Builder()
                 .addFormDataPart(PORTFOLIO_TITLE, file_name);
-        if (file_key_word_ids.length > 0) {
-            for (String file_key_word_id : file_key_word_ids) {
-                body.addFormDataPart(FILE_KEY_WORD_IDS, file_key_word_id);
-            }
-
-        } else {
-            body.addFormDataPart(FILE_KEY_WORD_IDS, "");
-        }
         if (portfolio_img != null) {
             body.addFormDataPart(PORTFOLIO_IMG, portfolio_img.getName(), RequestBody.create(jpeg, portfolio_img));
         } else {

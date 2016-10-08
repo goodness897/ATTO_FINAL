@@ -17,11 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -32,12 +30,6 @@ public class DetailTradeHeaderViewHolder extends RecyclerView.ViewHolder {
     private static final String TAG = DetailTradeHeaderViewHolder.class.getSimpleName();
     private static final int KEYWORD_COUNT = 3;
 
-    @BindViews({
-            R.id.text_trade_keyword_a,
-            R.id.text_trade_keyword_b,
-            R.id.text_trade_keyword_c
-    })
-    List<TextView> mTvKeywordList;
 
     @BindView(R.id.img_realtime_photo)
     ImageView mIvPhoto;
@@ -84,10 +76,7 @@ public class DetailTradeHeaderViewHolder extends RecyclerView.ViewHolder {
         String[] status = itemView.getContext().getResources().getStringArray(R.array.status);
         try {
             if (tradeData != null) {
-                if (tradeData.getTrade_key_word_info() != null) {
-                    Integer[] keywordList = tradeData.getTrade_key_word_info();
-                    checkKeywordList(keywordList);
-                }
+
                 checkImageData(tradeData);
                 checkDdaytest(tradeData);
                 mTvStatus.setText(status[tradeData.getTrade_status() - 1]);
@@ -129,22 +118,6 @@ public class DetailTradeHeaderViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    private void checkKeywordList(Integer[] keywordList) {
-        if (keywordList != null) {
-            for (int i = 0; i < keywordList.length; i++) {
-                Log.i("realtime", "keywordList : " + keywordList[i]);
-                if (keywordList[i] != null) {
-                    mTvKeywordList.get(i).setText(keywordList[i] + "");
-                } else {
-                    mTvKeywordList.get(i).setVisibility(View.GONE);
-                }
-            }
-        } else {
-            for (int i = 0; i < KEYWORD_COUNT; i++) {
-                mTvKeywordList.get(i).setVisibility(View.GONE);
-            }
-        }
-    }
 
     private void checkDdaytest(TradeData tradeData) throws ParseException {
         Calendar toTime = Calendar.getInstance();

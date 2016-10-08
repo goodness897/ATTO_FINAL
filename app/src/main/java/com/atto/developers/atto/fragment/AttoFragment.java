@@ -51,7 +51,7 @@ public class AttoFragment extends BaseFragment implements AdapterView.OnItemClic
 
     private final DemoUtils demoUtils = new DemoUtils();
 
-    public final static String PORTFOLIO= "portfolio";
+    public final static String PORTFOLIO = "portfolio";
 
 
     public AttoFragment() {
@@ -130,6 +130,7 @@ public class AttoFragment extends BaseFragment implements AdapterView.OnItemClic
 //        Toast.makeText(getContext(), "tradeId : " + tradeId, Toast.LENGTH_LONG).show();
 
     }
+
     public void getDataRequest() {
         TradeListRequest request = new TradeListRequest(getContext(), "1", "30");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
@@ -160,13 +161,14 @@ public class AttoFragment extends BaseFragment implements AdapterView.OnItemClic
             public void onSuccess(NetworkRequest<ListData<PortfolioData>> request, ListData<PortfolioData> result) {
                 PortfolioData[] portfolioDatas = result.getData();
                 if (portfolioDatas != null) {
-                    if(portfolioDatas.length >0) {
+                    if (portfolioDatas.length > 0) {
                         setPortfolioData(portfolioDatas);
                         adapter.setItems(demoUtils.morePortItems(portfolioDatas.length, Arrays.asList(portfolioDatas)));
                         Log.d("AttoFragment", "포트폴리오 제목 : " + portfolioDatas[0].getPortfolio_title());
                     }
                 }
             }
+
             @Override
             public void onFail(NetworkRequest<ListData<PortfolioData>> request, int errorCode, String errorMessage, Throwable e) {
                 Toast.makeText(getContext(), "실패 : " + errorMessage, Toast.LENGTH_LONG).show();
@@ -175,6 +177,7 @@ public class AttoFragment extends BaseFragment implements AdapterView.OnItemClic
         });
 
     }
+
     private void setTradeData(TradeData[] tradeDatas) {
         this.tradeDataList = Arrays.asList(tradeDatas);
     }

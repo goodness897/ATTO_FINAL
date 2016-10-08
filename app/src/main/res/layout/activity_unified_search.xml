@@ -36,6 +36,7 @@
             android:layout_toStartOf="@+id/btn_search"
             android:hint="@string/edit_search_hint_text"
             android:inputType="text"
+            android:minEms="2"
             android:textColor="@color/white"
             android:theme="@style/TextLabel" />
 

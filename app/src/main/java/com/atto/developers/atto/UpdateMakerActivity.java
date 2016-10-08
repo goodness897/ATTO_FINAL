@@ -1,6 +1,5 @@
 package com.atto.developers.atto;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.atto.developers.atto.fragment.ProgressDialogFragment;
 import com.atto.developers.atto.manager.NetworkManager;
@@ -42,7 +42,7 @@ public class UpdateMakerActivity extends AppCompatActivity {
     ImageView profileView;
 
     @BindView(R.id.edit_detail_maker_nickname)
-    EditText inputNickNameView;
+    TextView inputNickNameView;
 
     @BindView(R.id.edit_detail_maker_intro)
     EditText inputMakerIntroView;
@@ -177,7 +177,7 @@ public class UpdateMakerActivity extends AppCompatActivity {
                 break;
 
             case RC_CAMERA:
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == RESULT_OK) {
                     mContentFile = mSavedFile;
                     Glide.with(this)
                             .load(new File(mContentFile.getAbsolutePath())).bitmapTransform(new CropCircleTransformation(this))

@@ -21,20 +21,16 @@ public class SearchMakerListRequest extends AbstractRequest<ListData<MakerData>>
     Request mRequest;
 
     private final static String MAKERS = "makers";
-    private final static String PAGE_NO = "pageNo";
-    private final static String ROW_COUNT = "count";
     private final static String ACTION = "action";
     private final static String ACTION_VALUE = "keyword";
-    private final static String KEY_WORD_ID = "key_word_id";
+    private final static String KEY_WORD_ID = "keyword";
 
 
-    public SearchMakerListRequest(Context context, String key_word_id, String pageNo, String count) {
+    public SearchMakerListRequest(Context context, String key_word_id) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(MAKERS)
                 .addQueryParameter(ACTION, ACTION_VALUE)
                 .addQueryParameter(KEY_WORD_ID, key_word_id)
-                .addQueryParameter(PAGE_NO, pageNo)
-                .addQueryParameter(ROW_COUNT, count)
                 .build();
         mRequest = new Request.Builder()
                 .url(url)

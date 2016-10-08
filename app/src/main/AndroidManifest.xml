@@ -72,11 +72,15 @@
             android:theme="@style/LoginAppTheme" />
         <activity android:name=".MyPageActivity" />
         <activity android:name=".SearchAddressActivity" />
+
         <activity
+            xmlns:tools="http://schemas.android.com/tools"
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
+            tools:replace="android:theme"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <activity android:name=".UpdateTradeActivity" />
         <activity android:name=".UpdateNegoActivity" />
 

@@ -1,12 +1,11 @@
 package com.atto.developers.atto.networkdata.makerdata;
 
 
-import com.atto.developers.atto.networkdata.listdata.KeywordList;
-
 public class MakerData implements java.io.Serializable {
     private static final long serialVersionUID = 6984295785682812238L;
     private int maker_id;
     private String maker_representation_img;
+    private int maker_achivement_count;
     private String maker_line_tag;// null 가능
     private float maker_score;
     private String maker_name;
@@ -60,15 +59,11 @@ public class MakerData implements java.io.Serializable {
         this.maker_product_category_info = maker_product_category_info;
     }
 
-    public String getMaker_achievement_count() {
-        return maker_achievement_count;
+    public int getMaker_achivement_count() {
+        return maker_achivement_count;
     }
 
-    public void setMaker_achievement_count(String maker_achievement_count) {
-        this.maker_achievement_count = maker_achievement_count;
+    public void setMaker_achivement_count(int maker_achivement_count) {
+        this.maker_achivement_count = maker_achivement_count;
     }
-
-    private String maker_achievement_count;
-
-
 }

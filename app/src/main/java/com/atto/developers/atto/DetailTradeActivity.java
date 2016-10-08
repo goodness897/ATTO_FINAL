@@ -61,7 +61,9 @@ public class DetailTradeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tradeData = (TradeData) intent.getSerializableExtra("tradeData");
-        tradeId = tradeData.getTrade_id();
+        if(tradeData != null) {
+            tradeId = tradeData.getTrade_id();
+        }
         init(tradeData);
 
         int auth = PropertyManager.getInstance().getKeyAuth();

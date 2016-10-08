@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
  */
 public class DetailMakerViewHolder extends RecyclerView.ViewHolder {
 
-    MakerData makerData;
     PortfolioData portfolioData;
 
     @BindView(R.id.img_mypage_port)

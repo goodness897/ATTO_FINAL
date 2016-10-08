@@ -147,43 +147,13 @@ public class DetailMakerActivity extends AppCompatActivity {
         }
         listPortFolioData(maker_id);
     }
-/*
 
-    private void detailMakerRequest(int tid) {
-
-        DetailMakerRequest request = new DetailMakerRequest(this, String.valueOf(tid));
-        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<MakerListItemData>() {
-            @Override
-            public void onSuccess(NetworkRequest<MakerListItemData> request, MakerListItemData result) {
-                makerData = result.getData();
-                if (makerData != null) {
-                    if (makerData.getMaker_name().equals(makerNickName)) {
-                        Log.d("DetailMakerActivity", "제작자 동일 : " + makerData.getMaker_id());
-                        mAdapter.setMakerData(makerData, true);
-                    } else {
-                        Log.d("DetailMakerActivity", "제작자 다름 : " + makerData.getMaker_id());
-                        mAdapter.setMakerData(makerData, false);
-                    }
-                }
-                Log.d("DetailMakerActivity", "성공 result : " + makerData.getMaker_id());
-            }
-
-            @Override
-            public void onFail(NetworkRequest<MakerListItemData> request, int errorCode, String errorMessage, Throwable e) {
-                Log.d("DetailMakerActivity", "실패 : " + errorMessage);
-
-            }
-        });
-
-    }
-*/
-
-    private void listPortFolioData(int tid) {
+    private void listPortFolioData(int maker_id) {
 
         mAdapter.clear();
         int pageNo = 1;
         int rowCount = 12;
-        MakerPortfolioListRequest request = new MakerPortfolioListRequest(this, String.valueOf(tid), String.valueOf(pageNo), String.valueOf(rowCount));
+        MakerPortfolioListRequest request = new MakerPortfolioListRequest(this, String.valueOf(maker_id), String.valueOf(pageNo), String.valueOf(rowCount));
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<PortfolioData>>() {
             @Override
             public void onSuccess(NetworkRequest<ListData<PortfolioData>> request, ListData<PortfolioData> result) {

@@ -4,6 +4,7 @@ package com.atto.developers.atto.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,19 @@ import com.atto.developers.atto.asymmetricgridview.DefaultListAdapter;
 import com.atto.developers.atto.asymmetricgridview.DemoAdapter;
 import com.atto.developers.atto.asymmetricgridview.DemoItem;
 import com.atto.developers.atto.asymmetricgridview.DemoUtils;
+import com.atto.developers.atto.manager.NetworkManager;
+import com.atto.developers.atto.manager.NetworkRequest;
 import com.atto.developers.atto.networkdata.portfoliodata.PortfolioData;
+import com.atto.developers.atto.networkdata.tradedata.ListData;
+import com.atto.developers.atto.request.SearchPortfolioListRequest;
 import com.felipecsl.asymmetricgridview.library.Utils;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridView;
 import com.felipecsl.asymmetricgridview.library.widget.AsymmetricGridViewAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -37,7 +42,6 @@ public class SearchResultPortFragment extends Fragment implements AdapterView.On
 
     AsymmetricGridView listView;
     DemoAdapter adapter;
-    List<PortfolioData> list = new ArrayList<>();
 
 
     public final static String TRADE_ID = "trade_id";
@@ -46,15 +50,17 @@ public class SearchResultPortFragment extends Fragment implements AdapterView.On
     private final DemoUtils demoUtils = new DemoUtils();
 
     private static final String PORT_LIST = "portList";
+    private String keyword;
 
     public SearchResultPortFragment() {
 
     }
 
-    public static SearchResultPortFragment newInstance(List<PortfolioData> portfolioDataList) {
+    public static SearchResultPortFragment newInstance(String keyword) {
         SearchResultPortFragment fragment = new SearchResultPortFragment();
         Bundle args = new Bundle();
-        args.putSerializable(PORT_LIST, (Serializable) portfolioDataList);
+        args.putString(PORT_LIST, keyword);
+        Log.d("UnifiedSearchActivity", "Port keyword : " + keyword);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,11 +68,8 @@ public class SearchResultPortFragment extends Fragment implements AdapterView.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new DefaultListAdapter(getContext());
         if (getArguments() != null) {
-            list = (List<PortfolioData>) getArguments().getSerializable(PORT_LIST);
-            if(list != null) adapter.setItems(demoUtils.morePortItems(list.size(), list));
-
+            keyword = getArguments().getString(PORT_LIST);
         }
     }
 
@@ -82,20 +85,57 @@ public class SearchResultPortFragment extends Fragment implements AdapterView.On
 
         final List<DemoItem> items = new ArrayList<>();
         // initialize your items array
+        adapter = new DefaultListAdapter(getContext());
         adapter.setItems(items);
         return view;
 
     }
 
+    private void searchPortFolio() {
+
+        SearchPortfolioListRequest request = new SearchPortfolioListRequest(getContext(), keyword, "1", "10");
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<PortfolioData>>() {
+            @Override
+            public void onSuccess(NetworkRequest<ListData<PortfolioData>> request, ListData<PortfolioData> result) {
+                PortfolioData[] portfolioDatas = result.getData();
+                if (portfolioDatas != null) {
+                    if (portfolioDatas.length > 0) {
+                        setPortfolioData(portfolioDatas);
+                        adapter.setItems(demoUtils.morePortItems(portfolioDatas.length, Arrays.asList(portfolioDatas)));
+                        Log.d("UnifiedSearchActivity", "포트폴리오 제목 : " + portfolioDatas[0].getPortfolio_title());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFail(NetworkRequest<ListData<PortfolioData>> request, int errorCode, String errorMessage, Throwable e) {
+                Log.d("UnifiedSearchActivity", "실패 : " + errorMessage);
+
+            }
+        });
+    }
+
+    List<PortfolioData> portfolioDataList = new ArrayList<>();
+
+    private void setPortfolioData(PortfolioData[] portfolioData) {
+        this.portfolioDataList = Arrays.asList(portfolioData);
+    }
+
+
     @Override
     public void onResume() {
         super.onResume();
+        if (getArguments() != null) {
+            keyword = getArguments().getString(PORT_LIST);
+        }
         init();
 
     }
 
     private void init() {
 
+        searchPortFolio();
         demoUtils.currentOffset = 0;
         listView.setAllowReordering(true);
         listView.setRequestedHorizontalSpacing(Utils.dpToPx(getContext(), 3));
@@ -119,10 +159,11 @@ public class SearchResultPortFragment extends Fragment implements AdapterView.On
     @Override
     public void onItemClick(@NotNull AdapterView<?> parent, @NotNull View view, int position, long id) {
 
+        PortfolioData portfolioData = portfolioDataList.get(position);
         Intent intent = new Intent(getContext(), DetailPortActivity.class);
-        intent.putExtra("portfolioData", list.get(position));
+        intent.putExtra("portfolioData", portfolioData);
         startActivity(intent);
-//        Toast.makeText(getContext(), "tradeId : " + tradeId, Toast.LENGTH_LONG).show();
+
 
     }
 

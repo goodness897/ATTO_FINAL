@@ -6,9 +6,17 @@ public class PortfolioData implements java.io.Serializable {
     private Integer[] portfolio_key_word_info;
     private int maker_id;
     private int portfolio_id;
+    private String maker_name;
     private String portfolio_img;
     private String portfolio_title;
 
+    public String getMaker_name() {
+        return maker_name;
+    }
+
+    public void setMaker_name(String maker_name) {
+        this.maker_name = maker_name;
+    }
 
     public Integer[] getPortfolio_key_word_info() {
         return portfolio_key_word_info;

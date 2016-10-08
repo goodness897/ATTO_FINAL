@@ -22,15 +22,15 @@ public class SearchPortfolioListRequest extends AbstractRequest<ListData<Portfol
     private static final String ACTION = "action";
     private static final String ACTION_VALUE = "keyword";
     // url
-    private static final String KEY_WORD_ID = "key_word_id";
+    private static final String KEY_WORD_ID = "keyword";
 
-    public SearchPortfolioListRequest(Context context, String key_word_id, String page_no, String row_counnt) {
+    public SearchPortfolioListRequest(Context context, String key_word_id, String page_no, String row_count) {
         HttpUrl url = getBaseUrlBuilder()
                 .addPathSegment(PORTFOLIO)
                 .addQueryParameter(ACTION, ACTION_VALUE)
-                .addQueryParameter(PAGE_NO, page_no)
-                .addQueryParameter(ROWCOUNT, row_counnt)
                 .addQueryParameter(KEY_WORD_ID, key_word_id)
+                .addQueryParameter(PAGE_NO, page_no)
+                .addQueryParameter(ROWCOUNT, row_count)
                 .build();
 
         mRequest = new Request.Builder()

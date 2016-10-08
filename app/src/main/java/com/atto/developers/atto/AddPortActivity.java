@@ -35,9 +35,6 @@ public class AddPortActivity extends AppCompatActivity {
     @BindView(R.id.edit_trade_title)
     AppCompatEditText titleView;
 
-    @BindView(R.id.edit_add_port_keyword)
-    AppCompatEditText keywordView;
-
     @BindView(R.id.text_trade_preview)
     TextView textPreView;
 
@@ -73,13 +70,12 @@ public class AddPortActivity extends AppCompatActivity {
         final ProgressDialogFragment progressDialogFragment = new ProgressDialogFragment();
         progressDialogFragment.show(getSupportFragmentManager(), "progress");
         String file_name = titleView.getText().toString();
-        String[] file_key_word_ids = {keywordView.getText().toString()};
         File portfolio_img = null;
         if (file_path != null) {
             portfolio_img = new File(file_path);
         }
 
-        AddPortfolioRequest request = new AddPortfolioRequest(this, file_name, file_key_word_ids, portfolio_img);
+        AddPortfolioRequest request = new AddPortfolioRequest(this, file_name, portfolio_img);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<PortfolioListitemData>() {
             @Override
             public void onSuccess(NetworkRequest<PortfolioListitemData> request, PortfolioListitemData result) {

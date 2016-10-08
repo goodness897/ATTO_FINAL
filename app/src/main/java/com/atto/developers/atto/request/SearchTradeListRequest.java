@@ -3,8 +3,8 @@ package com.atto.developers.atto.request;
 import android.content.Context;
 import android.util.Log;
 
-import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.atto.developers.atto.networkdata.tradedata.ListData;
+import com.atto.developers.atto.networkdata.tradedata.TradeData;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -22,7 +22,7 @@ public class SearchTradeListRequest extends AbstractRequest<ListData<TradeData>>
     private final static String ROW_COUNT = "rowCount";
     private final static String ACTION = "action";
     private final static String ACTION_VALUE = "keyword";
-    private final static String KEY_WORD_ID = "key_word_id";
+    private final static String KEY_WORD_ID = "keyword";
 
     public SearchTradeListRequest(Context context, String key_word_id, String page_no, String row_count) {
 
