@@ -36,11 +36,10 @@ public class UpdateTradeRequest  extends AbstractRequest<TradeListItemData> {
     private final static String PRICE = "trade_price";
     private final static String DDATE = "trade_dtime";
     private final static String CONTENTS = "trade_product_contents";
-    private final static String KEYWORDS = "trade_key_words";
     private final static String IMAGES = "trade_product_imges";
 
     public UpdateTradeRequest(Context context,String tid, String trade_product_category_1, String trade_product_category_2, String trade_price,
-                                  String trade_dtime, String trade_product_contents, String[] trade_key_words, File[] trade_product_imges) {
+                                  String trade_dtime, String trade_product_contents, File[] trade_product_imges) {
 
 //        거래글 수정
 
@@ -57,13 +56,6 @@ public class UpdateTradeRequest  extends AbstractRequest<TradeListItemData> {
                 .addFormDataPart(DDATE, trade_dtime)
                 .addFormDataPart(CONTENTS, trade_product_contents);
 
-        if(trade_key_words.length>0) {
-            for (String trade_keywords : trade_key_words) {
-                body.addFormDataPart(KEYWORDS, trade_keywords);
-            }
-        }else{
-            body.addFormDataPart(KEYWORDS,"");
-        }
 
         if (trade_product_imges.length >0) {
             for (File trade_product_img : trade_product_imges) {

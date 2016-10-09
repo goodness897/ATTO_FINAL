@@ -3,7 +3,9 @@ package com.atto.developers.atto;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -56,6 +58,9 @@ public class MakeOrderActivity extends AppCompatActivity {
     @BindView(R.id.text_make_price)
     TextView makeMakerPrice;
 
+    NegoData negoData;
+    TradeData tradeData;
+
     int negoId = -1;
     int tradeId = -1;
 
@@ -63,12 +68,29 @@ public class MakeOrderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_order);
+        initToolBar();
         ButterKnife.bind(this);
         Intent intent = getIntent();
-        negoId = intent.getIntExtra("nego_Id", -1);
-        tradeId = intent.getIntExtra("trade_Id", -1);
+
+        negoData = (NegoData) intent.getSerializableExtra("negoData");
+        tradeData = (TradeData) intent.getSerializableExtra("tradeData");
+        negoId = negoData.getNegotiation_id();
+        tradeId = negoData.getTrade_id();
         Log.e(TAG, "MakerOrderDialogFragment : " + tradeId + " / " + negoId);
         initData(tradeId, negoId);
+    }
+
+    private void initToolBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        toolbar.setTitle("주문제작서");
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_navigate_before_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void initData(int tradeId, int negoId) {
@@ -79,7 +101,7 @@ public class MakeOrderActivity extends AppCompatActivity {
 
 
     private void makeOrderMakerData(int tradeId, int negoId) {
-        DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(this.tradeId), String.valueOf(this.negoId));
+        DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(tradeId), String.valueOf(negoId));
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoListItemData>() {
             @Override
             public void onSuccess(NetworkRequest<NegoListItemData> request, NegoListItemData result) {
@@ -102,13 +124,14 @@ public class MakeOrderActivity extends AppCompatActivity {
             String score = String.valueOf(negoData.getMaker_info().getMaker_score() / 2);
             makeMakerGrade.setRating(negoData.getMaker_info().getMaker_score());
             makeMakerGradeText.setText("(" + score + ")");
-            makeMakerPrice.setText(negoData.getNegotiation_price());
+            makeMakerPrice.setText(String.format("%,d", negoData.getNegotiation_price()) + "원");
+
         }
     }
 
 
     private void makeOrderTradeData(int tradeId, int negoId) {
-        DetailTradeRequest request = new DetailTradeRequest(this, String.valueOf(this.tradeId), "11", "10", "10");
+        DetailTradeRequest request = new DetailTradeRequest(this, String.valueOf(tradeId), "", "", "");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
             @Override
             public void onSuccess(NetworkRequest<TradeListItemData> request, TradeListItemData result) {
@@ -134,13 +157,14 @@ public class MakeOrderActivity extends AppCompatActivity {
             makeTradeIimitData.setText(tradeData.getTrade_dtime());
             makeTradeTitle.setText(tradeData.getTrade_title());
             makeTradeContent.setText(tradeData.getTrade_product_contents());
-            makeTradePrice.setText(tradeData.getTrade_price());
+            makeTradePrice.setText(String.format("%,d", tradeData.getTrade_price()) + "원");
+
         }
     }
 
     private void makeOrderImage(TradeData tradeData) {
         if (tradeData != null) {
-            Glide.with(this).load(tradeData.getMember_info().getMember_profile_img()).centerCrop().into(makeTradePhoto);
+            Glide.with(this).load(tradeData.getTrade_product_img()).centerCrop().into(makeTradePhoto);
         }
     }
 
@@ -151,8 +175,8 @@ public class MakeOrderActivity extends AppCompatActivity {
         String address = addressView.getText().toString();
         Intent intent = new Intent(MakeOrderActivity.this, MakeOrderNextActivity.class);
         startActivity(intent);
-    }
 
+    }
 
     @OnClick(R.id.btn_make_address)
     public void onSearchAddress() {

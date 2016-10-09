@@ -79,17 +79,6 @@
         android:gravity="center_vertical|center_horizontal">
 
         <TextView
-            android:id="@+id/text_trade_remain_time"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/staus_shape"
-            android:gravity="center"
-            android:text="24:24:24"
-            android:textColor="@color/white" />
-
-        <TextView
             android:id="@+id/offer_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

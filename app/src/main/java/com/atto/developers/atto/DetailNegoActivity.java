@@ -22,10 +22,18 @@ import com.atto.developers.atto.manager.PropertyManager;
 import com.atto.developers.atto.networkdata.ResultMessage;
 import com.atto.developers.atto.networkdata.negodata.NegoData;
 import com.atto.developers.atto.networkdata.negodata.NegoListItemData;
-import com.atto.developers.atto.networkdata.userdata.User;
+import com.atto.developers.atto.networkdata.tradedata.TradeData;
+import com.atto.developers.atto.networkdata.tradedata.TradeListItemData;
 import com.atto.developers.atto.request.DeleteNegoCardRequest;
 import com.atto.developers.atto.request.DetailNegoRequest;
+import com.atto.developers.atto.request.DetailTradeRequest;
 import com.bumptech.glide.Glide;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,9 +58,6 @@ public class DetailNegoActivity extends AppCompatActivity {
     @BindView(R.id.limit_date)
     TextView limit_date;
 
-    @BindView(R.id.text_trade_remain_time)
-    TextView trade_remain_time;
-
     @BindView(R.id.ratingbar_maker_grade)
     RatingBar ratingBar;
 
@@ -67,7 +72,7 @@ public class DetailNegoActivity extends AppCompatActivity {
 
 
     NegoData negoData;
-
+    TradeData tradeData;
 
     int negoId = -1;
     int tradeId = -1;
@@ -81,6 +86,7 @@ public class DetailNegoActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         negoData = (NegoData) intent.getSerializableExtra("negoData");
+        tradeData = (TradeData) intent.getSerializableExtra("tradeData");
         negoId = negoData.getNegotiation_id();
         tradeId = negoData.getTrade_id();
         Log.d("DetailNegoActivity", "negoId : " + negoData.getNegotiation_id());
@@ -89,12 +95,37 @@ public class DetailNegoActivity extends AppCompatActivity {
     }
 
     private void checkUser() {
-        if (negoData.getMaker_info().getMaker_name().equals(PropertyManager.getInstance().getNickName())) {
-            linearLayout.setVisibility(View.VISIBLE);
-        } else {
-            linearLayout.setVisibility(View.GONE);
 
-        }
+        DetailTradeRequest request = new DetailTradeRequest(this, String.valueOf(tradeId), "", "", "");
+        NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
+            @Override
+            public void onSuccess(NetworkRequest<TradeListItemData> request, TradeListItemData result) {
+                TradeData tradeData = result.getData();
+                if (tradeData.getMember_info().getMember_alias().equals(PropertyManager.getInstance().getNickName())) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                } else {
+                    linearLayout.setVisibility(View.GONE);
+                }
+            }
+            @Override
+            public void onFail(NetworkRequest<TradeListItemData> request, int errorCode, String errorMessage, Throwable e) {
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+    public NegoData getNegoData() {
+        return negoData;
+    }
+
+    public TradeData getTradeData() {
+        return tradeData;
     }
 
     @Override
@@ -135,7 +166,6 @@ public class DetailNegoActivity extends AppCompatActivity {
     }
 
     private void initData(int tradeId, int negoId) {
-
 
         DetailNegoRequest request = new DetailNegoRequest(this, String.valueOf(tradeId), String.valueOf(negoId));
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<NegoListItemData>() {
@@ -209,6 +239,11 @@ public class DetailNegoActivity extends AppCompatActivity {
         offer_pice.setText(String.format("%,d", negoData.getNegotiation_price()) + "원");
         limit_date.setText(negoData.getNegotiation_dtime()); //yyyy-mm-dd까지
         trade_maker_contents.setText(negoData.getNegotiation_product_contents());
+        try {
+            checkDdayData(negoData);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private void checkImageData(NegoData data) {
@@ -224,6 +259,24 @@ public class DetailNegoActivity extends AppCompatActivity {
         }
     }
 
+    private void checkDdayData(NegoData negoData) throws ParseException {
+        Calendar toTime = Calendar.getInstance();
+        long currentTiem = toTime.getTimeInMillis();
+        SimpleDateFormat d = new SimpleDateFormat("yyyy.MM.dd", Locale.getDefault());
+        String negoTime = negoData.getNegotiation_dtime();
+        Date trTime = d.parse(negoTime);
+        long futureTime = trTime.getTime();
+        long diff = futureTime - currentTiem;
+        int day = (int) (diff / (1000 * 60 * 60 * 24));
+        if (day < 0) {
+            day = day * -1;
+            trade_dday.setText("D+" + day);
+        } else {
+            trade_dday.setText("D-" + day);
+        }
+    }
+/*
+
     @OnClick(R.id.btn_chat)
     public void onChatButton() {
         User user = new User();
@@ -238,6 +291,7 @@ public class DetailNegoActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {

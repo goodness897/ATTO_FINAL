@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_edit_layout"
+
     >
 
     <android.support.v7.widget.Toolbar
@@ -135,59 +137,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_keyword_one"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_keyword"
-                android:drawablePadding="12dp"
-                android:hint="키워드 1"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:theme="@style/TextLabel" />
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_keyword_two"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_keyword"
-                android:drawablePadding="12dp"
-                android:hint="키워드 2"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:theme="@style/TextLabel" />
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/edit_keyword_three"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/ic_keyword"
-                android:drawablePadding="12dp"
-                android:hint="키워드 3"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:theme="@style/TextLabel" />
-        </LinearLayout>
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/text_setting_price"

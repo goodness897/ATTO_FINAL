@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/text_maker"
+        android:textColor="@color/white"
         android:id="@+id/textView11"
         android:layout_marginLeft="5dp" />
 
@@ -20,6 +21,7 @@
         android:layout_marginTop="10dp" />
 
     <TextView
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_trade_title"
@@ -27,6 +29,7 @@
         android:layout_marginLeft="5dp" />
 
     <TextView
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_trade_limit_date"
@@ -34,6 +37,7 @@
         android:layout_marginLeft="5dp" />
 
     <TextView
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_trade_price"

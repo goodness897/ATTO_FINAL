@@ -5,25 +5,16 @@
     android:orientation="vertical"
     android:background="@color/color_edit_layout">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/text_input_address"
+        android:textColor="@color/white"
         android:id="@+id/textView2"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/spinner_address"
-        android:background="@color/color_edit_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:textColor="@color/white"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,21 +81,12 @@
         android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/text_payment"
-            android:id="@+id/text_make_payment"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="20000원"
             android:id="@+id/text_make_price"
-            android:layout_weight="1"
-            android:gravity="right" />
+            android:textColor="@color/white"
+            android:gravity="center" />
 
 
     </LinearLayout>
@@ -114,37 +96,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/text_atto_notice"
+        android:textColor="@color/white"
         android:id="@+id/text_make_anotice"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/spinner_deposit_account"
-        android:background="@color/color_edit_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:textColor="@color/white"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="nnnn년 nn월 nn일까지 유효합니다."
-        android:id="@+id/text_make_bnotice"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_payment_notice"
-        android:id="@+id/checkBox"
-        android:gravity="center_horizontal"
-        android:paddingRight="40dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp" />
 
 </LinearLayout>

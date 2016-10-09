@@ -3,7 +3,7 @@ package com.atto.developers.atto;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
@@ -76,7 +76,7 @@ public class UnifiedSearchActivity extends AppCompatActivity {
         });
     }
 
-    public class SearchResultPagerAdapter extends FragmentPagerAdapter {
+    public class SearchResultPagerAdapter extends FragmentStatePagerAdapter {
 
         public static final int PAGE_COUNT = 3;
         String keyword;

@@ -199,13 +199,13 @@ public class MyPageActivity extends AppCompatActivity {
     private void initTradeData() {
 
         adapter.clear();
-        MyTradeListRequest request = new MyTradeListRequest(this, "1", "30");
+        MyTradeListRequest request = new MyTradeListRequest(this, "1", "10");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
 
             @Override
             public void onSuccess(NetworkRequest<ListData<TradeData>> request, ListData<TradeData> result) {
 
-                if(result.getData() != null) {
+                if (result.getData() != null) {
                     TradeData[] tradeData = result.getData();
                     if (tradeData != null) {
                         if (tradeData.length > 0)
@@ -214,11 +214,8 @@ public class MyPageActivity extends AppCompatActivity {
                     }
                 } else {
                     Log.d(this.toString(), "성공이지만 값이 없어");
-
                 }
-
             }
-
             @Override
             public void onFail(NetworkRequest<ListData<TradeData>> request, int errorCode, String errorMessage, Throwable e) {
                 Log.d(this.toString(), "실패 errorCode : " + errorCode);

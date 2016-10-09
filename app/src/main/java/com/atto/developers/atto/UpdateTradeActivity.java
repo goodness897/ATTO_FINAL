@@ -59,9 +59,6 @@ public class UpdateTradeActivity extends AppCompatActivity {
     @BindView(R.id.text_pickup_date)
     AppCompatEditText pickUpDateView;
 
-    @BindView(R.id.edit_keyword_one)
-    AppCompatEditText keywordOneView;
-
     @BindView(R.id.text_setting_price)
     AppCompatEditText priceView;
 
@@ -81,10 +78,8 @@ public class UpdateTradeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tradeData = (TradeData) intent.getSerializableExtra("tradeData");
         if (tradeData != null) {
-
             textPreView.setVisibility(View.GONE);
             setTradeData(tradeData);
-
         }
 
         MaterialSpinner main_spinner = (MaterialSpinner) findViewById(R.id.spinner_main_category);
@@ -116,12 +111,10 @@ public class UpdateTradeActivity extends AppCompatActivity {
 
     private void setTradeData(TradeData tradeData) {
         if (tradeData != null) {
-
             Glide.with(this).load(tradeData.getTrade_product_img()).centerCrop().into(imagePreView);
             inputTitleView.setText(tradeData.getTrade_title());
             inputContentView.setText(tradeData.getTrade_product_contents());
             pickUpDateView.setText(tradeData.getTrade_dtime());
-            keywordOneView.setText(tradeData.getTrade_key_word_info()[0] + "");
             priceView.setText(tradeData.getTrade_price() + "");
 
         }
@@ -175,7 +168,6 @@ public class UpdateTradeActivity extends AppCompatActivity {
             imageFile = new File(file_path);
         }
         File[] trade_product_images_info = {imageFile};
-        String[] trade_key_words = {keywordOneView.getText().toString()};
 
         Log.d("AddTradeActivity", "data : " + trade_title + " " + trade_product_category_1 + " " + trade_product_category_2
                 + " " + trade_price + " " + trade_dtime + " " + trade_product_contents);
@@ -185,7 +177,7 @@ public class UpdateTradeActivity extends AppCompatActivity {
         } else {
             progressDialogFragment.show(getSupportFragmentManager(), "progress");
             UpdateTradeRequest request = new UpdateTradeRequest(this, String.valueOf(tradeData.getTrade_id()), String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
-                    trade_price, trade_dtime, trade_product_contents, trade_key_words, trade_product_images_info);
+                    trade_price, trade_dtime, trade_product_contents, trade_product_images_info);
 
             NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
                 @Override

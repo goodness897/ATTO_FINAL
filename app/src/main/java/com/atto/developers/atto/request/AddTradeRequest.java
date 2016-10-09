@@ -42,7 +42,6 @@ public class AddTradeRequest extends AbstractRequest<TradeListItemData> {
     private final static String PRICE = "trade_price";
     private final static String DDATE = "trade_dtime";
     private final static String CONTENTS = "trade_product_contents";
-    private final static String KEYWORDS = "trade_key_word_info";
     private final static String IMAGES = "trade_product_imges";
     private final static String TRADE = "trades";
     Request mRequest;
@@ -50,7 +49,7 @@ public class AddTradeRequest extends AbstractRequest<TradeListItemData> {
     MediaType jpeg = MediaType.parse("image/jpeg");
 
     public AddTradeRequest(Context context, String trade_title, String trade_product_category_1, String trade_product_category_2, String trade_price,
-                           String trade_dtime, String trade_product_contents, String[] trade_key_word_info, File[] trade_product_imges_info) {
+                           String trade_dtime, String trade_product_contents, File[] trade_product_imges_info) {
 
 //        거래글 등록
 
@@ -66,14 +65,6 @@ public class AddTradeRequest extends AbstractRequest<TradeListItemData> {
                 .addFormDataPart(PRICE, trade_price)
                 .addFormDataPart(DDATE, trade_dtime)
                 .addFormDataPart(CONTENTS, trade_product_contents);
-
-        if (trade_key_word_info.length > 0) {
-            for (String trade_keywords : trade_key_word_info) {
-                body.addFormDataPart(KEYWORDS, trade_keywords);
-            }
-        } else {
-            body.addFormDataPart(KEYWORDS, "");
-        }
 
         if (trade_product_imges_info.length > 0) {
             for (File trade_product_img : trade_product_imges_info) {

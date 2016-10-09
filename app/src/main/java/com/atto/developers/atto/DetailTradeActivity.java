@@ -144,7 +144,7 @@ public class DetailTradeActivity extends AppCompatActivity {
         }
     }
 
-    private void init(TradeData tradeData) {
+    private void init(final TradeData tradeData) {
         initToolBar();
 
         mDialogFragment.show(getSupportFragmentManager(), "detail_trade");
@@ -152,7 +152,7 @@ public class DetailTradeActivity extends AppCompatActivity {
             @Override
             public void onAdapterItemClick(View view, NegoData negoData, int position) {
                 Intent intent = new Intent(DetailTradeActivity.this, DetailNegoActivity.class);
-                intent.putExtra("tradeId", tradeId);
+                intent.putExtra("tradeData", tradeData);
                 intent.putExtra("negoData", negoData);
                 startActivity(intent);
             }
@@ -211,6 +211,8 @@ public class DetailTradeActivity extends AppCompatActivity {
     }
 
     private void checkNegoData(int trade_id) {
+
+        mAdapter.clear();
 
         NegoCardListRequest request = new NegoCardListRequest(this, String.valueOf(trade_id), "", "50");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<NegoData>>() {

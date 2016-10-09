@@ -81,7 +81,8 @@
             tools:replace="android:theme"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <activity android:name=".UpdateTradeActivity" />
+        <activity android:name=".UpdateTradeActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".UpdateNegoActivity" />
 
         <service

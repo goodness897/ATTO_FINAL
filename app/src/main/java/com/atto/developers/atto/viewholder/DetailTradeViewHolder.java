@@ -44,9 +44,6 @@ public class DetailTradeViewHolder extends RecyclerView.ViewHolder {
 	@BindView(R.id.limit_date)
 	TextView mTvLimitDate;
 
-	@BindView(R.id.text_trade_remain_time)
-	TextView mRemainTime;
-
 	@BindView(R.id.ratingbar_maker_grade)
 	RatingBar mRbMakerGrade;
 

@@ -16,7 +16,7 @@ import com.atto.developers.atto.R;
 public class DetailTradeMultiViewHolder extends RecyclerView.ViewHolder {
 
     ImageView img_maker_profile;
-    TextView text_trade_remain_time, text_trade_profile_nickname, offer_pice, limit_date, text_trade_dday;
+    TextView offer_pice, limit_date, text_trade_dday;
     RatingBar ratingbar_maker_grade;
     Button btn_move_nego_register;
 
@@ -24,7 +24,6 @@ public class DetailTradeMultiViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         img_maker_profile = (ImageView)itemView.findViewById(R.id.img_maker_profile);
-        text_trade_remain_time = (TextView) itemView.findViewById(R.id.text_trade_remain_time);
 //        text_trade_profile_nickname = (TextView)itemView.findViewById(R.id.text_trade_profile_nickname);
         offer_pice = (TextView)itemView.findViewById(R.id.offer_price);
         limit_date = (TextView)itemView.findViewById(R.id.limit_date);

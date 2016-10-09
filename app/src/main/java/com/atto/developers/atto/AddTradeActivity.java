@@ -58,9 +58,6 @@ public class AddTradeActivity extends AppCompatActivity {
     @BindView(R.id.text_pickup_date)
     AppCompatEditText pickUpDateView;
 
-    @BindView(R.id.edit_keyword_one)
-    AppCompatEditText keywordOneView;
-
     @BindView(R.id.text_setting_price)
     AppCompatEditText priceView;
 
@@ -152,7 +149,6 @@ public class AddTradeActivity extends AppCompatActivity {
             imageFile = new File(file_path);
         }
         File[] trade_product_images_info = {imageFile};
-        String[] trade_key_words = {keywordOneView.getText().toString()};
 
 
         Log.d("AddTradeActivity", "data : " + trade_title + " " + trade_product_category_1 + " " + trade_product_category_2
@@ -164,15 +160,15 @@ public class AddTradeActivity extends AppCompatActivity {
 
             progressDialogFragment.show(getSupportFragmentManager(), "progress");
             getAddTradeRequest(trade_title, String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
-                    trade_price, trade_dtime, trade_product_contents, trade_key_words, trade_product_images_info);
+                    trade_price, trade_dtime, trade_product_contents, trade_product_images_info);
         }
 
     }
     private void getAddTradeRequest(String trade_title, String trade_product_category_1, String trade_product_category_2, String trade_price,
-                                    String trade_dtime, String trade_product_contents, String[] trade_key_words, File[] trade_product_images_info) {
+                                    String trade_dtime, String trade_product_contents, File[] trade_product_images_info) {
 
         AddTradeRequest request = new AddTradeRequest(this, trade_title, String.valueOf(trade_product_category_1), String.valueOf(trade_product_category_2),
-                trade_price, trade_dtime, trade_product_contents, trade_key_words, trade_product_images_info);
+                trade_price, trade_dtime, trade_product_contents, trade_product_images_info);
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<TradeListItemData>() {
 
             @Override
