@@ -61,7 +61,6 @@ public class MyPageActivity extends AppCompatActivity {
 
     ProgressDialogFragment dialogFragment;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +90,10 @@ public class MyPageActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("MyPageActivity", "onResume 실행");
+        adapter.clear();
         initTradeData();
+        pager.invalidate();
 
     }
 
@@ -198,7 +200,6 @@ public class MyPageActivity extends AppCompatActivity {
 
     private void initTradeData() {
 
-        adapter.clear();
         MyTradeListRequest request = new MyTradeListRequest(this, "1", "10");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<TradeData>>() {
 
@@ -230,6 +231,7 @@ public class MyPageActivity extends AppCompatActivity {
         List<TradeData> items = new ArrayList<>();
 
         public void addAll(List<TradeData> list) {
+            if(!items.isEmpty()) items.clear();
             items.addAll(list);
             notifyDataSetChanged();
         }

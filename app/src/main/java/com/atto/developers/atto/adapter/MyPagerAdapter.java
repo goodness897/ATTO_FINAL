@@ -2,7 +2,7 @@ package com.atto.developers.atto.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.atto.developers.atto.fragment.AttoFragment;
 import com.atto.developers.atto.fragment.MakerFragment;
@@ -11,7 +11,7 @@ import com.atto.developers.atto.fragment.RealTimeTradeFragment;
 /**
  * Created by goodn on 2016-08-29.
  */
-public class MyPagerAdapter extends FragmentPagerAdapter {
+public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
     public static final int PAGE_COUNT = 3;
 

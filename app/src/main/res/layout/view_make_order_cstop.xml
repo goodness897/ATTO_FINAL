@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBackg"
+    android:background="@color/white"
     android:orientation="vertical"    >
 
     <TextView
@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/text_maker"
-        android:textColor="@color/white"
+        android:textColor="@color/color_transparent_black"
         android:id="@+id/textView11"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
     <include
         android:layout_width="match_parent"
@@ -21,28 +21,31 @@
         android:layout_marginTop="10dp" />
 
     <TextView
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
+        android:textColor="@color/color_transparent_black"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:id="@+id/text_trade_title"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
+        android:textColor="@color/color_transparent_black"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:id="@+id/text_trade_limit_date"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
+        android:textColor="@color/color_transparent_black"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:id="@+id/text_trade_price"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginTop="10dp" />
 
     <ImageView
         android:layout_width="match_parent"
@@ -51,16 +54,5 @@
         android:layout_gravity="center_horizontal"
         android:background="@color/color_atto_main"
         android:layout_marginTop="10dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_detailed"
-        android:id="@+id/text_trade_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" />
 
 </LinearLayout>

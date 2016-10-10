@@ -83,11 +83,11 @@ public class RecyclerMakerViewHolder extends RecyclerView.ViewHolder {
             ratingText.setText("(" + score + ")");
 
             int categoryInfo[] = makerData.getMaker_product_category_info();
-            TextView categoryViews[] = {trade_category_one, trade_category_one};
+            TextView categoryViews[] = {trade_category_one, trade_category_two};
             if(categoryInfo != null) {
                 for(int num : categoryInfo) {
                     for(TextView number : categoryViews) {
-                        number.setText(num + "");
+                        number.setText("#" + num);
                     }
                 }
             }

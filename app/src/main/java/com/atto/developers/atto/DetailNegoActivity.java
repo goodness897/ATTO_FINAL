@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -70,6 +71,9 @@ public class DetailNegoActivity extends AppCompatActivity {
     @BindView(R.id.accept_layout)
     LinearLayout linearLayout;
 
+    @BindView(R.id.img_btn_report)
+    Button reportButton;
+
 
     NegoData negoData;
     TradeData tradeData;
@@ -113,10 +117,11 @@ public class DetailNegoActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
+        if (negoData.getMaker_info().getMaker_name().equals(PropertyManager.getInstance().getNickName())) {
+            reportButton.setVisibility(View.GONE);
+        } else {
+            reportButton.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -146,7 +151,7 @@ public class DetailNegoActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.img_btn_Report)
+    @OnClick(R.id.img_btn_report)
     public void onReport() {
         ReportDialogFragment dialogFragment = new ReportDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "report");
@@ -252,7 +257,7 @@ public class DetailNegoActivity extends AppCompatActivity {
         } else {
             img_add_port_photo.setImageResource(R.drawable.default_image);
         }
-        if (data.getNegotiation_product_imges_info() != null) {
+        if (data.getNegotiation_product_imges_info().length > 0) {
             Glide.with(this).load(data.getNegotiation_product_imges_info()[0]).centerCrop().into(img_add_port_photo);
         } else {
             maker_profile.setImageResource(R.drawable.default_image);

@@ -10,6 +10,7 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.atto.developers.atto.fragment.NoSearchFragment;
 import com.atto.developers.atto.fragment.SearchResultMakerFragment;
 import com.atto.developers.atto.fragment.SearchResultPortFragment;
 import com.atto.developers.atto.fragment.SearchResultTradeFragment;
@@ -96,7 +97,7 @@ public class UnifiedSearchActivity extends AppCompatActivity {
                 case 2:
                     return SearchResultMakerFragment.newInstance(keyword);
                 default:
-                    return SearchResultPortFragment.newInstance(keyword);
+                    return new NoSearchFragment();
             }
         }
 

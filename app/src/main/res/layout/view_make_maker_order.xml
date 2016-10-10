@@ -2,7 +2,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -64,18 +65,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:text="홍 길 동"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/chatting"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
-            android:background="@color/colorBackg"
-            android:visibility="gone" />
 
     </LinearLayout>
 

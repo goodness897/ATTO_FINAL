@@ -91,7 +91,6 @@ public class MakerFragment extends Fragment {
     private void initData() {
 
 
-        mAdapter.clear();
         MakerListRequest request = new MakerListRequest(getContext(), "1", "10");
         NetworkManager.getInstance().getNetworkData(request, new NetworkManager.OnResultListener<ListData<MakerData>>() {
             @Override
@@ -100,6 +99,7 @@ public class MakerFragment extends Fragment {
                 if(data != null) {
                     Log.d("MakerFragment", String.valueOf(data[0].getMaker_score()));
                     Log.d("MakerFragment", String.valueOf(data[0].getMaker_id()));
+                    mAdapter.clear();
                     mAdapter.addAll(Arrays.asList(data));
                 }
 

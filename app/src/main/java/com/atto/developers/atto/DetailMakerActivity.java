@@ -53,7 +53,7 @@ public class DetailMakerActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        makerData = (MakerData)intent.getSerializableExtra(MakerFragment.MAKER);
+        makerData = (MakerData) intent.getSerializableExtra(MakerFragment.MAKER);
         makerNickName = PropertyManager.getInstance().getNickName();
         Log.d("DetailMakerActivity", "저장 닉네임 : " + makerNickName);
         Log.d("DetailMakerActivity", "메이커 닉네임 : " + makerData.getMaker_name());

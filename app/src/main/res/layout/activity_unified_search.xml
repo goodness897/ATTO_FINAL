@@ -87,7 +87,6 @@
                 app:nts_factor="2.8"
                 app:nts_inactive_color="#81ffffff"
                 app:nts_titles="@array/search_result"
-                app:nts_typeface="fonts/drugs.otf"
                 app:nts_weight="3dp" />
 
         </FrameLayout>
