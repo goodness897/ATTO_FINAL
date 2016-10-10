@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_edit_layout"
+    android:background="@color/colorBackg"
     android:orientation="vertical"
     tools:context="com.atto.developers.atto.MakeOrderActivity">
 
@@ -35,7 +35,7 @@
         <include
             android:id="@+id/include6"
             layout="@layout/view_make_order_bottom"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp" />
 

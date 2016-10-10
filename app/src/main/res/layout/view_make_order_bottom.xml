@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/color_edit_layout">
+    android:background="@color/colorBackg">
 
     <TextView
         android:layout_width="wrap_content"

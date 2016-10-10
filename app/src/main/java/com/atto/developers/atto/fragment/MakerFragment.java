@@ -61,11 +61,7 @@ public class MakerFragment extends Fragment {
         listView.setAdapter(mAdapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
-//        listView.addItemDecoration(new DividerItemDecoration(getActivity()));
-        //add ItemDecoration
-        //listView.addItemDecoration(new VerticalSpaceItemDecoration(VERTICAL_ITEM_SPACE));
-//        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getContext(), R.dimen.item_offset);
-//        listView.addItemDecoration(itemDecoration);
+
         listView.setLayoutManager(manager);
         listView.addItemDecoration(
                 new DividerItemDecoration(getContext(), R.drawable.divider));

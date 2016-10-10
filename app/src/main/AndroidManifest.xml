@@ -50,7 +50,8 @@
         <activity android:name=".ChangeAddressActivity" />
         <activity android:name=".MyTradeActivity" />
         <activity android:name=".AddMakeOrderActivity" />
-        <activity android:name=".MakeOrderActivity" />
+        <activity android:name=".MakeOrderActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".MyPageMoreTradeActivity" />
         <activity android:name=".MakerInfoActivity" />
         <activity android:name=".MakerNegoActivity" />
@@ -67,6 +68,7 @@
         <activity android:name=".FindPasswordActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".AgreementActivity" />
+        <activity android:name=".MakeOrderNextActivity"/>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/LoginAppTheme" />
@@ -103,7 +105,7 @@
 
         <activity android:name=".UpdateMakerActivity" />
         <activity android:name=".DetailMakerTwoActivity" />
-        <activity android:name=".UpdatePortActivity"></activity>
+        <activity android:name=".UpdatePortActivity"/>
     </application>
 
 </manifest>

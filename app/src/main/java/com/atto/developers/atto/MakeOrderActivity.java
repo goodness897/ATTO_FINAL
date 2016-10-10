@@ -138,9 +138,7 @@ public class MakeOrderActivity extends AppCompatActivity {
                 Log.e(TAG, "MakeOrder_Trade 성공 : " + result.getData());
                 TradeData tradeData = result.getData();
                 setMakeTrade(tradeData);
-
             }
-
             @Override
             public void onFail(NetworkRequest<TradeListItemData> request, int errorCode, String errorMessage, Throwable e) {
                 Log.e(TAG, "MakeOrder_Trade 실패 : " + errorMessage);
@@ -164,7 +162,7 @@ public class MakeOrderActivity extends AppCompatActivity {
 
     private void makeOrderImage(TradeData tradeData) {
         if (tradeData != null) {
-            Glide.with(this).load(tradeData.getTrade_product_img()).centerCrop().into(makeTradePhoto);
+            Glide.with(this).load(tradeData.getTrade_product_imges_info()[0]).centerCrop().into(makeTradePhoto);
         }
     }
 

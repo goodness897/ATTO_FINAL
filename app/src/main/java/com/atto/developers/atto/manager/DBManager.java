@@ -21,14 +21,14 @@ import java.util.Map;
 public class DBManager extends SQLiteOpenHelper {
     private static DBManager instance;
 
-    private static final String CATEGORY_TABLE_CREATE = "create table category (_id integer primary key autoincrement,"+ "name text not null);";
-    private static final String KEYWORD_TABLE_CREATE="create table keyword (_id integer primary key autoincrement,"+ "name text not null);";
+    private static final String CATEGORY_TABLE_CREATE = "create table category (_id integer primary key autoincrement," + "name text not null);";
+    private static final String KEYWORD_TABLE_CREATE = "create table keyword (_id integer primary key autoincrement," + "name text not null);";
     private static final String DATABASE_NAME = "category_db";
     private static final int DATABASE_VERSION = 1;
     private static final String TAG = "DBManager";
 
-    public static DBManager getInstance(){
-        if(instance ==null){
+    public static DBManager getInstance() {
+        if (instance == null) {
             instance = new DBManager();
         }
         return instance;
@@ -64,12 +64,12 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
 
-    public long getCategoryId(long category_Id){
-        String selection = "CREATE TABLE"+ CategoryKeywordData.Cateory._ID+"=?";
-        String [] args = {""+category_Id};
-        String [] columns = {CategoryKeywordData.Cateory._ID};
+    public long getCategoryId(long category_Id) {
+        String selection = "CREATE TABLE" + CategoryKeywordData.Cateory._ID + "=?";
+        String[] args = {"" + category_Id};
+        String[] columns = {CategoryKeywordData.Cateory._ID};
         SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.query(CategoryKeywordData.Cateory.TABLE,columns,selection,args,null,null,null);
+        Cursor c = db.query(CategoryKeywordData.Cateory.TABLE, columns, selection, args, null, null, null);
 
         return 0;
     }
@@ -86,7 +86,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     public long getUserId(long serverId) {
         String selection = ChatContract.ChatUser.COLUMN_SERVER_ID + " = ?";
-        String[] args = {""+serverId};
+        String[] args = {"" + serverId};
         String[] columns = {ChatContract.ChatUser._ID};
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(ChatContract.ChatUser.TABLE, columns, selection, args, null, null, null);
@@ -122,6 +122,7 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     ContentValues values = new ContentValues();
+
     public long addUser(User user) {
         if (getUserId(user.getId()) == -1) {
             SQLiteDatabase db = getWritableDatabase();
@@ -135,9 +136,11 @@ public class DBManager extends SQLiteOpenHelper {
     }
 
     Map<Long, Long> resolveUserId = new HashMap<>();
+
     public long addMessage(User user, int type, String message) {
         return addMessage(user, type, message, new Date());
     }
+
     public long addMessage(User user, int type, String message, Date date) {
         Long uid = resolveUserId.get(user.getId());
         if (uid == null) {
@@ -151,7 +154,7 @@ public class DBManager extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         values.clear();
-        values.put(ChatContract.ChatMessage.COLUMN_USER_ID, (long)uid);
+        values.put(ChatContract.ChatMessage.COLUMN_USER_ID, (long) uid);
         values.put(ChatContract.ChatMessage.COLUMN_TYPE, type);
         values.put(ChatContract.ChatMessage.COLUMN_MESSAGE, message);
         long current = date.getTime();
@@ -190,7 +193,7 @@ public class DBManager extends SQLiteOpenHelper {
     public Cursor getChatMessage(User user) {
         long userid = -1;
         Long uid = resolveUserId.get(user.getId());
-        Log.d("userid",String.valueOf(user.getId()));
+        Log.d("userid", String.valueOf(user.getId()));
         if (uid == null) {
             long id = getUserId(user.getId());
             if (id != -1) {

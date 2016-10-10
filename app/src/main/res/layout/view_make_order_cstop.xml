@@ -46,7 +46,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         android:id="@+id/img_realtime_photo"
         android:layout_gravity="center_horizontal"
         android:background="@color/color_atto_main"

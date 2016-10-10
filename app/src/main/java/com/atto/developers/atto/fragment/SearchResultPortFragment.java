@@ -155,7 +155,6 @@ public class SearchResultPortFragment extends Fragment implements AdapterView.On
         listView.setAdapter(getNewAdapter());
     }
 
-
     @Override
     public void onItemClick(@NotNull AdapterView<?> parent, @NotNull View view, int position, long id) {
 
@@ -163,7 +162,6 @@ public class SearchResultPortFragment extends Fragment implements AdapterView.On
         Intent intent = new Intent(getContext(), DetailPortActivity.class);
         intent.putExtra("portfolioData", portfolioData);
         startActivity(intent);
-
 
     }
 
